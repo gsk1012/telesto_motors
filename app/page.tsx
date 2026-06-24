@@ -217,7 +217,7 @@ export default function Home() {
           {/* Centered header */}
           <div className="mx-auto max-w-xl text-center">
             <h2 className="animate-on-scroll font-serif text-5xl font-semibold leading-[1.05] sm:text-6xl" data-delay="0s">
-              Laten we kennismaken.
+              Laten we kennismaken
             </h2>
             <p className="animate-on-scroll mt-5 text-lg leading-relaxed text-ink/65" data-delay="0.15s">
               Vertel ons jouw wensen in een paar stappen. Wij nemen binnen een werkdag contact op.
