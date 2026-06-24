@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Anek_Devanagari } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const anek = Anek_Devanagari({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-anek",
   display: "swap",
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-serif",
-  display: "swap",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -26,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="nl" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="nl" className={anek.variable}>
       <body className="font-sans">{children}</body>
     </html>
   );
