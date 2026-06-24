@@ -75,13 +75,13 @@ export default function Home() {
             >
               <a
                 href="#contact"
-                className="rounded-full bg-bronze px-7 py-3.5 text-base font-semibold text-white shadow-lg transition-colors hover:bg-bronze-dark"
+                className="inline-flex items-center justify-center rounded-full bg-bronze px-7 py-3.5 text-base font-semibold text-white shadow-lg transition-colors hover:bg-bronze-dark"
               >
                 Afspraak maken
               </a>
               <a
                 href="#diensten"
-                className="rounded-full border border-white/40 bg-white/5 px-7 py-3.5 text-base font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/15"
+                className="inline-flex items-center justify-center rounded-full border border-white/40 bg-white/5 px-7 py-3.5 text-base font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/15"
               >
                 Bekijk diensten
               </a>
@@ -200,7 +200,7 @@ export default function Home() {
               </ul>
               <a
                 href="#contact"
-                className="animate-on-scroll mt-10 inline-flex rounded-full bg-bronze px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-bronze-dark"
+                className="animate-on-scroll mt-10 inline-flex items-center justify-center rounded-full bg-bronze px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-bronze-dark"
                 data-delay="0.4s"
               >
                 Plan een kennismaking
