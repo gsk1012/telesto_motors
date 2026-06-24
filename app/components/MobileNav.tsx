@@ -26,7 +26,7 @@ export default function MobileNav({ links = DEFAULT_LINKS, ctaHref = '#contact' 
 
   return (
     <>
-      {/* Hamburger button — mobile only */}
+      {/* Hamburger — mobile only */}
       <button
         type="button"
         onClick={() => setOpen(true)}
@@ -38,22 +38,17 @@ export default function MobileNav({ links = DEFAULT_LINKS, ctaHref = '#contact' 
         </svg>
       </button>
 
-      {/* Backdrop */}
+      {/* Full-screen overlay */}
       <div
-        onClick={() => setOpen(false)}
-        className={`fixed inset-0 z-40 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ${
+        aria-hidden={!open}
+        style={{ backgroundColor: '#111111' }}
+        className={`fixed inset-0 z-50 flex flex-col transition-opacity duration-300 md:hidden ${
           open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
-      />
-
-      {/* Slide-in panel */}
-      <div
-        className={`fixed inset-y-0 right-0 z-50 flex w-72 flex-col bg-ink transition-transform duration-300 ease-in-out ${
-          open ? 'translate-x-0' : 'translate-x-full'
-        }`}
       >
-        {/* Close button */}
-        <div className="flex items-center justify-end px-6 py-6">
+        {/* Header row */}
+        <div className="flex items-center justify-between px-6 py-5">
+          <img src="/images/telesto-logo-color.svg" alt="Telesto Motors" className="h-14 w-auto" />
           <button
             type="button"
             onClick={() => setOpen(false)}
@@ -66,14 +61,14 @@ export default function MobileNav({ links = DEFAULT_LINKS, ctaHref = '#contact' 
           </button>
         </div>
 
-        {/* Links */}
-        <nav className="flex flex-col px-8">
+        {/* Nav links */}
+        <nav className="mt-4 flex flex-col px-8">
           {links.map((item) => (
             <a
               key={item.label}
               href={item.href}
               onClick={() => setOpen(false)}
-              className="border-b border-white/8 py-4 text-lg font-medium text-white/75 transition-colors hover:text-white last:border-0"
+              className="border-b border-white/10 py-5 text-2xl font-medium text-white/75 transition-colors hover:text-white last:border-0"
             >
               {item.label}
             </a>
@@ -85,7 +80,7 @@ export default function MobileNav({ links = DEFAULT_LINKS, ctaHref = '#contact' 
           <a
             href={ctaHref}
             onClick={() => setOpen(false)}
-            className="block rounded-full bg-bronze px-6 py-3.5 text-center text-base font-semibold text-white transition-colors hover:bg-bronze-dark"
+            className="block rounded-full bg-bronze px-6 py-4 text-center text-base font-semibold text-white transition-colors hover:bg-bronze-dark"
           >
             Afspraak maken
           </a>
