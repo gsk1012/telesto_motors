@@ -10,8 +10,8 @@ export interface NavLink {
 
 const DEFAULT_NAV: NavLink[] = [
   { label: 'Home', href: '#home' },
-  { label: 'Over ons', href: '#over' },
   { label: 'Diensten', href: '#diensten' },
+  { label: 'Over ons', href: '#over' },
   { label: 'Plannen', href: '/plans' },
   { label: 'Contact', href: '#contact' },
 ]
@@ -40,7 +40,7 @@ export default function StickyNav({
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-30 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-30 will-change-transform transition-all duration-300 ${
         scrolled || alwaysDark
           ? 'bg-ink/85 shadow-sm backdrop-blur-md'
           : ''
