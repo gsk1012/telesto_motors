@@ -55,7 +55,7 @@ export default function StickyNav({
             className="h-16 w-auto"
           />
         </a>
-        <ul className="hidden items-center gap-9 text-sm font-medium text-white/85 md:flex">
+        <ul className="hidden items-center gap-9 text-base font-medium text-white/85 md:flex">
           {links.map((item) => (
             <li key={item.label}>
               <a href={item.href} className="transition-colors hover:text-white">

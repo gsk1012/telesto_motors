@@ -93,7 +93,7 @@ export default function Home() {
       {/* ===== Diensten ===== */}
       <section
         id="diensten"
-        className="py-24"
+        className="pt-24 pb-10"
         style={{ background: 'linear-gradient(to bottom, #F7F0EC 55%, #ffffff 55%)' }}
       >
         <div className="mx-auto max-w-container px-6">
