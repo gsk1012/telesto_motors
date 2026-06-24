@@ -91,7 +91,7 @@ export default function PlansPage() {
       <StickyNav links={PLANS_NAV} logoHref="/" ctaHref="/#contact" />
 
       {/* ===== Hero ===== */}
-      <section className="relative flex min-h-[78vh] w-full items-end overflow-hidden md:items-center">
+      <section className="relative flex min-h-[78svh] w-full items-end overflow-hidden md:items-center">
         <Image
           src="/images/tesla-hero.webp"
           alt="Telesto Motors — jouw droomauto"

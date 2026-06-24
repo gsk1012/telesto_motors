@@ -36,7 +36,7 @@ export default function Home() {
       <StickyNav />
 
       {/* ===== Hero ===== */}
-      <section className="relative flex min-h-screen w-full items-end overflow-hidden md:items-center">
+      <section className="relative flex min-h-[100svh] w-full items-end overflow-hidden md:items-center">
         <video
           className="absolute inset-0 h-full w-full object-cover will-change-transform"
           autoPlay
