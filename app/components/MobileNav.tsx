@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import type { NavLink } from './StickyNav'
 
 const DEFAULT_LINKS: NavLink[] = [
@@ -18,10 +18,25 @@ interface MobileNavProps {
 
 export default function MobileNav({ links = DEFAULT_LINKS, ctaHref = '#contact' }: MobileNavProps) {
   const [open, setOpen] = useState(false)
+  const scrollY = useRef(0)
 
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
+    if (open) {
+      scrollY.current = window.scrollY
+      document.body.style.position = 'fixed'
+      document.body.style.top = `-${scrollY.current}px`
+      document.body.style.width = '100%'
+    } else {
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.width = ''
+      window.scrollTo(0, scrollY.current)
+    }
+    return () => {
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.width = ''
+    }
   }, [open])
 
   return (
@@ -38,17 +53,24 @@ export default function MobileNav({ links = DEFAULT_LINKS, ctaHref = '#contact' 
         </svg>
       </button>
 
-      {/* Full-screen overlay */}
+      {/* Backdrop */}
       <div
-        aria-hidden={!open}
-        style={{ backgroundColor: '#111111' }}
-        className={`fixed inset-0 z-50 flex flex-col transition-opacity duration-300 md:hidden ${
+        onClick={() => setOpen(false)}
+        className={`fixed inset-0 z-40 bg-black/50 transition-opacity duration-300 md:hidden ${
           open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
+      />
+
+      {/* Slide-in panel */}
+      <div
+        className={`fixed inset-y-0 right-0 z-50 flex w-4/5 max-w-xs flex-col transition-transform duration-300 ease-in-out md:hidden ${
+          open ? 'translate-x-0' : 'translate-x-full'
+        }`}
+        style={{ backgroundColor: '#111111' }}
       >
-        {/* Header row */}
+        {/* Header */}
         <div className="flex items-center justify-between px-6 py-5">
-          <img src="/images/telesto-logo-color.svg" alt="Telesto Motors" className="h-14 w-auto" />
+          <img src="/images/telesto-logo-color.svg" alt="Telesto Motors" className="h-12 w-auto" />
           <button
             type="button"
             onClick={() => setOpen(false)}
@@ -61,14 +83,14 @@ export default function MobileNav({ links = DEFAULT_LINKS, ctaHref = '#contact' 
           </button>
         </div>
 
-        {/* Nav links */}
-        <nav className="mt-4 flex flex-col px-8">
+        {/* Links */}
+        <nav className="mt-2 flex flex-col px-8">
           {links.map((item) => (
             <a
               key={item.label}
               href={item.href}
               onClick={() => setOpen(false)}
-              className="border-b border-white/10 py-5 text-2xl font-medium text-white/75 transition-colors hover:text-white last:border-0"
+              className="border-b border-white/10 py-4 text-lg font-medium text-white/75 transition-colors hover:text-white last:border-0"
             >
               {item.label}
             </a>
@@ -76,11 +98,11 @@ export default function MobileNav({ links = DEFAULT_LINKS, ctaHref = '#contact' 
         </nav>
 
         {/* CTA */}
-        <div className="mt-auto px-8 pb-12">
+        <div className="mt-auto px-6 pb-10">
           <a
             href={ctaHref}
             onClick={() => setOpen(false)}
-            className="block rounded-full bg-bronze px-6 py-4 text-center text-base font-semibold text-white transition-colors hover:bg-bronze-dark"
+            className="block rounded-full bg-bronze px-6 py-3.5 text-center text-base font-semibold text-white transition-colors hover:bg-bronze-dark"
           >
             Afspraak maken
           </a>
