@@ -121,7 +121,7 @@ export default function PlansPage() {
             </p>
             <a
               href="/#contact"
-              className="animate-fade-up mt-8 inline-flex items-center justify-center rounded-full bg-bronze px-7 py-3.5 text-base font-semibold text-white shadow-lg transition-colors hover:bg-bronze-dark"
+              className="btn-label animate-fade-up mt-8 inline-flex items-center justify-center rounded-full bg-bronze px-7 py-3.5 text-base font-semibold text-white shadow-lg transition-colors hover:bg-bronze-dark"
               style={{ animationDelay: '0.5s' }}
             >
               Plan een consult in
@@ -182,7 +182,7 @@ export default function PlansPage() {
                   <div className="mt-auto pt-8">
                     <a
                       href="/#contact"
-                      className={`flex w-full items-center justify-center rounded-full py-3 text-sm font-semibold transition-colors ${
+                      className={`btn-label flex w-full items-center justify-center rounded-full py-3 text-sm font-semibold transition-colors ${
                         plan.featured
                           ? 'bg-bronze text-white hover:bg-bronze-dark'
                           : 'border border-ink/15 text-ink/70 hover:border-bronze hover:text-bronze'
@@ -215,7 +215,7 @@ export default function PlansPage() {
           </p>
           <a
             href="/#contact"
-            className="animate-on-scroll mt-8 inline-flex items-center justify-center rounded-full bg-bronze px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-bronze-dark"
+            className="btn-label animate-on-scroll mt-8 inline-flex items-center justify-center rounded-full bg-bronze px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-bronze-dark"
             data-delay="0.28s"
           >
             Persoonlijk consult inplannen

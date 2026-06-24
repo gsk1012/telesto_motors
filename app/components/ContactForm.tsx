@@ -47,7 +47,7 @@ function Pill({
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-full border px-4 py-2 text-sm font-medium transition-all duration-150 ${
+      className={`btn-label rounded-full border px-4 py-2 text-sm font-medium transition-all duration-150 ${
         selected
           ? 'border-bronze bg-bronze text-white shadow-sm'
           : 'border-ink/15 bg-white text-ink hover:border-bronze/50 hover:text-ink'
@@ -200,7 +200,7 @@ export default function ContactForm() {
                     key={b}
                     type="button"
                     onClick={() => setForm((f) => ({ ...f, budget: b }))}
-                    className={`rounded-full border px-5 py-3 text-left text-sm font-medium transition-all duration-150 ${
+                    className={`btn-label rounded-full border px-5 py-3 text-left text-sm font-medium transition-all duration-150 ${
                       form.budget === b
                         ? 'border-bronze bg-bronze text-white shadow-sm'
                         : 'border-ink/15 bg-white text-ink hover:border-bronze/50'
@@ -373,7 +373,7 @@ export default function ContactForm() {
                 type="button"
                 onClick={handleNext}
                 disabled={!isNextEnabled()}
-                className="rounded-full bg-bronze px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-bronze-dark disabled:cursor-not-allowed disabled:opacity-40"
+                className="btn-label rounded-full bg-bronze px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-bronze-dark disabled:cursor-not-allowed disabled:opacity-40"
               >
                 Volgende
               </button>
@@ -381,7 +381,7 @@ export default function ContactForm() {
               <button
                 type="submit"
                 disabled={!isNextEnabled()}
-                className="rounded-full bg-bronze px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-bronze-dark disabled:cursor-not-allowed disabled:opacity-40"
+                className="btn-label rounded-full bg-bronze px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-bronze-dark disabled:cursor-not-allowed disabled:opacity-40"
               >
                 Verstuur aanvraag
               </button>

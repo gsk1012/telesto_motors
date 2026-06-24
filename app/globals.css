@@ -3,12 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --font-sans: var(--font-anek), system-ui, sans-serif;
-  --font-serif: var(--font-anek), system-ui, sans-serif;
+  --font-sans: var(--font-montserrat), system-ui, sans-serif;
+  --font-serif: var(--font-montserrat), system-ui, sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+/*
+ * Trim the line box to the cap/alphabetic edges so `items-center` centers the
+ * actual glyphs in buttons rather than the font's line box. line-height:1 is
+ * the fallback for browsers without text-box-trim.
+ */
+.btn-label {
+  line-height: 1;
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
 }
 
 body {
@@ -35,6 +46,13 @@ body {
 
 .animate-on-scroll {
   opacity: 0;
+}
+
+/* Mobile: cream bleeds up to the midpoint of the over-ons image */
+@media (max-width: 1023px) {
+  .over-image-col {
+    background: linear-gradient(to bottom, #ffffff 50%, #F7F0EC 50%);
+  }
 }
 
 .plans-section-bg {

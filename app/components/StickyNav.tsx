@@ -66,7 +66,7 @@ export default function StickyNav({
         </ul>
         <a
           href={ctaHref}
-          className="hidden items-center justify-center rounded-full bg-bronze px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-bronze-dark md:inline-flex"
+          className="btn-label hidden items-center justify-center rounded-full bg-bronze px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-bronze-dark md:inline-flex"
         >
           Afspraak maken
         </a>

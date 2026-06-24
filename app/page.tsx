@@ -70,18 +70,18 @@ export default function Home() {
               Wij luisteren naar jouw wensen en regelen de rest.
             </p>
             <div
-              className="animate-fade-up mt-8 flex flex-wrap items-center gap-3"
+              className="animate-fade-up mt-8 flex flex-row items-center gap-3"
               style={{ animationDelay: '0.5s' }}
             >
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center rounded-full bg-bronze px-7 py-3.5 text-base font-semibold text-white shadow-lg transition-colors hover:bg-bronze-dark"
+                className="btn-label inline-flex items-center justify-center whitespace-nowrap rounded-full bg-bronze px-7 py-3.5 text-base font-semibold text-white shadow-lg transition-colors hover:bg-bronze-dark"
               >
                 Afspraak maken
               </a>
               <a
                 href="#diensten"
-                className="inline-flex items-center justify-center rounded-full border border-white/40 bg-white/5 px-7 py-3.5 text-base font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/15"
+                className="btn-label inline-flex items-center justify-center whitespace-nowrap rounded-full border border-white/40 bg-white/5 px-7 py-3.5 text-base font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/15"
               >
                 Bekijk diensten
               </a>
@@ -140,9 +140,9 @@ export default function Home() {
         <div className="grid items-center lg:grid-cols-[5fr_6fr] lg:min-h-[720px]">
 
           {/* Left: photo column */}
-          <div className="animate-on-scroll order-2 lg:order-1" data-delay="0s">
+          <div className="over-image-col animate-on-scroll order-2 lg:order-1" data-delay="0s">
             {/* Mobile: original rounded style */}
-            <div className="relative mx-6 mt-10 mb-2 overflow-hidden rounded-3xl shadow-lg lg:hidden">
+            <div className="relative mx-6 mt-10 mb-0 overflow-hidden rounded-3xl shadow-lg lg:hidden">
               <Image
                 src="/images/over-ons.jpg"
                 alt="Telesto Motors, persoonlijk auto-advies"
@@ -200,7 +200,7 @@ export default function Home() {
               </ul>
               <a
                 href="#contact"
-                className="animate-on-scroll mt-10 inline-flex items-center justify-center rounded-full bg-bronze px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-bronze-dark"
+                className="btn-label animate-on-scroll mt-10 inline-flex items-center justify-center rounded-full bg-bronze px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-bronze-dark"
                 data-delay="0.4s"
               >
                 Plan een kennismaking
