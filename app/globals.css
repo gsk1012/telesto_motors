@@ -37,6 +37,16 @@ body {
   opacity: 0;
 }
 
+.plans-section-bg {
+  background: #F7F0EC;
+}
+
+@media (min-width: 768px) {
+  .plans-section-bg {
+    background: linear-gradient(to top, #F7F0EC 50%, #ffffff 50%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-on-scroll,
   .animate-fade-up {

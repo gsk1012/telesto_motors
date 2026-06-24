@@ -131,7 +131,7 @@ export default function PlansPage() {
       </section>
 
       {/* ===== Plans ===== */}
-      <section className="py-24" style={{ background: 'linear-gradient(to top, #F7F0EC 50%, #ffffff 50%)' }}>
+      <section className="py-24 plans-section-bg">
         <div className="mx-auto max-w-container px-6">
           <div className="grid gap-6 lg:grid-cols-3 lg:items-start">
             {PLANS.map((plan, i) => (
