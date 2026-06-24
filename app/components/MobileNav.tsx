@@ -7,7 +7,7 @@ const DEFAULT_LINKS: NavLink[] = [
   { label: 'Home', href: '#home' },
   { label: 'Over ons', href: '#over' },
   { label: 'Diensten', href: '#diensten' },
-  { label: 'Plannen', href: '/plans' },
+  { label: 'Pakketen', href: '/plans' },
   { label: 'Contact', href: '#contact' },
 ]
 

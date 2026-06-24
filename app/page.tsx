@@ -7,7 +7,7 @@ const NAV = [
   { label: "Home", href: "#home" },
   { label: "Over Telesto", href: "#over" },
   { label: "Diensten", href: "#diensten" },
-  { label: "Plannen", href: "/plans" },
+  { label: "Pakketen", href: "/plans" },
   { label: "Contact", href: "#contact" },
 ];
 

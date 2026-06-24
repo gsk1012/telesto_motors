@@ -4,7 +4,7 @@ import StickyNav from '../components/StickyNav'
 import ScrollAnimator from '../components/ScrollAnimator'
 
 export const metadata: Metadata = {
-  title: 'Plannen — Telesto Motors',
+  title: 'Pakketen — Telesto Motors',
   description:
     'Ontdek onze drie diensten: Telesto Elite, Deluxe en Excellent. Van een gerichte start tot volledig ontzorgd van A tot Z.',
 }
@@ -13,7 +13,7 @@ const PLANS_NAV = [
   { label: 'Home', href: '/#home' },
   { label: 'Over ons', href: '/#over' },
   { label: 'Diensten', href: '/#diensten' },
-  { label: 'Plannen', href: '/plans' },
+  { label: 'Pakketen', href: '/plans' },
   { label: 'Contact', href: '/#contact' },
 ]
 

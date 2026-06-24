@@ -12,7 +12,7 @@ const DEFAULT_NAV: NavLink[] = [
   { label: 'Home', href: '#home' },
   { label: 'Diensten', href: '#diensten' },
   { label: 'Over ons', href: '#over' },
-  { label: 'Plannen', href: '/plans' },
+  { label: 'Pakketen', href: '/plans' },
   { label: 'Contact', href: '#contact' },
 ]
 
