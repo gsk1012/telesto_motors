@@ -1,7 +1,8 @@
 import Image from "next/image";
-import ContactForm from "./components/ContactForm";
+import ContactTabs from "./components/ContactTabs";
 import StickyNav from "./components/StickyNav";
 import ScrollAnimator from "./components/ScrollAnimator";
+import SocialInstagram from "./components/SocialInstagram";
 
 const NAV = [
   { label: "Home", href: "#home" },
@@ -93,7 +94,7 @@ export default function Home() {
       {/* ===== Diensten ===== */}
       <section
         id="diensten"
-        className="pt-24 pb-10"
+        className="pt-24 pb-20"
         style={{ background: 'linear-gradient(to bottom, #F7F0EC 55%, #ffffff 55%)' }}
       >
         <div className="mx-auto max-w-container px-6">
@@ -135,8 +136,48 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ===== Brand Marquee ===== */}
+      {(() => {
+        const BRAND_LOGOS = [
+          { src: "/images/brands/audi.svg",        alt: "Audi" },
+          { src: "/images/brands/bmw.svg",         alt: "BMW" },
+          { src: "/images/brands/mercedes.svg",    alt: "Mercedes-Benz" },
+          { src: "/images/brands/volkswagen.svg",  alt: "Volkswagen" },
+          { src: "/images/brands/tesla.svg",       alt: "Tesla" },
+          { src: "/images/brands/toyota.svg",      alt: "Toyota" },
+          { src: "/images/brands/volvo.svg",       alt: "Volvo" },
+          { src: "/images/brands/ford.svg",        alt: "Ford" },
+          { src: "/images/brands/hyundai.svg",     alt: "Hyundai" },
+          { src: "/images/brands/kia.svg",         alt: "Kia" },
+        ];
+        const items = [...BRAND_LOGOS, ...BRAND_LOGOS];
+        return (
+          <div className="overflow-hidden bg-white py-10">
+            <div className="marquee-track flex min-w-max items-center">
+              {items.map((logo, i) => (
+                <div key={i} className="flex items-center">
+                  <div className="flex items-center justify-center px-8">
+                    <div className="relative" style={{ width: 100, height: 40, flexShrink: 0 }}>
+                      <Image
+                        src={logo.src}
+                        alt={logo.alt}
+                        fill
+                        className="object-contain"
+                        sizes="100px"
+                        style={{ filter: "grayscale(1) opacity(0.4)" }}
+                      />
+                    </div>
+                  </div>
+                  <span className="text-ink/15 text-xs select-none">|</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })()}
+
       {/* ===== Waarom Telesto ===== */}
-      <section id="over" className="overflow-hidden bg-white">
+      <section id="over" className="overflow-hidden bg-white pb-16 lg:pb-0">
         <div className="grid items-center lg:grid-cols-[5fr_6fr] lg:min-h-[720px]">
 
           {/* Left: photo column */}
@@ -211,6 +252,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ===== Social / Instagram ===== */}
+      <SocialInstagram />
+
       {/* ===== Contact ===== */}
       <section id="contact" className="bg-cream py-24">
         <div className="mx-auto max-w-container px-6">
@@ -226,7 +270,7 @@ export default function Home() {
 
           {/* Form card centered below */}
           <div className="animate-on-scroll mx-auto mt-12 max-w-2xl" data-delay="0.28s">
-            <ContactForm />
+            <ContactTabs />
           </div>
         </div>
       </section>
