@@ -269,7 +269,7 @@ export default function Home() {
           </div>
 
           {/* Form card centered below */}
-          <div className="animate-on-scroll mx-auto mt-12 max-w-2xl" data-delay="0.28s">
+          <div className="animate-on-scroll mx-auto mt-12 max-w-3xl" data-delay="0.28s">
             <ContactTabs />
           </div>
         </div>
