@@ -12,6 +12,7 @@ interface FormState {
   naam: string
   email: string
   telefoon: string
+  pakket: string
   dagVoorkeur: string[]
   tijdVoorkeur: string
   bericht: string
@@ -61,6 +62,8 @@ function Pill({
 const toggleMulti = (arr: string[], val: string): string[] =>
   arr.includes(val) ? arr.filter((v) => v !== val) : [...arr, val]
 
+const PAKKETTEN = ['Telesto Elite', 'Telesto Deluxe', 'Telesto Excellent']
+
 const INITIAL: FormState = {
   heeftVoorkeur: '',
   budget: '',
@@ -69,6 +72,7 @@ const INITIAL: FormState = {
   naam: '',
   email: '',
   telefoon: '',
+  pakket: '',
   dagVoorkeur: [],
   tijdVoorkeur: '',
   bericht: '',
@@ -304,6 +308,23 @@ export default function ContactForm() {
                   placeholder="+31 6 12 34 56 78"
                   className="rounded-lg border border-ink/15 bg-cream px-4 py-3 text-sm text-ink placeholder:text-ink/45 focus:border-bronze focus:outline-none focus:ring-1 focus:ring-bronze"
                 />
+              </div>
+              <div className="mt-4 flex flex-col gap-1.5">
+                <label htmlFor="pakket" className="text-sm font-medium text-ink">
+                  Pakket voorkeur{' '}
+                  <span className="font-normal text-ink/40">(optioneel)</span>
+                </label>
+                <select
+                  id="pakket"
+                  value={form.pakket}
+                  onChange={(e) => setForm((f) => ({ ...f, pakket: e.target.value }))}
+                  className="rounded-lg border border-ink/15 bg-cream px-4 py-3 text-sm text-ink focus:border-bronze focus:outline-none focus:ring-1 focus:ring-bronze"
+                >
+                  <option value="">Nog geen voorkeur</option>
+                  {PAKKETTEN.map((p) => (
+                    <option key={p} value={p}>{p}</option>
+                  ))}
+                </select>
               </div>
               <div className="mt-5">
                 <p className="text-sm font-medium text-ink">

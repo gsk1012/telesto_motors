@@ -11,8 +11,8 @@ const config: Config = {
         ink: "#111111",
       },
       fontFamily: {
-        sans: ["var(--font-montserrat)", "system-ui", "sans-serif"],
-        serif: ["var(--font-montserrat)", "system-ui", "sans-serif"],
+        sans: ["var(--font-open-sans)", "system-ui", "sans-serif"],
+        serif: ["var(--font-open-sans)", "system-ui", "sans-serif"],
       },
       maxWidth: {
         container: "1200px",

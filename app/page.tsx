@@ -1,34 +1,13 @@
 import Image from "next/image";
+import Link from "next/link";
+import { SERVICES } from "./diensten/services";
 import ContactTabs from "./components/ContactTabs";
 import StickyNav from "./components/StickyNav";
+import { DEFAULT_NAV } from "./components/nav";
 import ScrollAnimator from "./components/ScrollAnimator";
 import SocialInstagram from "./components/SocialInstagram";
-
-const NAV = [
-  { label: "Home", href: "#home" },
-  { label: "Over Telesto", href: "#over" },
-  { label: "Diensten", href: "#diensten" },
-  { label: "Pakketen", href: "/plans" },
-  { label: "Contact", href: "#contact" },
-];
-
-const DIENSTEN = [
-  {
-    title: "Persoonlijke autoselectie",
-    body: "We zoeken objectief de auto die echt bij jouw leven, wensen en budget past. Onafhankelijk en zonder voorkeur voor een merk.",
-    image: "/images/car-1.webp",
-  },
-  {
-    title: "Technische keuring",
-    body: "Elk voertuig wordt grondig gekeurd voor aankoop. Zo weet je precies wat je koopt en kom je nooit voor verrassingen te staan.",
-    image: "/images/car-2.webp",
-  },
-  {
-    title: "Prijsonderhandeling",
-    body: "Wij onderhandelen namens jou de scherpste prijs en voorwaarden. Jij profiteert van onze kennis van de markt.",
-    image: "/images/car-3.webp",
-  },
-];
+import ReviewsWall from "./components/ReviewsWall";
+import PromiseShowcase from "./components/PromiseShowcase";
 
 export default function Home() {
   return (
@@ -37,7 +16,7 @@ export default function Home() {
       <StickyNav />
 
       {/* ===== Hero ===== */}
-      <section className="relative flex min-h-[100svh] w-full items-end overflow-hidden md:items-center">
+      <section className="relative flex min-h-[85svh] w-full items-end overflow-hidden md:items-center">
         <video
           className="absolute inset-0 h-full w-full object-cover will-change-transform"
           autoPlay
@@ -94,27 +73,41 @@ export default function Home() {
       {/* ===== Diensten ===== */}
       <section
         id="diensten"
-        className="pt-24 pb-20"
+        className="pt-24 pb-24"
         style={{ background: 'linear-gradient(to bottom, #F7F0EC 55%, #ffffff 55%)' }}
       >
         <div className="mx-auto max-w-container px-6">
-          <div className="max-w-2xl">
-            <h2 className="animate-on-scroll font-serif text-4xl font-semibold leading-tight sm:text-5xl" data-delay="0s">
-              Van zoektocht tot sleutels
-            </h2>
-            <p className="animate-on-scroll mt-5 text-lg leading-relaxed text-ink/65" data-delay="0.15s">
-              Een auto kopen is een van de grootste aankopen die je doet.
-              Wij begeleiden je van het eerste gesprek tot de overhandeling
-              van de sleutels. Onafhankelijk, grondig en altijd met jouw
-              belang voorop.
-            </p>
+          <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-2xl">
+              <h2 className="animate-on-scroll font-serif text-4xl font-semibold leading-tight sm:text-5xl" data-delay="0s">
+                Van zoektocht tot sleutels
+              </h2>
+              <p className="animate-on-scroll mt-5 text-lg leading-relaxed text-ink/65" data-delay="0.15s">
+                Een auto kopen is een van de grootste aankopen die je doet.
+                Wij begeleiden je van het eerste gesprek tot de overhandeling
+                van de sleutels. Onafhankelijk, grondig en altijd met jouw
+                belang voorop.
+              </p>
+            </div>
+            <div className="animate-on-scroll flex-none" data-delay="0.25s">
+              <Link
+                href="/diensten"
+                className="btn-label group inline-flex items-center gap-2 rounded-full border border-ink/15 px-7 py-3.5 text-sm font-semibold text-ink transition-colors hover:border-bronze hover:bg-bronze hover:text-white"
+              >
+                Bekijk alle diensten
+                <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
           </div>
 
           <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {DIENSTEN.map((d, i) => (
-              <article
-                key={d.title}
-                className="animate-on-scroll group overflow-hidden rounded-2xl border border-ink/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+            {SERVICES.slice(0, 3).map((d, i) => (
+              <Link
+                key={d.slug}
+                href={`/diensten/${d.slug}`}
+                className="animate-on-scroll group flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                 data-delay={`${0.1 + i * 0.12}s`}
               >
                 <div className="relative h-52 overflow-hidden">
@@ -126,15 +119,53 @@ export default function Home() {
                     sizes="(min-width: 768px) 33vw, 100vw"
                   />
                 </div>
-                <div className="p-7">
+                <div className="flex flex-1 flex-col p-7">
                   <h3 className="text-xl font-semibold">{d.title}</h3>
-                  <p className="mt-3 leading-relaxed text-ink/65">{d.body}</p>
+                  <p className="mt-3 leading-relaxed text-ink/65">{d.shortBody}</p>
+                  <span className="btn-label mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-bronze transition-colors group-hover:text-bronze-dark">
+                    Lees meer
+                    <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         </div>
       </section>
+
+      {/* ===== Kenmerken-balk (credentials) ===== */}
+      <section className="bg-cream">
+        <div className="mx-auto max-w-container px-6 py-11 sm:py-12">
+          <ul className="animate-on-scroll grid grid-cols-2 gap-x-6 gap-y-5 sm:flex sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-10 sm:gap-y-4 lg:flex-nowrap lg:justify-between lg:gap-x-6" data-delay="0s">
+            {[
+              "Expertise sinds 2008",
+              "Vakkundig advies",
+              "Persoonlijke aandacht",
+              "5+ jaar ervaring in EV's en hybrides",
+            ].map((item) => (
+              <li
+                key={item}
+                className="flex items-center gap-2.5 sm:whitespace-nowrap"
+              >
+                <svg
+                  className="h-5 w-5 flex-none text-bronze"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M11.48 3.5a.6.6 0 011.04 0l2.09 5.03a.56.56 0 00.48.35l5.43.44c.5.04.7.66.32.99l-4.14 3.54a.56.56 0 00-.18.56l1.27 5.3a.56.56 0 01-.84.6l-4.65-2.84a.56.56 0 00-.58 0l-4.65 2.84a.56.56 0 01-.84-.6l1.27-5.3a.56.56 0 00-.18-.56L3.16 10.7a.56.56 0 01.32-.99l5.43-.44a.56.56 0 00.48-.35z" />
+                </svg>
+                <span className="text-sm font-medium text-ink sm:text-base">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ===== Onze belofte (kenmerken) ===== */}
+      <PromiseShowcase />
 
       {/* ===== Brand Marquee ===== */}
       {(() => {
@@ -152,18 +183,18 @@ export default function Home() {
         ];
         const items = [...BRAND_LOGOS, ...BRAND_LOGOS];
         return (
-          <div className="overflow-hidden bg-white py-10">
+          <div className="overflow-hidden bg-white py-6">
             <div className="marquee-track flex min-w-max items-center">
               {items.map((logo, i) => (
                 <div key={i} className="flex items-center">
-                  <div className="flex items-center justify-center px-8">
-                    <div className="relative" style={{ width: 100, height: 40, flexShrink: 0 }}>
+                  <div className="flex items-center justify-center px-5 sm:px-8">
+                    <div className="relative h-7 w-[70px] shrink-0 sm:h-10 sm:w-[100px]">
                       <Image
                         src={logo.src}
                         alt={logo.alt}
                         fill
                         className="object-contain"
-                        sizes="100px"
+                        sizes="(min-width: 640px) 100px, 70px"
                         style={{ filter: "grayscale(1) opacity(0.4)" }}
                       />
                     </div>
@@ -177,8 +208,8 @@ export default function Home() {
       })()}
 
       {/* ===== Waarom Telesto ===== */}
-      <section id="over" className="overflow-hidden bg-white pb-16 lg:pb-0">
-        <div className="grid items-center lg:grid-cols-[5fr_6fr] lg:min-h-[720px]">
+      <section id="over" className="overflow-hidden bg-white pb-16 lg:pb-20">
+        <div className="grid items-center lg:grid-cols-[5fr_6fr] lg:min-h-[560px]">
 
           {/* Left: photo column */}
           <div className="over-image-col animate-on-scroll order-2 lg:order-1" data-delay="0s">
@@ -212,7 +243,7 @@ export default function Home() {
           </div>
 
           {/* Right: text */}
-          <div className="order-1 flex items-center px-8 py-16 lg:order-2 lg:py-24 lg:pl-16 xl:pl-20 lg:pr-12 xl:pr-16">
+          <div className="order-1 flex items-center px-8 py-14 lg:order-2 lg:py-16 lg:pl-16 xl:pl-20 lg:pr-12 xl:pr-16">
             <div>
               <h2 className="animate-on-scroll font-serif text-4xl font-semibold leading-tight sm:text-5xl" data-delay="0s">
                 Onafhankelijk, en altijd aan jouw kant
@@ -255,9 +286,14 @@ export default function Home() {
       {/* ===== Social / Instagram ===== */}
       <SocialInstagram />
 
+      {/* ===== Klantreviews ===== */}
+      <ReviewsWall />
+
       {/* ===== Contact ===== */}
-      <section id="contact" className="bg-cream py-24">
-        <div className="mx-auto max-w-container px-6">
+      <section id="contact" className="relative bg-cream py-24">
+        {/* Lower half bg-ink so the form card lifts off the seam into the footer */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 top-[68%] bg-ink" />
+        <div className="relative z-10 mx-auto max-w-container px-6">
           {/* Centered header */}
           <div className="mx-auto max-w-xl text-center">
             <h2 className="animate-on-scroll font-serif text-5xl font-semibold leading-[1.05] sm:text-6xl" data-delay="0s">
@@ -269,7 +305,7 @@ export default function Home() {
           </div>
 
           {/* Form card centered below */}
-          <div className="animate-on-scroll mx-auto mt-12 max-w-3xl" data-delay="0.28s">
+          <div className="animate-on-scroll mt-12 w-full" data-delay="0.28s">
             <ContactTabs />
           </div>
         </div>
@@ -296,7 +332,7 @@ export default function Home() {
               Menu
             </p>
             <ul className="mt-4 space-y-2 text-sm">
-              {NAV.map((item) => (
+              {DEFAULT_NAV.map((item) => (
                 <li key={item.href}>
                   <a href={item.href} className="transition-colors hover:text-white">
                     {item.label}
@@ -311,7 +347,7 @@ export default function Home() {
             </p>
             <ul className="mt-4 space-y-2 text-sm text-white/60">
               <li>info@telestomotors.nl</li>
-              <li>+31 (0)6 12 34 56 78</li>
+              <li>+31 (0)6 20 92 92 14</li>
               <li>Nederland</li>
             </ul>
           </div>
@@ -320,25 +356,34 @@ export default function Home() {
               Openingstijden
             </p>
             <ul className="mt-4 space-y-2 text-sm text-white/60">
-              <li>Ma t/m vr: 09:00 - 18:00</li>
-              <li>Za: op afspraak</li>
-              <li>Zo: gesloten</li>
+              <li>Ma t/m vr: 09.00 - 22.00 (op afspraak)</li>
+              <li>Za: 09.30 - 16.00</li>
+              <li>Zo: op afspraak</li>
             </ul>
           </div>
         </div>
         <div className="mx-auto mt-12 max-w-container flex flex-col items-center gap-2 border-t border-white/10 px-6 pt-6 text-xs text-white/40 sm:flex-row sm:justify-between">
           <span>© {new Date().getFullYear()} Telesto Motors</span>
-          <span>
-            Gemaakt door{" "}
+          <div className="flex items-center gap-4">
             <a
-              href="https://bluestardevelopment.nl/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="no-underline transition-colors hover:text-white/70"
+              href="/privacybeleid"
+              className="transition-colors hover:text-white/70"
             >
-              BlueStar Development
+              Privacybeleid
             </a>
-          </span>
+            <span className="text-white/20">·</span>
+            <span>
+              Gemaakt door{" "}
+              <a
+                href="https://bluestardevelopment.nl/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="no-underline transition-colors hover:text-white/70"
+              >
+                BlueStar Development
+              </a>
+            </span>
+          </div>
         </div>
       </footer>
     </main>
