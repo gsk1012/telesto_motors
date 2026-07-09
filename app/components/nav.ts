@@ -13,7 +13,7 @@ export const DEFAULT_NAV: NavLink[] = [
 
 /** Snelkoppelingen die naast de MENU-knop staan (zoals in het referentieontwerp). */
 export const QUICK_NAV: NavLink[] = [
-  { label: 'Pakketten', href: '/plans' },
+  { label: 'Diensten', href: '/diensten' },
   { label: 'Contact', href: '/contact' },
 ]
 

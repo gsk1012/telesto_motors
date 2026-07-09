@@ -59,7 +59,7 @@ export default function StickyNav({
               <li key={item.label}>
                 <a
                   href={item.href}
-                  className="rounded-full px-4 py-2.5 transition-colors duration-200 hover:text-white"
+                  className="rounded-full px-4 py-2.5 transition-colors duration-300 ease-out hover:text-bronze"
                 >
                   {item.label}
                 </a>
@@ -101,14 +101,14 @@ export default function StickyNav({
         <div className="hidden items-center gap-5 lg:flex">
           <a
             href={PHONE_HREF}
-            className="flex items-center gap-2 text-sm font-semibold text-white/90 transition-colors duration-200 hover:text-white"
+            className="flex items-center gap-2 text-sm font-semibold text-white/90 transition-colors duration-300 ease-out hover:text-white"
           >
             <PhoneGlyph className="h-6 w-6 text-bronze" />
             {PHONE_DISPLAY}
           </a>
           <a
             href={ctaHref}
-            className="btn-label inline-flex items-center justify-center rounded-full bg-bronze px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-bronze-dark"
+            className="btn-label inline-flex items-center justify-center rounded-full bg-bronze px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors duration-300 ease-out hover:bg-bronze-dark"
           >
             Afspraak maken
           </a>

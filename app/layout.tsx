@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import WhatsAppButton from "./components/WhatsAppButton";
-import DemoGuard from "./components/DemoGuard";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -41,7 +40,7 @@ export const metadata: Metadata = {
       "De onafhankelijke auto-adviseur die luistert naar jouw wensen. Onafhankelijk advies, technische keuring en prijsonderhandeling — actief sinds 2008.",
     images: [
       {
-        url: "/images/hero-bmw.png",
+        url: "/images/hero-bmw.jpg",
         width: 1200,
         height: 630,
         alt: "Telesto Motors — Onafhankelijk auto-advies",
@@ -53,7 +52,7 @@ export const metadata: Metadata = {
     title: "Telesto Motors — Jouw droomauto, zonder gedoe",
     description:
       "De onafhankelijke auto-adviseur die luistert naar jouw wensen. Onafhankelijk advies, technische keuring en prijsonderhandeling.",
-    images: ["/images/hero-bmw.png"],
+    images: ["/images/hero-bmw.jpg"],
   },
   robots: {
     index: true,
@@ -110,7 +109,7 @@ const jsonLd = {
       description: "Op afspraak",
     },
   ],
-  image: "https://telestomotors.nl/images/hero-bmw.png",
+  image: "https://telestomotors.nl/images/hero-bmw.jpg",
   logo: "https://telestomotors.nl/images/telesto-logo-color.svg",
   sameAs: [],
   hasOfferCatalog: {
@@ -164,11 +163,15 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {/* Zonder JS reveal't ScrollAnimator niets — toon de inhoud dan direct. */}
+        <noscript>
+          {/* eslint-disable-next-line react/no-danger */}
+          <style dangerouslySetInnerHTML={{ __html: '.animate-on-scroll{opacity:1 !important}' }} />
+        </noscript>
       </head>
       <body className="font-sans">
         {children}
         <WhatsAppButton />
-        <DemoGuard />
       </body>
     </html>
   );

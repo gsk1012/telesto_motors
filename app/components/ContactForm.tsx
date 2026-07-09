@@ -122,7 +122,7 @@ export default function ContactForm() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="mt-6 font-serif text-2xl font-semibold text-ink">
+        <h3 className="mt-6 font-serif text-2xl font-light text-ink">
           Bedankt, {form.naam.split(' ')[0]}!
         </h3>
         <p className="mt-3 max-w-[22ch] text-base leading-relaxed text-ink/60">
@@ -158,7 +158,7 @@ export default function ContactForm() {
           {/* ── Step 1: weet je al wat je zoekt? ── */}
           {step === 1 && (
             <div>
-              <h3 className="mt-3 font-serif text-2xl font-semibold leading-snug text-ink">
+              <h3 className="mt-3 font-serif text-2xl font-light leading-snug text-ink">
                 Weet je al wat je zoekt?
               </h3>
               <div className="mt-6 grid gap-3 sm:grid-cols-2">
@@ -195,7 +195,7 @@ export default function ContactForm() {
           {/* ── Step 2: budget ── */}
           {step === 2 && (
             <div>
-              <h3 className="mt-3 font-serif text-2xl font-semibold leading-snug text-ink">
+              <h3 className="mt-3 font-serif text-2xl font-light leading-snug text-ink">
                 Wat is je budget?
               </h3>
               <div className="mt-6 flex flex-col gap-2">
@@ -220,7 +220,7 @@ export default function ContactForm() {
           {/* ── Step 3: type auto ── */}
           {step === 3 && (
             <div>
-              <h3 className="mt-3 font-serif text-2xl font-semibold leading-snug text-ink">
+              <h3 className="mt-3 font-serif text-2xl font-light leading-snug text-ink">
                 Welk type auto zoek je?
               </h3>
               <p className="mt-1 text-sm text-ink/45">Meerdere opties mogelijk</p>
@@ -240,7 +240,7 @@ export default function ContactForm() {
           {/* ── Step 4: brandstof ── */}
           {step === 4 && (
             <div>
-              <h3 className="mt-3 font-serif text-2xl font-semibold leading-snug text-ink">
+              <h3 className="mt-3 font-serif text-2xl font-light leading-snug text-ink">
                 Welke brandstof heeft je voorkeur?
               </h3>
               <div className="mt-6 flex flex-wrap gap-2.5">
@@ -259,7 +259,7 @@ export default function ContactForm() {
           {/* ── Step 5: contactgegevens ── */}
           {step === 5 && (
             <div>
-              <h3 className="mt-3 font-serif text-2xl font-semibold leading-snug text-ink">
+              <h3 className="mt-3 font-serif text-2xl font-light leading-snug text-ink">
                 Hoe kunnen we je bereiken?
               </h3>
               <div className="mt-6 grid gap-4 sm:grid-cols-2">

@@ -10,7 +10,6 @@ const REVIEWS = [
     name: "Mark Verhoeven",
     role: "BMW 3-serie",
     initials: "MV",
-    tone: "cream" as const,
   },
   {
     quote:
@@ -18,7 +17,6 @@ const REVIEWS = [
     name: "Joost Brinkman",
     role: "Audi Q5, zakelijk",
     initials: "JB",
-    tone: "white" as const,
   },
   {
     quote:
@@ -26,7 +24,6 @@ const REVIEWS = [
     name: "Sanne de Wit",
     role: "Eerste elektrische auto",
     initials: "SW",
-    tone: "white" as const,
   },
   {
     quote:
@@ -34,7 +31,6 @@ const REVIEWS = [
     name: "Eline Kuipers",
     role: "Gezinsauto",
     initials: "EK",
-    tone: "cream" as const,
   },
 ];
 
@@ -57,32 +53,29 @@ function ReviewCard({
   review: (typeof REVIEWS)[number];
   delay: string;
 }) {
-  const cream = review.tone === "cream";
   return (
     <figure
       data-delay={delay}
-      className={`animate-on-scroll group relative overflow-hidden rounded-3xl border p-8 shadow-[0_20px_50px_-32px_rgba(140,110,80,0.45)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_32px_64px_-28px_rgba(140,110,80,0.6)] sm:p-9 ${
-        cream ? "border-bronze/15 bg-cream" : "border-ink/10 bg-white"
-      }`}
+      className="animate-on-scroll group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.06] p-8 shadow-[0_20px_50px_-32px_rgba(0,0,0,0.5)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-bronze/30 hover:bg-white/[0.09] sm:p-9"
     >
       {/* Watermark quote mark */}
       <svg
         viewBox="0 0 24 24"
         fill="currentColor"
-        className="pointer-events-none absolute -top-2 right-5 h-20 w-20 text-bronze/10 transition-transform duration-300 group-hover:scale-110 sm:h-24 sm:w-24"
+        className="pointer-events-none absolute -top-2 right-5 h-20 w-20 text-bronze/15 transition-transform duration-300 group-hover:scale-110 sm:h-24 sm:w-24"
         aria-hidden
       >
         <path d="M9.6 7C6.4 7 4 9.6 4 13.1V19h6.6v-6.6H7.9c0-1.9 1-3 2.8-3.1V7zm9.9 0c-3.2 0-5.6 2.6-5.6 6.1V19H20.5v-6.6h-2.7c0-1.9 1-3 2.8-3.1V7z" />
       </svg>
 
-      <blockquote className="relative mt-5 font-serif text-lg font-medium leading-relaxed text-ink sm:text-xl">
+      <blockquote className="relative mt-5 font-serif text-lg font-medium leading-relaxed text-white sm:text-xl">
         {review.quote}
       </blockquote>
 
       <figcaption className="mt-7 flex items-center gap-4">
         <span>
-          <span className="block font-semibold text-ink">{review.name}</span>
-          <span className="block text-sm text-ink/55">{review.role}</span>
+          <span className="block font-semibold text-white">{review.name}</span>
+          <span className="block text-sm text-white/55">{review.role}</span>
         </span>
       </figcaption>
     </figure>
@@ -91,18 +84,24 @@ function ReviewCard({
 
 export default function ReviewsWall() {
   return (
-    <section className="bg-white py-24 sm:py-28">
+    <section className="bg-charcoal py-24 sm:py-28">
       <div className="mx-auto max-w-container px-6">
         {/* Header */}
         <div className="max-w-2xl">
-          <h2
-            className="animate-on-scroll font-serif text-4xl font-semibold leading-tight sm:text-5xl"
+          <p
+            className="animate-on-scroll text-sm font-semibold uppercase tracking-widest text-bronze"
             data-delay="0s"
+          >
+            Klantervaringen
+          </p>
+          <h2
+            className="animate-on-scroll mt-3 font-serif text-4xl font-light uppercase leading-tight text-white sm:text-5xl"
+            data-delay="0.05s"
           >
             Wat onze klanten zeggen
           </h2>
           <p
-            className="animate-on-scroll mt-5 text-lg leading-relaxed text-ink/65"
+            className="animate-on-scroll mt-5 text-lg leading-relaxed text-white/65"
             data-delay="0.15s"
           >
             Ervaringen van mensen die wij hielpen aan de auto die echt bij hen past.

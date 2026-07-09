@@ -28,7 +28,7 @@ export const metadata: Metadata = {
       'Sinds 2008 de onafhankelijke autoadviseur die altijd aan jouw kant staat. Ons verhaal en oprichter Pawan Singh.',
     images: [
       {
-        url: '/images/hero-bmw.png',
+        url: '/images/hero-bmw.jpg',
         width: 1200,
         height: 630,
         alt: 'Telesto Motors — Over ons',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     title: 'Over ons — Telesto Motors',
     description:
       'Sinds 2008 de onafhankelijke autoadviseur die altijd aan jouw kant staat.',
-    images: ['/images/hero-bmw.png'],
+    images: ['/images/hero-bmw.jpg'],
   },
   alternates: {
     canonical: 'https://telestomotors.nl/over-ons',

@@ -4,15 +4,9 @@ import { useState, useRef, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import type { NavLink } from './StickyNav'
 import { InstagramGlyph, FacebookGlyph, PhoneGlyph, SocialIconLink } from './SocialIcons'
-import { PHONE_DISPLAY, PHONE_HREF, INSTAGRAM_HREF, FACEBOOK_HREF } from './nav'
+import { PHONE_DISPLAY, PHONE_HREF, INSTAGRAM_HREF, FACEBOOK_HREF, DEFAULT_NAV } from './nav'
 
-const DEFAULT_LINKS: NavLink[] = [
-  { label: 'Home', href: '#home' },
-  { label: 'Over ons', href: '#over' },
-  { label: 'Diensten', href: '/diensten' },
-  { label: 'Pakketen', href: '/plans' },
-  { label: 'Contact', href: '#contact' },
-]
+const DEFAULT_LINKS: NavLink[] = DEFAULT_NAV
 
 interface MobileNavProps {
   links?: NavLink[]
@@ -119,7 +113,7 @@ export default function MobileNav({
                       key={item.label}
                       href={item.href}
                       onClick={closeMenu}
-                      className="border-b border-white/10 py-4 text-lg font-medium text-white/75 transition-colors hover:text-white last:border-0"
+                      className="border-b border-white/10 py-4 text-lg font-medium uppercase tracking-wide text-white/75 transition-colors duration-300 ease-out hover:text-bronze last:border-0"
                     >
                       {item.label}
                     </a>
@@ -131,14 +125,14 @@ export default function MobileNav({
                   <a
                     href={ctaHref}
                     onClick={closeMenu}
-                    className="btn-label block rounded-full bg-bronze px-6 py-3.5 text-center text-base font-semibold text-white transition-colors hover:bg-bronze-dark"
+                    className="btn-label block rounded-full bg-bronze px-6 py-3.5 text-center text-base font-semibold text-white transition-colors duration-300 ease-out hover:bg-bronze-dark"
                   >
                     Afspraak maken
                   </a>
                   <div className="mt-6 flex items-center justify-between">
                     <a
                       href={PHONE_HREF}
-                      className="flex items-center gap-2 text-sm font-semibold text-white/80 transition-colors hover:text-white"
+                      className="flex items-center gap-2 text-sm font-semibold text-white/80 transition-colors duration-300 ease-out hover:text-white"
                     >
                       <PhoneGlyph className="h-4 w-4 text-bronze" />
                       {PHONE_DISPLAY}

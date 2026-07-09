@@ -35,7 +35,7 @@ export default function DesktopMenu({ links, logoHref = '/' }: DesktopMenuProps)
         aria-haspopup="menu"
         aria-expanded={open}
         onClick={() => setOpen((o) => !o)}
-        className="btn-label relative flex items-center gap-3 rounded-full border border-bronze/60 px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.18em] text-white/90 transition-colors duration-200 hover:border-bronze hover:text-white"
+        className="btn-label relative flex items-center gap-3 rounded-full border border-bronze/60 px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.18em] text-white/90 transition-colors duration-300 ease-out hover:border-bronze hover:text-white"
       >
         {/* Drie balken die op open naar een X morphen */}
         <span aria-hidden className="relative flex h-3.5 w-5 flex-col justify-between">
@@ -88,7 +88,7 @@ export default function DesktopMenu({ links, logoHref = '/' }: DesktopMenuProps)
                     type="button"
                     onClick={() => setOpen(false)}
                     aria-label="Menu sluiten"
-                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/20 text-white/80 transition-colors duration-200 hover:border-bronze hover:text-white"
+                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/20 text-white/80 transition-colors duration-300 ease-out hover:border-bronze hover:text-white"
                   >
                     <span aria-hidden className="relative block h-5 w-5">
                       <span className="absolute left-0 top-1/2 h-[2px] w-5 -translate-y-1/2 rotate-45 rounded-full bg-current" />
@@ -104,7 +104,7 @@ export default function DesktopMenu({ links, logoHref = '/' }: DesktopMenuProps)
                       key={item.label}
                       href={item.href}
                       onClick={() => setOpen(false)}
-                      className="border-b border-white/10 py-4 text-2xl font-medium text-white/75 transition-colors hover:text-white last:border-0"
+                      className="border-b border-white/10 py-4 text-xl font-medium uppercase tracking-wide text-white/75 transition-colors duration-300 ease-out hover:text-bronze last:border-0"
                     >
                       {item.label}
                     </a>

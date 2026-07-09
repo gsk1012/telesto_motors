@@ -23,7 +23,7 @@ export default function Home() {
           muted
           loop
           playsInline
-          poster="/images/hero-bmw.png"
+          poster="/images/hero-bmw.jpg"
         >
           <source src="/video/hero.mp4?v=5" type="video/mp4" />
         </video>
@@ -35,12 +35,10 @@ export default function Home() {
         <div className="relative z-10 mx-auto w-full max-w-container px-6 pb-14 md:pb-0">
           <div className="max-w-3xl">
             <h1
-              className="animate-fade-up font-serif text-5xl font-semibold leading-[1.05] text-white sm:text-6xl lg:text-8xl"
+              className="animate-fade-up font-sans text-6xl font-light uppercase tracking-[0.04em] leading-[1.02] text-white sm:text-7xl lg:text-9xl"
               style={{ animationDelay: '0.05s' }}
             >
-              Jouw droomauto,
-              <br />
-              zonder gedoe
+              Telesto <span className="text-bronze">Motors</span>
             </h1>
             <p
               className="animate-fade-up mt-6 max-w-sm text-base text-white/80 sm:max-w-xl sm:text-lg"
@@ -74,15 +72,18 @@ export default function Home() {
       <section
         id="diensten"
         className="pt-24 pb-24"
-        style={{ background: 'linear-gradient(to bottom, #F7F0EC 55%, #ffffff 55%)' }}
+        style={{ background: 'linear-gradient(to bottom, #191D23 66%, #F7F0EC 66%)' }}
       >
         <div className="mx-auto max-w-container px-6">
           <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
-            <div className="max-w-2xl">
-              <h2 className="animate-on-scroll font-serif text-4xl font-semibold leading-tight sm:text-5xl" data-delay="0s">
+            <div className="max-w-3xl">
+              <p className="animate-on-scroll text-sm font-semibold uppercase tracking-widest text-bronze" data-delay="0s">
+                Onze diensten
+              </p>
+              <h2 className="animate-on-scroll mt-3 font-serif text-4xl font-light uppercase leading-tight text-white sm:text-5xl lg:whitespace-nowrap" data-delay="0.05s">
                 Van zoektocht tot sleutels
               </h2>
-              <p className="animate-on-scroll mt-5 text-lg leading-relaxed text-ink/65" data-delay="0.15s">
+              <p className="animate-on-scroll mt-5 text-lg leading-relaxed text-white/65" data-delay="0.15s">
                 Een auto kopen is een van de grootste aankopen die je doet.
                 Wij begeleiden je van het eerste gesprek tot de overhandeling
                 van de sleutels. Onafhankelijk, grondig en altijd met jouw
@@ -92,7 +93,7 @@ export default function Home() {
             <div className="animate-on-scroll flex-none" data-delay="0.25s">
               <Link
                 href="/diensten"
-                className="btn-label group inline-flex items-center gap-2 rounded-full border border-ink/15 px-7 py-3.5 text-sm font-semibold text-ink transition-colors hover:border-bronze hover:bg-bronze hover:text-white"
+                className="btn-label group inline-flex items-center gap-2 rounded-full bg-bronze px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-bronze-dark"
               >
                 Bekijk alle diensten
                 <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
@@ -107,7 +108,7 @@ export default function Home() {
               <Link
                 key={d.slug}
                 href={`/diensten/${d.slug}`}
-                className="animate-on-scroll group flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                className="animate-on-scroll group flex flex-col overflow-hidden rounded-2xl bg-[#20242B] ring-1 ring-white/10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20"
                 data-delay={`${0.1 + i * 0.12}s`}
               >
                 <div className="relative h-52 overflow-hidden">
@@ -120,9 +121,9 @@ export default function Home() {
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-7">
-                  <h3 className="text-xl font-semibold">{d.title}</h3>
-                  <p className="mt-3 leading-relaxed text-ink/65">{d.shortBody}</p>
-                  <span className="btn-label mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-bronze transition-colors group-hover:text-bronze-dark">
+                  <h3 className="text-xl font-medium text-white">{d.title}</h3>
+                  <p className="mt-3 leading-relaxed text-white/65">{d.shortBody}</p>
+                  <span className="btn-label mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold text-bronze transition-colors group-hover:text-white">
                     Lees meer
                     <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -167,49 +168,9 @@ export default function Home() {
       {/* ===== Onze belofte (kenmerken) ===== */}
       <PromiseShowcase />
 
-      {/* ===== Brand Marquee ===== */}
-      {(() => {
-        const BRAND_LOGOS = [
-          { src: "/images/brands/audi.svg",        alt: "Audi" },
-          { src: "/images/brands/bmw.svg",         alt: "BMW" },
-          { src: "/images/brands/mercedes.svg",    alt: "Mercedes-Benz" },
-          { src: "/images/brands/volkswagen.svg",  alt: "Volkswagen" },
-          { src: "/images/brands/tesla.svg",       alt: "Tesla" },
-          { src: "/images/brands/toyota.svg",      alt: "Toyota" },
-          { src: "/images/brands/volvo.svg",       alt: "Volvo" },
-          { src: "/images/brands/ford.svg",        alt: "Ford" },
-          { src: "/images/brands/hyundai.svg",     alt: "Hyundai" },
-          { src: "/images/brands/kia.svg",         alt: "Kia" },
-        ];
-        const items = [...BRAND_LOGOS, ...BRAND_LOGOS];
-        return (
-          <div className="overflow-hidden bg-white py-6">
-            <div className="marquee-track flex min-w-max items-center">
-              {items.map((logo, i) => (
-                <div key={i} className="flex items-center">
-                  <div className="flex items-center justify-center px-5 sm:px-8">
-                    <div className="relative h-7 w-[70px] shrink-0 sm:h-10 sm:w-[100px]">
-                      <Image
-                        src={logo.src}
-                        alt={logo.alt}
-                        fill
-                        className="object-contain"
-                        sizes="(min-width: 640px) 100px, 70px"
-                        style={{ filter: "grayscale(1) opacity(0.4)" }}
-                      />
-                    </div>
-                  </div>
-                  <span className="text-ink/15 text-xs select-none">|</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        );
-      })()}
-
       {/* ===== Waarom Telesto ===== */}
-      <section id="over" className="overflow-hidden bg-white pb-16 lg:pb-20">
-        <div className="grid items-center lg:grid-cols-[5fr_6fr] lg:min-h-[560px]">
+      <section id="over" className="overflow-hidden bg-charcoal py-16 lg:py-20">
+        <div className="grid items-center lg:grid-cols-[5fr_6fr]">
 
           {/* Left: photo column */}
           <div className="over-image-col animate-on-scroll order-2 lg:order-1" data-delay="0s">
@@ -245,10 +206,13 @@ export default function Home() {
           {/* Right: text */}
           <div className="order-1 flex items-center px-8 py-14 lg:order-2 lg:py-16 lg:pl-16 xl:pl-20 lg:pr-12 xl:pr-16">
             <div>
-              <h2 className="animate-on-scroll font-serif text-4xl font-semibold leading-tight sm:text-5xl" data-delay="0s">
+              <p className="animate-on-scroll text-sm font-semibold uppercase tracking-widest text-bronze" data-delay="0s">
+                Over ons
+              </p>
+              <h2 className="animate-on-scroll mt-3 font-serif text-4xl font-light uppercase leading-tight text-white sm:text-5xl" data-delay="0.05s">
                 Onafhankelijk, en altijd aan jouw kant
               </h2>
-              <p className="animate-on-scroll mt-5 text-lg text-ink/70" data-delay="0.15s">
+              <p className="animate-on-scroll mt-5 text-lg text-white/70" data-delay="0.15s">
                 Sinds 2008 helpen wij particulieren en bedrijven aan de juiste auto.
                 Omdat we onafhankelijk zijn, kiezen we nooit voor een merk: alleen
                 voor jou. Met ruime kennis van elektrische en hybride auto&apos;s
@@ -266,7 +230,7 @@ export default function Home() {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                       </svg>
                     </span>
-                    <span className="text-ink/80">{point}</span>
+                    <span className="text-white/80">{point}</span>
                   </li>
                 ))}
               </ul>
@@ -290,13 +254,16 @@ export default function Home() {
       <ReviewsWall />
 
       {/* ===== Contact ===== */}
-      <section id="contact" className="relative bg-cream py-24">
-        {/* Lower half bg-ink so the form card lifts off the seam into the footer */}
-        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 top-[68%] bg-ink" />
+      <section id="contact" className="relative bg-cream pt-24 pb-12">
+        {/* Lower half bg-footer so the form card lifts off the seam into the footer */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 top-[68%] bg-footer" />
         <div className="relative z-10 mx-auto max-w-container px-6">
           {/* Centered header */}
           <div className="mx-auto max-w-xl text-center">
-            <h2 className="animate-on-scroll font-serif text-5xl font-semibold leading-[1.05] sm:text-6xl" data-delay="0s">
+            <p className="animate-on-scroll text-sm font-semibold uppercase tracking-widest text-bronze" data-delay="0s">
+              Contact
+            </p>
+            <h2 className="animate-on-scroll mt-3 font-serif text-4xl font-light uppercase leading-tight sm:text-5xl" data-delay="0.05s">
               Laten we kennismaken
             </h2>
             <p className="animate-on-scroll mt-5 text-lg leading-relaxed text-ink/65" data-delay="0.15s">
@@ -314,7 +281,44 @@ export default function Home() {
       <ScrollAnimator />
 
       {/* ===== Footer ===== */}
-      <footer className="bg-ink py-16 text-white/80">
+      <footer className="bg-footer pt-6 pb-16 text-white/80">
+        {/* Brand Marquee */}
+        {(() => {
+          // Beeldmerken (rond/vierkant) mogen hoger; woordmerken lager omdat ze optisch zwaarder ogen.
+          const BRAND_LOGOS = [
+            { src: "/images/brands/audi.svg",        alt: "Audi",          cls: "h-5 sm:h-6" },
+            { src: "/images/brands/bmw-mono.svg",    alt: "BMW",           cls: "h-6 sm:h-8" },
+            { src: "/images/brands/mercedes.webp",   alt: "Mercedes-Benz", cls: "h-6 sm:h-8" },
+            { src: "/images/brands/volkswagen.svg",  alt: "Volkswagen",    cls: "h-6 sm:h-8" },
+            { src: "/images/brands/tesla.svg",       alt: "Tesla",         cls: "h-6 sm:h-8" },
+            { src: "/images/brands/toyota.svg",      alt: "Toyota",        cls: "h-3 sm:h-4" },
+            { src: "/images/brands/volvo.svg",       alt: "Volvo",         cls: "h-3 sm:h-4" },
+            { src: "/images/brands/ford-mono.svg",   alt: "Ford",          cls: "h-4 sm:h-5" },
+            { src: "/images/brands/hyundai.svg",     alt: "Hyundai",       cls: "h-3 sm:h-4" },
+            { src: "/images/brands/kia.svg",         alt: "Kia",           cls: "h-5 sm:h-6" },
+          ];
+          const items = [...BRAND_LOGOS, ...BRAND_LOGOS];
+          return (
+            <div className="overflow-hidden pb-10 mb-10">
+              <div className="marquee-track flex min-w-max items-center">
+                {items.map((logo, i) => (
+                  <div key={i} className="flex items-center">
+                    <div className="flex items-center justify-center px-5 sm:px-8">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={logo.src}
+                        alt={logo.alt}
+                        className={`${logo.cls} w-auto shrink-0`}
+                        style={{ filter: "brightness(0) invert(0.72) opacity(0.6)" }}
+                      />
+                    </div>
+                    <span className="text-xs text-white/10 select-none">|</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
         <div className="mx-auto grid max-w-container gap-10 px-6 sm:grid-cols-2 lg:grid-cols-4">
           <div className="sm:col-span-2 lg:col-span-1">
             {/* eslint-disable-next-line @next/next/no-img-element */}

@@ -185,9 +185,15 @@ export default function SocialInstagram() {
       <div className="relative z-10 mx-auto max-w-container px-6">
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center">
-          <h2
-            className="animate-on-scroll font-serif text-4xl font-semibold leading-tight text-white sm:text-5xl"
+          <p
+            className="animate-on-scroll text-sm font-semibold uppercase tracking-widest text-bronze"
             data-delay="0s"
+          >
+            Instagram
+          </p>
+          <h2
+            className="animate-on-scroll mt-3 font-serif text-4xl font-light uppercase leading-tight text-white sm:text-5xl"
+            data-delay="0.08s"
           >
             Elke auto een verhaal
           </h2>

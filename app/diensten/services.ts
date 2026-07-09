@@ -229,7 +229,7 @@ export const SERVICES: Service[] = [
     title: 'Technische consultatie',
     shortBody:
       'Een losse, inhoudelijke vraag over een model, motor of uitvoering? Leg hem aan ons voor en krijg een onderbouwd antwoord, ook zonder volledig traject.',
-    image: '/images/hero-bmw.png',
+    image: '/images/hero-bmw.jpg',
     tagline: 'Inhoudelijke vragen, een onderbouwd antwoord',
     intro:
       'Soms zit je niet vast aan het hele traject, maar aan één concrete vraag. Is deze motor betrouwbaar op termijn? Wat is een verstandige kilometerstand? Welke uitvoering houdt zijn waarde? Voor precies dat soort vragen kun je ons los inschakelen.',
