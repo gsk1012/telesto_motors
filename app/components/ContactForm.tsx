@@ -51,7 +51,7 @@ function Pill({
       className={`btn-label rounded-full border px-4 py-2 text-sm font-medium transition-all duration-150 ${
         selected
           ? 'border-bronze bg-bronze text-white shadow-sm'
-          : 'border-ink/15 bg-white text-ink hover:border-bronze/50 hover:text-ink'
+          : 'border-ink/15 bg-cream text-ink hover:border-bronze/50 hover:text-ink'
       }`}
     >
       {label}
@@ -116,7 +116,7 @@ export default function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="flex min-h-[440px] flex-col items-center justify-center rounded-2xl bg-white p-10 shadow-sm text-center">
+      <div className="flex min-h-[440px] flex-col items-center justify-center rounded-2xl bg-paper p-10 shadow-sm text-center">
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-bronze/10">
           <svg className="h-8 w-8 text-bronze" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
@@ -140,7 +140,7 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="overflow-hidden rounded-2xl bg-white shadow-sm">
+    <div className="overflow-hidden rounded-2xl bg-paper shadow-sm">
       {/* Progress bar */}
       <div className="h-[3px] bg-ink/6">
         <div
@@ -207,7 +207,7 @@ export default function ContactForm() {
                     className={`btn-label rounded-full border px-5 py-3 text-left text-sm font-medium transition-all duration-150 ${
                       form.budget === b
                         ? 'border-bronze bg-bronze text-white shadow-sm'
-                        : 'border-ink/15 bg-white text-ink hover:border-bronze/50'
+                        : 'border-ink/15 bg-cream text-ink hover:border-bronze/50'
                     }`}
                   >
                     {b}

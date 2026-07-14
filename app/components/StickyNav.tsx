@@ -50,7 +50,11 @@ export default function StickyNav({
           : ''
       }`}
     >
-      <nav className="relative mx-auto flex max-w-container items-center justify-between px-6 py-5 lg:px-8 lg:py-8">
+      <nav
+        className={`relative mx-auto flex max-w-container items-center justify-between px-6 transition-[padding] duration-300 ease-out lg:px-8 ${
+          scrolled ? 'py-5 lg:py-8' : 'py-7 lg:py-11'
+        }`}
+      >
         {/* LINKS (desktop): MENU-op-hover + snelkoppelingen, zoals de referentie */}
         <div className="hidden items-center gap-2 lg:flex">
           <DesktopMenu links={links} logoHref={logoHref} />
@@ -79,7 +83,9 @@ export default function StickyNav({
           <img
             src="/images/telesto-logo-color.svg"
             alt="Telesto Motors"
-            className="h-16 w-auto"
+            className={`w-auto transition-[height] duration-300 ease-out ${
+              scrolled ? 'h-16' : 'h-20'
+            }`}
           />
         </a>
 
@@ -93,7 +99,9 @@ export default function StickyNav({
           <img
             src="/images/telesto-logo-color.svg"
             alt="Telesto Motors"
-            className="h-16 w-auto"
+            className={`w-auto transition-[height] duration-300 ease-out ${
+              scrolled ? 'h-16' : 'h-20'
+            }`}
           />
         </a>
 

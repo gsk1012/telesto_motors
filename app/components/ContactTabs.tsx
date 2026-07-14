@@ -54,7 +54,7 @@ export default function ContactTabs() {
             onClick={() => handleSelect(tab.id)}
             className={`btn-label flex-1 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200 ${
               active === tab.id
-                ? 'bg-white text-ink shadow-sm'
+                ? 'bg-paper text-ink shadow-sm'
                 : 'text-ink/50 hover:text-ink/80'
             }`}
           >

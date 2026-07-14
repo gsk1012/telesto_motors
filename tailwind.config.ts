@@ -6,6 +6,7 @@ const config: Config = {
     extend: {
       colors: {
         cream: "#F7F0EC",
+        paper: "#FDFAF6",
         bronze: "#A68463",
         "bronze-dark": "#8C6E50",
         ink: "#111111",

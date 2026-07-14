@@ -95,13 +95,21 @@ export default function PromiseShowcase() {
                     {p.title}
                   </h3>
                   <span
-                    className={`flex h-10 w-10 flex-none items-center justify-center rounded-full border transition-colors duration-300 sm:h-12 sm:w-12 ${
+                    className={`flex h-10 w-10 flex-none items-center justify-center rounded-full border transition-colors duration-500 sm:h-12 sm:w-12 ${
                       isActive
                         ? 'border-bronze bg-bronze text-white'
                         : 'border-ink/20 text-ink/40'
                     }`}
                   >
-                    <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                    <svg
+                      className={`h-4 w-4 transition-transform duration-500 ease-in-out ${
+                        isActive ? 'rotate-[135deg]' : 'rotate-0'
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      viewBox="0 0 24 24"
+                    >
                       <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H8M17 7v9" />
                     </svg>
                   </span>

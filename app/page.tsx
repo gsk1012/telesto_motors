@@ -3,10 +3,9 @@ import Link from "next/link";
 import { SERVICES } from "./diensten/services";
 import ContactTabs from "./components/ContactTabs";
 import StickyNav from "./components/StickyNav";
-import { DEFAULT_NAV } from "./components/nav";
 import ScrollAnimator from "./components/ScrollAnimator";
 import SocialInstagram from "./components/SocialInstagram";
-import ReviewsWall from "./components/ReviewsWall";
+import ReviewsSpotlight from "./components/ReviewsSpotlight";
 import PromiseShowcase from "./components/PromiseShowcase";
 
 export default function Home() {
@@ -108,7 +107,7 @@ export default function Home() {
               <Link
                 key={d.slug}
                 href={`/diensten/${d.slug}`}
-                className="animate-on-scroll group flex flex-col overflow-hidden rounded-2xl bg-[#20242B] ring-1 ring-white/10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20"
+                className="animate-on-scroll group flex flex-col overflow-hidden rounded-2xl bg-[#20242B] ring-1 ring-white/10 shadow-sm transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/20"
                 data-delay={`${0.1 + i * 0.12}s`}
               >
                 <div className="relative h-52 overflow-hidden">
@@ -116,16 +115,16 @@ export default function Home() {
                     src={d.image}
                     alt={d.title}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                     sizes="(min-width: 768px) 33vw, 100vw"
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-7">
                   <h3 className="text-xl font-medium text-white">{d.title}</h3>
                   <p className="mt-3 leading-relaxed text-white/65">{d.shortBody}</p>
-                  <span className="btn-label mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold text-bronze transition-colors group-hover:text-white">
+                  <span className="btn-label mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold text-bronze transition-colors duration-300 ease-out group-hover:text-white">
                     Lees meer
-                    <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                    <svg className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
                   </span>
@@ -251,7 +250,7 @@ export default function Home() {
       <SocialInstagram />
 
       {/* ===== Klantreviews ===== */}
-      <ReviewsWall />
+      <ReviewsSpotlight />
 
       {/* ===== Contact ===== */}
       <section id="contact" className="relative bg-cream pt-24 pb-12">
@@ -279,117 +278,6 @@ export default function Home() {
       </section>
 
       <ScrollAnimator />
-
-      {/* ===== Footer ===== */}
-      <footer className="bg-footer pt-6 pb-16 text-white/80">
-        {/* Brand Marquee */}
-        {(() => {
-          // Beeldmerken (rond/vierkant) mogen hoger; woordmerken lager omdat ze optisch zwaarder ogen.
-          const BRAND_LOGOS = [
-            { src: "/images/brands/audi.svg",        alt: "Audi",          cls: "h-5 sm:h-6" },
-            { src: "/images/brands/bmw-mono.svg",    alt: "BMW",           cls: "h-6 sm:h-8" },
-            { src: "/images/brands/mercedes.webp",   alt: "Mercedes-Benz", cls: "h-6 sm:h-8" },
-            { src: "/images/brands/volkswagen.svg",  alt: "Volkswagen",    cls: "h-6 sm:h-8" },
-            { src: "/images/brands/tesla.svg",       alt: "Tesla",         cls: "h-6 sm:h-8" },
-            { src: "/images/brands/toyota.svg",      alt: "Toyota",        cls: "h-3 sm:h-4" },
-            { src: "/images/brands/volvo.svg",       alt: "Volvo",         cls: "h-3 sm:h-4" },
-            { src: "/images/brands/ford-mono.svg",   alt: "Ford",          cls: "h-4 sm:h-5" },
-            { src: "/images/brands/hyundai.svg",     alt: "Hyundai",       cls: "h-3 sm:h-4" },
-            { src: "/images/brands/kia.svg",         alt: "Kia",           cls: "h-5 sm:h-6" },
-          ];
-          const items = [...BRAND_LOGOS, ...BRAND_LOGOS];
-          return (
-            <div className="overflow-hidden pb-10 mb-10">
-              <div className="marquee-track flex min-w-max items-center">
-                {items.map((logo, i) => (
-                  <div key={i} className="flex items-center">
-                    <div className="flex items-center justify-center px-5 sm:px-8">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={logo.src}
-                        alt={logo.alt}
-                        className={`${logo.cls} w-auto shrink-0`}
-                        style={{ filter: "brightness(0) invert(0.72) opacity(0.6)" }}
-                      />
-                    </div>
-                    <span className="text-xs text-white/10 select-none">|</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          );
-        })()}
-        <div className="mx-auto grid max-w-container gap-10 px-6 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="sm:col-span-2 lg:col-span-1">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/telesto-logo-color.svg"
-              alt="Telesto Motors"
-              className="h-20 w-auto"
-            />
-            <p className="mt-4 max-w-xs text-sm text-white/60">
-              De onafhankelijke auto-adviseur die luistert naar jouw wensen.
-            </p>
-          </div>
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-widest text-white">
-              Menu
-            </p>
-            <ul className="mt-4 space-y-2 text-sm">
-              {DEFAULT_NAV.map((item) => (
-                <li key={item.href}>
-                  <a href={item.href} className="transition-colors hover:text-white">
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-widest text-white">
-              Contact
-            </p>
-            <ul className="mt-4 space-y-2 text-sm text-white/60">
-              <li>info@telestomotors.nl</li>
-              <li>+31 (0)6 20 92 92 14</li>
-              <li>Nederland</li>
-            </ul>
-          </div>
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-widest text-white">
-              Openingstijden
-            </p>
-            <ul className="mt-4 space-y-2 text-sm text-white/60">
-              <li>Ma t/m vr: 09.00 - 22.00 (op afspraak)</li>
-              <li>Za: 09.30 - 16.00</li>
-              <li>Zo: op afspraak</li>
-            </ul>
-          </div>
-        </div>
-        <div className="mx-auto mt-12 max-w-container flex flex-col items-center gap-2 border-t border-white/10 px-6 pt-6 text-xs text-white/40 sm:flex-row sm:justify-between">
-          <span>© {new Date().getFullYear()} Telesto Motors</span>
-          <div className="flex items-center gap-4">
-            <a
-              href="/privacybeleid"
-              className="transition-colors hover:text-white/70"
-            >
-              Privacybeleid
-            </a>
-            <span className="text-white/20">·</span>
-            <span>
-              Gemaakt door{" "}
-              <a
-                href="https://bluestardevelopment.nl/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="no-underline transition-colors hover:text-white/70"
-              >
-                BlueStar Development
-              </a>
-            </span>
-          </div>
-        </div>
-      </footer>
     </main>
   );
 }

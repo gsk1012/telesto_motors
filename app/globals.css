@@ -12,7 +12,7 @@ html {
   scroll-behavior: smooth;
   /* Compenseer de vaste navbar zodat ankerlinks (#diensten, #contact ...) de
      sectiekop niet achter de header verbergen. */
-  scroll-padding-top: 7.5rem;
+  scroll-padding-top: 8rem;
 }
 
 h1,

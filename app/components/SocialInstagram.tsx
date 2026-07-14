@@ -18,8 +18,6 @@ const POSTS = [
   { src: "/images/instagram/post-5.jpg", alt: "Droomauto" },
 ];
 
-const BG_IMAGE = "/images/instagram/bg.avif";
-
 // Drie sets achter elkaar zodat de slider naadloos kan doorlopen (oneindig).
 const LOOP = [...POSTS, ...POSTS, ...POSTS];
 const BASE = POSTS.length;
@@ -34,56 +32,7 @@ function InstagramGlyph({ className }: { className?: string }) {
   );
 }
 
-function Chevron({ dir }: { dir: "left" | "right" }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-5 w-5" aria-hidden>
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d={dir === "left" ? "M15 5l-7 7 7 7" : "M9 5l7 7-7 7"}
-      />
-    </svg>
-  );
-}
-
 export default function SocialInstagram() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const bgRef = useRef<HTMLDivElement>(null);
-
-  // ----- Parallax achtergrond -----
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const section = sectionRef.current;
-    const bg = bgRef.current;
-    if (!section || !bg) return;
-
-    const MAX = 70; // px of vertical drift
-    let raf = 0;
-
-    const update = () => {
-      raf = 0;
-      const rect = section.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const progress = (vh - rect.top) / (vh + rect.height);
-      const clamped = Math.min(1, Math.max(0, progress));
-      const translate = (clamped - 0.5) * 2 * MAX;
-      bg.style.transform = `translate3d(0, ${translate.toFixed(2)}px, 0) scale(1.12)`;
-    };
-
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      if (raf) cancelAnimationFrame(raf);
-    };
-  }, []);
-
   // ----- Oneindige slider -----
   const trackRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(BASE); // start in de middelste set
@@ -134,7 +83,7 @@ export default function SocialInstagram() {
   // Autoplay — geeft de "oneindige" beweging; pauzeert bij hover/verborgen tab.
   useEffect(() => {
     if (paused || reduced || slideW === 0) return;
-    const id = setInterval(next, 3500);
+    const id = setInterval(next, 2000);
     return () => clearInterval(id);
   }, [paused, reduced, slideW, next]);
 
@@ -157,34 +106,75 @@ export default function SocialInstagram() {
   };
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative overflow-hidden bg-ink py-24 sm:py-28 lg:py-32"
-    >
-      {/* Parallax background */}
+    <section className="relative overflow-hidden bg-[#14181E] py-10 sm:py-12 lg:py-16">
+      {/* Full-bleed rij grote vierkanten die oneindig door-scrolt */}
       <div
-        ref={bgRef}
-        className="pointer-events-none absolute inset-x-0 -top-24 -bottom-24 will-change-transform"
-        aria-hidden
+        className="relative"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onFocusCapture={() => setPaused(true)}
+        onBlurCapture={() => setPaused(false)}
       >
-        <Image
-          src={BG_IMAGE}
-          alt=""
-          fill
-          className="object-cover opacity-40"
-          sizes="100vw"
-        />
-      </div>
-      {/* scrims */}
-      <div className="absolute inset-0 bg-ink/30" aria-hidden />
-      <div
-        className="absolute inset-0 bg-gradient-to-b from-ink via-ink/30 to-ink"
-        aria-hidden
-      />
+        <div
+          className="overflow-hidden"
+          onPointerDown={onPointerDown}
+          onPointerUp={onPointerUp}
+        >
+          <div
+            ref={trackRef}
+            onTransitionEnd={onTransitionEnd}
+            className="flex py-4 sm:py-6"
+            style={{
+              transform: `translate3d(-${index * slideW}px, 0, 0)`,
+              transition: animate
+                ? "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)"
+                : "none",
+            }}
+          >
+            {LOOP.map((post, i) => {
+              const clone = i < BASE || i >= BASE * 2;
+              return (
+                <div
+                  key={i}
+                  className="w-[68%] shrink-0 px-1 sm:w-1/3 sm:px-1.5 lg:w-1/5"
+                  aria-hidden={clone}
+                >
+                  <a
+                    href={IG_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Bekijk onze Instagram"
+                    tabIndex={clone ? -1 : 0}
+                    className="relative block aspect-square overflow-hidden rounded-xl border border-white/10 shadow-lg"
+                    draggable={false}
+                  >
+                    <Image
+                      src={post.src}
+                      alt={post.alt}
+                      fill
+                      className="object-cover transition-transform duration-500 hover:scale-105"
+                      sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 68vw"
+                      draggable={false}
+                    />
+                  </a>
+                </div>
+              );
+            })}
+          </div>
+        </div>
 
-      <div className="relative z-10 mx-auto max-w-container px-6">
-        {/* Header */}
-        <div className="mx-auto max-w-2xl text-center">
+        {/* Waas in het midden — randtegels blijven helder, tekst blijft leesbaar */}
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 62% 92% at center, rgba(20,24,30,0.92) 0%, rgba(20,24,30,0.78) 42%, rgba(20,24,30,0.2) 74%, rgba(20,24,30,0) 100%)",
+          }}
+          aria-hidden
+        />
+
+        {/* Titel + @handle + knop gecentreerd over de beelden */}
+        <div className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center">
           <p
             className="animate-on-scroll text-sm font-semibold uppercase tracking-widest text-bronze"
             data-delay="0s"
@@ -192,107 +182,29 @@ export default function SocialInstagram() {
             Instagram
           </p>
           <h2
-            className="animate-on-scroll mt-3 font-serif text-4xl font-light uppercase leading-tight text-white sm:text-5xl"
+            className="animate-on-scroll mt-3 font-serif text-3xl font-light uppercase leading-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] sm:text-5xl lg:text-6xl"
             data-delay="0.08s"
           >
-            Elke auto een verhaal
+            Bekijk onze socials
           </h2>
           <a
             href={IG_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="animate-on-scroll mt-3 inline-block text-lg font-medium text-bronze transition-colors hover:text-white"
+            className="pointer-events-auto animate-on-scroll mt-3 inline-block text-lg font-medium text-bronze transition-colors hover:text-white sm:text-xl"
             data-delay="0.18s"
           >
             @telesto.motors
           </a>
-        </div>
-
-        {/* Slider */}
-        <div
-          className="animate-on-scroll mt-12 flex items-center gap-2 sm:gap-4"
-          data-delay="0.15s"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          onFocusCapture={() => setPaused(true)}
-          onBlurCapture={() => setPaused(false)}
-        >
-          {/* Vorige */}
-          <button
-            type="button"
-            onClick={prev}
-            aria-label="Vorige"
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/25 bg-ink/50 text-white backdrop-blur transition-colors duration-200 hover:border-bronze hover:bg-bronze"
-          >
-            <Chevron dir="left" />
-          </button>
-
-          <div
-            className="flex-1 overflow-hidden"
-            onPointerDown={onPointerDown}
-            onPointerUp={onPointerUp}
-          >
-            <div
-              ref={trackRef}
-              onTransitionEnd={onTransitionEnd}
-              className="flex"
-              style={{
-                transform: `translate3d(-${index * slideW}px, 0, 0)`,
-                transition: animate
-                  ? "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)"
-                  : "none",
-              }}
-            >
-              {LOOP.map((post, i) => (
-                <div
-                  key={i}
-                  className="w-1/2 shrink-0 px-1.5 sm:w-1/3 sm:px-2 lg:w-1/5"
-                  aria-hidden={i < BASE || i >= BASE * 2}
-                >
-                  <a
-                    href={IG_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Bekijk onze Instagram"
-                    tabIndex={i < BASE || i >= BASE * 2 ? -1 : 0}
-                    className="relative block aspect-square overflow-hidden rounded-2xl border border-white/10 shadow-lg"
-                    draggable={false}
-                  >
-                    <Image
-                      src={post.src}
-                      alt={post.alt}
-                      fill
-                      className="object-cover transition-transform duration-500 hover:scale-110"
-                      sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
-                      draggable={false}
-                    />
-                  </a>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Volgende */}
-          <button
-            type="button"
-            onClick={next}
-            aria-label="Volgende"
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/25 bg-ink/50 text-white backdrop-blur transition-colors duration-200 hover:border-bronze hover:bg-bronze"
-          >
-            <Chevron dir="right" />
-          </button>
-        </div>
-
-        {/* CTA */}
-        <div className="animate-on-scroll mt-12 text-center" data-delay="0.25s">
           <a
             href={IG_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-label inline-flex items-center gap-2.5 rounded-full bg-bronze px-7 py-3.5 text-base font-semibold text-white shadow-lg transition-colors hover:bg-bronze-dark"
+            className="btn-label pointer-events-auto animate-on-scroll mt-8 inline-flex items-center gap-2.5 rounded-full bg-bronze px-7 py-3.5 text-base font-semibold text-white shadow-lg transition-colors hover:bg-bronze-dark"
+            data-delay="0.25s"
           >
             <InstagramGlyph className="h-5 w-5" />
-            Bekijk onze Instagram
+            Ga naar onze Instagram
           </a>
         </div>
       </div>

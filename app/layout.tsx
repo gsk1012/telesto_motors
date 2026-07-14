@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
+import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
 
 const openSans = Open_Sans({
@@ -171,6 +172,7 @@ export default function RootLayout({
       </head>
       <body className="font-sans">
         {children}
+        <Footer />
         <WhatsAppButton />
       </body>
     </html>
