@@ -57,7 +57,7 @@ export default function StickyNav({
       >
         {/* LINKS (desktop): MENU-op-hover + snelkoppelingen, zoals de referentie */}
         <div className="hidden items-center gap-2 lg:flex">
-          <DesktopMenu links={links} logoHref={logoHref} />
+          <DesktopMenu links={links} logoHref={logoHref} ctaHref={ctaHref} />
           <ul className="flex items-center gap-1 text-sm font-semibold uppercase tracking-[0.14em] text-white/80">
             {quickLinks.map((item) => (
               <li key={item.label}>

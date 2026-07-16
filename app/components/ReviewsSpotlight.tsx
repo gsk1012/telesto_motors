@@ -1,17 +1,15 @@
 "use client";
 
-import Image from "next/image";
 import { type CSSProperties, useCallback, useEffect, useRef, useState } from "react";
 
 /*
- * Klantreviews als peek-slider: het uitgelichte paneel (autofoto + citaat) is
- * groot in beeld, de volgende review komt voor iets minder dan de helft mee —
- * gedimd, als uitnodiging om door te schuiven. Sleep/veeg of gebruik de pijlen.
- * Auto-schuift zachtjes door (pauzeert bij hover/focus), respecteert
- * prefers-reduced-motion.
+ * Klantreviews als peek-slider: het uitgelichte citaat staat groot in beeld,
+ * de volgende review komt voor iets minder dan de helft mee — gedimd, als
+ * uitnodiging om door te schuiven. Sleep/veeg of gebruik de pijlen. Auto-schuift
+ * zachtjes door (pauzeert bij hover/focus), respecteert prefers-reduced-motion.
  *
- * De autofoto's zijn placeholders (public/images/reviews/) — vervang ze door
- * echte foto's zodra beschikbaar; verder verandert er niets aan dit bestand.
+ * Geen foto's: de linkerhelft is een identiteitspaneel met een groot
+ * aanhalingsteken en een monogram (initialen) van de klant.
  */
 const REVIEWS = [
   {
@@ -19,32 +17,24 @@ const REVIEWS = [
       "Binnen twee weken hadden ze de juiste auto gevonden. De keuring legde verborgen schade bloot die mij duizenden euro's scheelde.",
     name: "Mark Verhoeven",
     role: "BMW 3-serie",
-    image: "/images/reviews/review-1.jpg",
-    alt: "Metallic grijsblauwe BMW 3-serie op een rustige straat in het gouden avondlicht",
   },
   {
     quote:
       "Geen verkooppraatjes, alleen eerlijk advies. De onderhandeling deden ze volledig voor mij, scherper dan ik zelf ooit had gekregen.",
     name: "Joost Brinkman",
     role: "Audi Q5, zakelijk",
-    image: "/images/reviews/review-2.jpg",
-    alt: "Zilvergrijze Audi Q5 voor een modern kantoorgebouw",
   },
   {
     quote:
       "Ik wist niets van elektrisch rijden. Ze namen al mijn twijfels weg en kozen een model dat perfect bij mijn dagelijkse ritten past.",
     name: "Sanne de Wit",
     role: "Eerste elektrische auto",
-    image: "/images/reviews/review-3.jpg",
-    alt: "Compacte witte elektrische auto aan een laadpaal in een groene woonstraat",
   },
   {
     quote:
       "Persoonlijk en betrokken van het eerste gesprek tot de sleutels. Het voelde alsof iemand echt aan mijn kant stond.",
     name: "Eline Kuipers",
     role: "Gezinsauto",
-    image: "/images/reviews/review-4.jpg",
-    alt: "Donkerblauwe stationwagen op een oprit bij een Nederlandse gezinswoning",
   },
 ];
 
@@ -177,7 +167,7 @@ export default function ReviewsSpotlight() {
             className="animate-on-scroll mt-5 text-lg leading-relaxed text-white/65"
             data-delay="0.15s"
           >
-            Elke auto hieronder vonden wij voor de klant die erover vertelt.
+            Echte ervaringen van mensen die wij aan hun ideale auto hielpen.
           </p>
         </div>
       </div>
@@ -250,6 +240,10 @@ export default function ReviewsSpotlight() {
             >
               {LOOP.map((r, i) => {
                 const isActive = i === index;
+                const parts = r.name.split(" ");
+                const initials = (
+                  parts[0][0] + (parts.length > 1 ? parts[parts.length - 1][0] : "")
+                ).toUpperCase();
                 return (
                   <div
                     key={i}
@@ -257,7 +251,7 @@ export default function ReviewsSpotlight() {
                     className="w-[calc(100vw-var(--rev-inset)-3.5rem)] shrink-0 pr-3 sm:pr-5 lg:w-[min(calc(100vw-var(--rev-inset)-16rem),66rem)] lg:pr-6"
                   >
                     <figure
-                      className={`flex h-[560px] flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.06] shadow-[0_30px_80px_-40px_rgba(0,0,0,0.75)] backdrop-blur-sm [will-change:transform,opacity] motion-reduce:transition-none sm:h-[440px] lg:grid lg:h-[460px] lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1fr)] ${
+                      className={`flex h-[440px] flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.06] shadow-[0_30px_80px_-40px_rgba(0,0,0,0.75)] backdrop-blur-sm [will-change:transform,opacity] motion-reduce:transition-none sm:h-[400px] lg:grid lg:h-[440px] lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1fr)] ${
                         animate
                           ? "transition-[opacity,transform] duration-[800ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
                           : "transition-none"
@@ -265,21 +259,15 @@ export default function ReviewsSpotlight() {
                         isActive ? "scale-100 opacity-100" : "scale-[0.96] opacity-50"
                       }`}
                     >
-                      {/* Beeld */}
-                      <div className="relative h-56 w-full shrink-0 lg:h-full">
-                        <Image
-                          src={r.image}
-                          alt={isActive ? r.alt : ""}
-                          fill
-                          priority={i === BASE}
-                          sizes="(min-width: 1024px) 40vw, 86vw"
-                          draggable={false}
-                          className="object-cover"
-                        />
-                        <div
-                          aria-hidden
-                          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal/45 via-transparent to-transparent lg:bg-gradient-to-r"
-                        />
+                      {/* Identiteitspaneel — vervangt de foto */}
+                      <div className="relative flex shrink-0 items-center gap-4 overflow-hidden border-b border-white/10 bg-gradient-to-br from-bronze/25 via-bronze/[0.08] to-transparent px-8 py-7 sm:gap-5 lg:h-full lg:flex-col lg:justify-center lg:gap-7 lg:border-b-0 lg:border-r lg:px-10">
+                        <div className="relative grid h-16 w-16 shrink-0 place-items-center rounded-full border border-bronze/40 bg-white/[0.05] font-serif text-2xl text-bronze sm:h-20 sm:w-20 lg:h-24 lg:w-24 lg:text-4xl">
+                          {initials}
+                        </div>
+                        <div className="relative lg:text-center">
+                          <span className="block font-semibold text-white lg:text-lg">{r.name}</span>
+                          <span className="block text-sm text-white/55">{r.role}</span>
+                        </div>
                       </div>
 
                       {/* Citaat */}
@@ -298,13 +286,6 @@ export default function ReviewsSpotlight() {
                           <blockquote className="mt-6 font-serif text-lg font-medium leading-relaxed text-white sm:text-xl lg:text-[1.6rem] lg:leading-relaxed">
                             {r.quote}
                           </blockquote>
-                          <figcaption className="mt-8 flex items-center gap-4">
-                            <span aria-hidden className="h-px w-10 bg-bronze" />
-                            <span>
-                              <span className="block font-semibold text-white">{r.name}</span>
-                              <span className="block text-sm text-white/55">{r.role}</span>
-                            </span>
-                          </figcaption>
                         </div>
                       </div>
                     </figure>

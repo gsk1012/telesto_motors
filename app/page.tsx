@@ -70,8 +70,8 @@ export default function Home() {
       {/* ===== Diensten ===== */}
       <section
         id="diensten"
-        className="pt-24 pb-24"
-        style={{ background: 'linear-gradient(to bottom, #191D23 66%, #F7F0EC 66%)' }}
+        className="pt-16 pb-24"
+        style={{ backgroundColor: '#191D23' }}
       >
         <div className="mx-auto max-w-container px-6">
           <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
@@ -107,7 +107,7 @@ export default function Home() {
               <Link
                 key={d.slug}
                 href={`/diensten/${d.slug}`}
-                className="animate-on-scroll group flex flex-col overflow-hidden rounded-2xl bg-[#20242B] ring-1 ring-white/10 shadow-sm transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/20"
+                className="animate-on-scroll group flex flex-col overflow-hidden bg-[#20242B] ring-1 ring-white/10 shadow-sm transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/20"
                 data-delay={`${0.1 + i * 0.12}s`}
               >
                 <div className="relative h-52 overflow-hidden">
@@ -134,6 +134,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ===== Onze belofte (kenmerken) ===== */}
+      <PromiseShowcase />
 
       {/* ===== Kenmerken-balk (credentials) ===== */}
       <section className="bg-cream">
@@ -164,54 +167,47 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== Onze belofte (kenmerken) ===== */}
-      <PromiseShowcase />
-
       {/* ===== Waarom Telesto ===== */}
-      <section id="over" className="overflow-hidden bg-charcoal py-16 lg:py-20">
-        <div className="grid items-center lg:grid-cols-[5fr_6fr]">
+      <section id="over" className="overflow-hidden bg-cream text-ink">
+        <div className="grid items-stretch lg:grid-cols-[1fr_1fr]">
 
-          {/* Left: photo column */}
-          <div className="over-image-col animate-on-scroll order-2 lg:order-1" data-delay="0s">
-            {/* Mobile: original rounded style */}
-            <div className="relative mx-6 mt-10 mb-0 overflow-hidden rounded-3xl shadow-lg lg:hidden">
+          {/* Left: label boven, full-bleed foto eronder (crème erboven) */}
+          <div className="order-2 flex flex-col lg:order-1">
+            {/* Label alleen op desktop hier (linksboven het beeld) */}
+            <p
+              className="animate-on-scroll hidden text-sm font-semibold uppercase tracking-widest text-bronze lg:block lg:px-10 lg:pt-16 lg:pb-10"
+              data-delay="0s"
+            >
+              Over ons
+            </p>
+            <div className="relative min-h-[300px] w-full flex-1 lg:min-h-[440px]">
               <Image
                 src="/images/over-ons.jpg"
                 alt="Telesto Motors, persoonlijk auto-advies"
-                width={1024}
-                height={648}
-                className="h-full w-full object-cover"
+                fill
+                className="object-cover object-center"
+                sizes="(min-width: 1024px) 45vw, 100vw"
               />
-            </div>
-            {/* Desktop: centered rounded rectangle, badge pops out */}
-            <div className="relative hidden lg:block lg:pr-10">
-              <div className="relative h-[460px] w-full overflow-hidden rounded-r-3xl shadow-lg">
-                <Image
-                  src="/images/over-ons.jpg"
-                  alt="Telesto Motors, persoonlijk auto-advies"
-                  fill
-                  className="object-cover"
-                  sizes="50vw"
-                />
-              </div>
-              {/* Badge pops out below photo corner */}
-              <div className="absolute -bottom-5 right-6 rounded-2xl bg-bronze px-7 py-5 text-white shadow-xl">
-                <p className="text-3xl font-semibold">15+</p>
-                <p className="text-sm text-white/85">jaar ervaring</p>
-              </div>
             </div>
           </div>
 
-          {/* Right: text */}
-          <div className="order-1 flex items-center px-8 py-14 lg:order-2 lg:py-16 lg:pl-16 xl:pl-20 lg:pr-12 xl:pr-16">
+          {/* Right: titel bovenin, tekst eronder (zoals de referentie) */}
+          <div className="relative z-10 order-1 flex flex-col justify-between gap-10 px-8 py-14 lg:order-2 lg:py-16 lg:pl-14 xl:pl-20 lg:pr-14 xl:pr-20">
             <div>
-              <p className="animate-on-scroll text-sm font-semibold uppercase tracking-widest text-bronze" data-delay="0s">
+              {/* Label alleen op mobiel hier (boven de koptekst) */}
+              <p className="animate-on-scroll mb-4 text-sm font-semibold uppercase tracking-widest text-bronze lg:hidden" data-delay="0s">
                 Over ons
               </p>
-              <h2 className="animate-on-scroll mt-3 font-serif text-4xl font-light uppercase leading-tight text-white sm:text-5xl" data-delay="0.05s">
-                Onafhankelijk, en altijd aan jouw kant
+              <h2 className="animate-on-scroll font-serif text-4xl font-light uppercase leading-tight tracking-[0.06em] text-ink sm:text-5xl lg:-ml-28 lg:max-w-[48rem] lg:text-[4rem] lg:leading-[1.05] lg:[text-shadow:0_0_22px_rgb(247_240_236_/_0%),0_0_9px_rgb(247_240_236_/_0%),0_1px_2px_rgb(247_240_236_/_84%)]" data-delay="0.05s">
+                Onafhankelijk advies{" "}
+                <br className="hidden lg:block" />
+                altijd zonder{" "}
+                <br className="hidden lg:block" />
+                eigenbelang.
               </h2>
-              <p className="animate-on-scroll mt-5 text-lg text-white/70" data-delay="0.15s">
+            </div>
+            <div>
+              <p className="animate-on-scroll text-lg leading-relaxed text-ink/65" data-delay="0.15s">
                 Sinds 2008 helpen wij particulieren en bedrijven aan de juiste auto.
                 Omdat we onafhankelijk zijn, kiezen we nooit voor een merk: alleen
                 voor jou. Met ruime kennis van elektrische en hybride auto&apos;s
@@ -229,13 +225,13 @@ export default function Home() {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                       </svg>
                     </span>
-                    <span className="text-white/80">{point}</span>
+                    <span className="text-ink/80">{point}</span>
                   </li>
                 ))}
               </ul>
               <a
                 href="#contact"
-                className="btn-label animate-on-scroll mt-10 inline-flex items-center justify-center rounded-full bg-bronze px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-bronze-dark"
+                className="btn-label animate-on-scroll mt-10 inline-flex w-fit items-center justify-center rounded-full bg-bronze px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-bronze-dark"
                 data-delay="0.4s"
               >
                 Plan een kennismaking
@@ -253,9 +249,7 @@ export default function Home() {
       <ReviewsSpotlight />
 
       {/* ===== Contact ===== */}
-      <section id="contact" className="relative bg-cream pt-24 pb-12">
-        {/* Lower half bg-footer so the form card lifts off the seam into the footer */}
-        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 top-[68%] bg-footer" />
+      <section id="contact" className="relative bg-cream pt-24 pb-20">
         <div className="relative z-10 mx-auto max-w-container px-6">
           {/* Centered header */}
           <div className="mx-auto max-w-xl text-center">

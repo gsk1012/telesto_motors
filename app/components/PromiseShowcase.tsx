@@ -61,13 +61,13 @@ export default function PromiseShowcase() {
   }, [])
 
   return (
-    <section id="belofte" className="bg-cream text-ink">
-      <div className="mx-auto max-w-container px-6 pb-14 pt-14 sm:pb-16 sm:pt-16 lg:pb-20 lg:pt-20">
+    <section id="belofte" className="bg-[#14181E] text-white">
+      <div className="mx-auto max-w-container px-6 pt-20 pb-14 sm:pb-16 lg:pb-20">
         <p
           className="animate-on-scroll text-sm font-semibold uppercase tracking-widest text-bronze"
           data-delay="0s"
         >
-          Onze belofte
+          Onze beloftes
         </p>
 
         {/* Hover-accordion */}
@@ -79,7 +79,7 @@ export default function PromiseShowcase() {
                 key={p.title}
                 onMouseEnter={canHover ? () => setActive(i) : undefined}
                 onFocus={canHover ? () => setActive(i) : undefined}
-                className={i < PROMISES.length - 1 ? 'border-b border-ink/15' : ''}
+                className={i < PROMISES.length - 1 ? 'border-b border-white/15' : ''}
               >
                 <button
                   type="button"
@@ -89,7 +89,7 @@ export default function PromiseShowcase() {
                 >
                   <h3
                     className={`font-serif text-xl font-light transition-colors duration-300 sm:text-2xl lg:text-3xl ${
-                      isActive ? 'text-ink' : 'text-ink/40'
+                      isActive ? 'text-white' : 'text-white/40'
                     }`}
                   >
                     {p.title}
@@ -98,7 +98,7 @@ export default function PromiseShowcase() {
                     className={`flex h-10 w-10 flex-none items-center justify-center rounded-full border transition-colors duration-500 sm:h-12 sm:w-12 ${
                       isActive
                         ? 'border-bronze bg-bronze text-white'
-                        : 'border-ink/20 text-ink/40'
+                        : 'border-white/20 text-white/40'
                     }`}
                   >
                     <svg
@@ -124,8 +124,8 @@ export default function PromiseShowcase() {
                   <div className="overflow-hidden">
                     <div className="grid gap-6 pb-6 sm:pb-8 lg:grid-cols-[1.3fr_1fr] lg:items-start lg:gap-10">
                       <div>
-                        <p className="max-w-md leading-relaxed text-ink/70">
-                          <span className="font-semibold text-ink">{p.lead} </span>
+                        <p className="max-w-md leading-relaxed text-white/70">
+                          <span className="font-semibold text-white">{p.lead} </span>
                           {p.body}
                         </p>
                         <a
@@ -135,7 +135,7 @@ export default function PromiseShowcase() {
                           Plan een gesprek
                         </a>
                       </div>
-                      <div className="relative mx-auto aspect-[4/3] w-full max-w-xs overflow-hidden rounded-2xl shadow-lg [transform:rotate(-1.5deg)] lg:max-w-full">
+                      <div className="relative mx-auto aspect-[4/3] w-full max-w-xs overflow-hidden shadow-lg [transform:rotate(-1.5deg)] lg:max-w-full">
                         <Image
                           src={p.image}
                           alt={p.alt}

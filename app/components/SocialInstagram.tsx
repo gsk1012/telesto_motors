@@ -106,7 +106,32 @@ export default function SocialInstagram() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-[#14181E] py-10 sm:py-12 lg:py-16">
+    <section className="relative overflow-hidden bg-[#14181E] py-8 sm:py-10 lg:py-12">
+      {/* Titel boven de beelden */}
+      <div className="mb-5 px-6 text-center sm:mb-6">
+        <p
+          className="animate-on-scroll text-sm font-semibold uppercase tracking-widest text-bronze"
+          data-delay="0s"
+        >
+          Instagram
+        </p>
+        <h2
+          className="animate-on-scroll mt-2 font-serif text-3xl font-light uppercase leading-tight text-white sm:text-4xl lg:text-5xl"
+          data-delay="0.08s"
+        >
+          Bekijk onze socials
+        </h2>
+        <a
+          href={IG_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="animate-on-scroll mt-2 inline-block text-base font-medium text-bronze transition-colors hover:text-white sm:text-lg"
+          data-delay="0.18s"
+        >
+          @telesto.motors
+        </a>
+      </div>
+
       {/* Full-bleed rij grote vierkanten die oneindig door-scrolt */}
       <div
         className="relative"
@@ -145,7 +170,7 @@ export default function SocialInstagram() {
                     rel="noopener noreferrer"
                     aria-label="Bekijk onze Instagram"
                     tabIndex={clone ? -1 : 0}
-                    className="relative block aspect-square overflow-hidden rounded-xl border border-white/10 shadow-lg"
+                    className="relative block aspect-square overflow-hidden border border-white/10 shadow-lg"
                     draggable={false}
                   >
                     <Image
@@ -163,50 +188,20 @@ export default function SocialInstagram() {
           </div>
         </div>
 
-        {/* Waas in het midden — randtegels blijven helder, tekst blijft leesbaar */}
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 62% 92% at center, rgba(20,24,30,0.92) 0%, rgba(20,24,30,0.78) 42%, rgba(20,24,30,0.2) 74%, rgba(20,24,30,0) 100%)",
-          }}
-          aria-hidden
-        />
+      </div>
 
-        {/* Titel + @handle + knop gecentreerd over de beelden */}
-        <div className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center">
-          <p
-            className="animate-on-scroll text-sm font-semibold uppercase tracking-widest text-bronze"
-            data-delay="0s"
-          >
-            Instagram
-          </p>
-          <h2
-            className="animate-on-scroll mt-3 font-serif text-3xl font-light uppercase leading-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] sm:text-5xl lg:text-6xl"
-            data-delay="0.08s"
-          >
-            Bekijk onze socials
-          </h2>
-          <a
-            href={IG_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="pointer-events-auto animate-on-scroll mt-3 inline-block text-lg font-medium text-bronze transition-colors hover:text-white sm:text-xl"
-            data-delay="0.18s"
-          >
-            @telesto.motors
-          </a>
-          <a
-            href={IG_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-label pointer-events-auto animate-on-scroll mt-8 inline-flex items-center gap-2.5 rounded-full bg-bronze px-7 py-3.5 text-base font-semibold text-white shadow-lg transition-colors hover:bg-bronze-dark"
-            data-delay="0.25s"
-          >
-            <InstagramGlyph className="h-5 w-5" />
-            Ga naar onze Instagram
-          </a>
-        </div>
+      {/* Knop onder de beelden */}
+      <div className="mt-5 px-6 text-center sm:mt-6">
+        <a
+          href={IG_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-label animate-on-scroll inline-flex items-center gap-2.5 rounded-full bg-bronze px-6 py-3 text-sm font-semibold text-white shadow-lg transition-colors hover:bg-bronze-dark sm:text-base"
+          data-delay="0.25s"
+        >
+          <InstagramGlyph className="h-5 w-5" />
+          Ga naar onze Instagram
+        </a>
       </div>
     </section>
   );

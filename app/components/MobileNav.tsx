@@ -95,10 +95,10 @@ export default function MobileNav({
                 moving edge instead of sliding along (reijndersvanvliet-style). */}
             <div
               inert={!open}
-              className={`fixed inset-y-0 right-0 z-50 overflow-hidden transition-[width] duration-[800ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] motion-reduce:transition-none lg:hidden ${
+              className={`fixed inset-y-0 right-0 z-50 overflow-hidden backdrop-blur-xl transition-[width] duration-[800ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] motion-reduce:transition-none lg:hidden ${
                 open ? 'w-[min(80vw,20rem)]' : 'w-0'
               }`}
-              style={{ backgroundColor: '#111111' }}
+              style={{ backgroundColor: 'rgba(17,17,17,0.65)' }}
             >
               <div className="absolute inset-y-0 right-0 flex w-[min(80vw,20rem)] flex-col">
                 {/* Header (mirrors the page nav so the toggle lines up with it) */}
@@ -108,12 +108,20 @@ export default function MobileNav({
 
                 {/* Links */}
                 <nav className="mt-2 flex flex-col px-8">
-                  {links.map((item) => (
+                  {links.map((item, i) => (
                     <a
                       key={item.label}
                       href={item.href}
                       onClick={closeMenu}
-                      className="border-b border-white/10 py-4 text-lg font-medium uppercase tracking-wide text-white/75 transition-colors duration-300 ease-out hover:text-bronze last:border-0"
+                      style={{
+                        transitionProperty: 'opacity, transform, color',
+                        transitionDuration: '900ms, 900ms, 250ms',
+                        transitionTimingFunction: 'cubic-bezier(0.22,1,0.36,1)',
+                        transitionDelay: open ? `${250 + i * 130}ms, ${250 + i * 130}ms, 0ms` : '0ms',
+                      }}
+                      className={`border-b border-white/10 py-4 text-lg font-medium uppercase tracking-wide text-white/75 hover:text-bronze last:border-0 motion-reduce:transition-none ${
+                        open ? 'translate-y-0 opacity-100' : '-translate-y-3 opacity-0'
+                      }`}
                     >
                       {item.label}
                     </a>
@@ -121,7 +129,12 @@ export default function MobileNav({
                 </nav>
 
                 {/* CTA + contact/socials */}
-                <div className="mt-auto px-6 pb-10">
+                <div
+                  style={{ transitionDelay: open ? `${250 + links.length * 130}ms` : '0ms' }}
+                  className={`mt-auto px-6 pb-10 transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
+                    open ? 'translate-y-0 opacity-100' : '-translate-y-3 opacity-0'
+                  }`}
+                >
                   <a
                     href={ctaHref}
                     onClick={closeMenu}
