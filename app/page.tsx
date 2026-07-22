@@ -164,10 +164,10 @@ export default function Home() {
             </p>
             <div className="relative min-h-[300px] w-full flex-1 lg:min-h-[440px]">
               <Image
-                src="/images/over-ons-home.avif"
+                src="/images/over-ons-home.jpg"
                 alt="Telesto Motors, persoonlijk auto-advies"
                 fill
-                className="object-cover object-[10%_center]"
+                className="object-cover object-[50%_center]"
                 sizes="(min-width: 1024px) 45vw, 100vw"
               />
             </div>
