@@ -19,10 +19,9 @@ export default function Home() {
       {/* ===== Hero ===== */}
       <section className="relative flex min-h-[62svh] w-full items-center overflow-hidden md:min-h-[88svh] md:items-start">
         <HeroSlider />
-        {/* scrims */}
-        <div className="absolute inset-0 bg-black/20" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/25 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-black/15" />
+        {/* scrims — licht gehouden zodat de hero helder blijft, net genoeg voor leesbare tekst */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/5 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/10" />
 
         <div className="relative z-10 mx-auto w-full max-w-container px-6 pt-16 md:pt-32 lg:pt-40">
           <div className="max-w-3xl">
@@ -165,10 +164,10 @@ export default function Home() {
             </p>
             <div className="relative min-h-[300px] w-full flex-1 lg:min-h-[440px]">
               <Image
-                src="/images/over-ons.jpg"
+                src="/images/over-ons-home.avif"
                 alt="Telesto Motors, persoonlijk auto-advies"
                 fill
-                className="object-cover object-center"
+                className="object-cover object-[10%_center]"
                 sizes="(min-width: 1024px) 45vw, 100vw"
               />
             </div>
@@ -181,7 +180,7 @@ export default function Home() {
               <p className="animate-on-scroll mb-4 text-sm font-semibold uppercase tracking-widest text-bronze lg:hidden" data-delay="0s">
                 Over ons
               </p>
-              <h2 className="animate-on-scroll font-serif text-4xl font-light uppercase leading-[1.4] tracking-[0.12em] text-ink sm:text-5xl lg:-ml-28 lg:max-w-[48rem] lg:text-[4rem] lg:leading-[1.35] lg:[text-shadow:0_0_22px_rgb(247_240_236_/_0%),0_0_9px_rgb(247_240_236_/_0%),0_1px_2px_rgb(247_240_236_/_84%)]" data-delay="0.05s">
+              <h2 className="animate-on-scroll font-serif text-4xl font-light uppercase leading-[1.4] tracking-[0.12em] text-ink sm:text-5xl lg:-ml-28 lg:max-w-[48rem] lg:text-[4rem] lg:leading-[1.35]" data-delay="0.05s">
                 Onafhankelijk advies{" "}
                 <br className="hidden lg:block" />
                 altijd zonder{" "}
@@ -253,6 +252,16 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ===== Sfeerbeeld (parallax) ===== */}
+      {/* Achtergrond zit vast aan het venster (bg-fixed): de sectie is het kijkgat dat
+          erover scrolt, de foto zelf beweegt niet mee met de pagina-inhoud. */}
+      <section
+        className="relative h-[35svh] w-full bg-fixed bg-cover bg-center sm:h-[45svh]"
+        style={{ backgroundImage: "url('/images/home/parallax-werkplaats.jpg')" }}
+        aria-label="Telesto Motors werkplaats"
+        role="img"
+      />
 
       <ScrollAnimator />
     </main>

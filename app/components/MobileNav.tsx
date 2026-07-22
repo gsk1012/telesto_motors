@@ -98,7 +98,7 @@ export default function MobileNav({
               className={`fixed inset-y-0 right-0 z-50 overflow-hidden backdrop-blur-xl transition-[width] duration-[800ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] motion-reduce:transition-none lg:hidden ${
                 open ? 'w-[min(80vw,20rem)]' : 'w-0'
               }`}
-              style={{ backgroundColor: 'rgba(17,17,17,0.65)' }}
+              style={{ backgroundColor: 'rgba(17,17,17,0.92)' }}
             >
               <div className="absolute inset-y-0 right-0 flex w-[min(80vw,20rem)] flex-col">
                 {/* Header (mirrors the page nav so the toggle lines up with it) */}

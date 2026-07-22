@@ -4,9 +4,9 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const SLIDES = [
-  { src: "/images/hero/hero-1.avif", alt: "Premium auto geselecteerd door Telesto" },
   { src: "/images/hero/hero-2.webp", alt: "Onafhankelijke autokeuring door Telesto" },
   { src: "/images/hero/hero-3.jpg", alt: "Droomauto klaar voor overhandiging" },
+  { src: "/images/hero/hero-1.avif", alt: "Premium auto geselecteerd door Telesto" },
 ];
 
 const INTERVAL = 5000;

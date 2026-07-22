@@ -185,7 +185,7 @@ export default function InstagramSlider({ posts }: { posts: InstagramPost[] }) {
           href={IG_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-label animate-on-scroll inline-flex items-center gap-2.5 rounded-full bg-bronze px-6 py-3 text-sm font-semibold text-white shadow-lg transition-colors hover:bg-bronze-dark sm:text-base"
+          className="btn-gold btn-label animate-on-scroll inline-flex items-center justify-center gap-2.5 rounded-full px-7 py-3.5 text-base font-semibold shadow-lg transition-all duration-200 active:scale-[0.98]"
           data-delay="0.25s"
         >
           <InstagramGlyph className="h-5 w-5" />
