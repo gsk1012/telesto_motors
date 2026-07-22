@@ -255,18 +255,27 @@ export default function Home() {
       </section>
 
       {/* ===== Sfeerbeeld (parallax) ===== */}
-      {/* JS-gedreven parallax (ParallaxImage) i.p.v. CSS bg-fixed, omdat iOS Safari
-          background-attachment: fixed negeert. Zo drift de foto óók op mobiel mee. */}
+      {/* Desktop (lg+): echt bg-fixed-effect. Mobiel: JS-parallax (ParallaxImage),
+          omdat iOS Safari background-attachment: fixed negeert. */}
       <section
         className="relative h-[35svh] w-full overflow-hidden sm:h-[45svh]"
         aria-label="Telesto Motors werkplaats"
         role="img"
       >
-        <ParallaxImage
-          src="/images/home/parallax-werkplaats.jpg"
-          alt="Telesto Motors werkplaats"
-          className="object-cover object-center"
+        {/* Desktop: achtergrond zit vast aan het venster */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 hidden bg-cover bg-center bg-fixed lg:block"
+          style={{ backgroundImage: "url('/images/home/parallax-werkplaats.jpg')" }}
         />
+        {/* Mobiel/tablet: soepele drift-parallax die iOS wél ondersteunt */}
+        <div className="absolute inset-0 lg:hidden">
+          <ParallaxImage
+            src="/images/home/parallax-werkplaats.jpg"
+            alt=""
+            className="object-cover object-center"
+          />
+        </div>
       </section>
 
       <ScrollAnimator />
