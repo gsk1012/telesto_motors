@@ -111,7 +111,12 @@ export default function ReviewsSpotlight() {
   }, []);
 
   // Naadloze wrap: na de overgang onzichtbaar terugspringen naar de middelste set.
-  const onTransitionEnd = () => {
+  // Belangrijk: alleen reageren op de transform-transitie van de track zélf.
+  // De kaarten/titels/pijlen hebben eigen (kortere) transitions die omhoog
+  // bubbelen; zonder deze filter zou de sprong te vroeg gebeuren en midden in de
+  // animatie de slider laten haperen.
+  const onTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
+    if (e.target !== trackRef.current || e.propertyName !== "transform") return;
     if (index >= BASE * 2 || index < BASE) {
       setAnimate(false);
       setIndex(BASE + ((((index - BASE) % BASE) + BASE) % BASE));
@@ -181,7 +186,7 @@ export default function ReviewsSpotlight() {
         role="group"
         aria-roledescription="carrousel"
         aria-label="Klantreviews"
-        style={{ "--rev-inset": "max(1.5rem, calc((100vw - 1200px) / 2 + 1.5rem))" } as CSSProperties}
+        style={{ "--rev-inset": "max(1.5rem, calc((100vw - 1500px) / 2 + 1.5rem))" } as CSSProperties}
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
         onFocusCapture={() => setPaused(true)}

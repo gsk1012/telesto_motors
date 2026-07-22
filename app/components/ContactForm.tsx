@@ -394,7 +394,7 @@ export default function ContactForm() {
                 type="button"
                 onClick={handleNext}
                 disabled={!isNextEnabled()}
-                className="btn-label rounded-full bg-bronze px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-bronze-dark disabled:cursor-not-allowed disabled:opacity-40"
+                className="btn-gold btn-label rounded-full px-7 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-40"
               >
                 Volgende
               </button>
@@ -402,7 +402,7 @@ export default function ContactForm() {
               <button
                 type="submit"
                 disabled={!isNextEnabled()}
-                className="btn-label rounded-full bg-bronze px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-bronze-dark disabled:cursor-not-allowed disabled:opacity-40"
+                className="btn-gold btn-label rounded-full px-7 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-40"
               >
                 Verstuur aanvraag
               </button>

@@ -1,45 +1,8 @@
 import { DEFAULT_NAV } from './nav'
 
-// Beeldmerken (rond/vierkant) mogen hoger; woordmerken lager omdat ze optisch zwaarder ogen.
-const BRAND_LOGOS = [
-  { src: '/images/brands/audi.svg', alt: 'Audi', cls: 'h-5 sm:h-6' },
-  { src: '/images/brands/bmw-mono.svg', alt: 'BMW', cls: 'h-6 sm:h-8' },
-  { src: '/images/brands/mercedes.webp', alt: 'Mercedes-Benz', cls: 'h-6 sm:h-8' },
-  { src: '/images/brands/volkswagen.svg', alt: 'Volkswagen', cls: 'h-6 sm:h-8' },
-  { src: '/images/brands/tesla.svg', alt: 'Tesla', cls: 'h-6 sm:h-8' },
-  { src: '/images/brands/toyota.svg', alt: 'Toyota', cls: 'h-3 sm:h-4' },
-  { src: '/images/brands/volvo.svg', alt: 'Volvo', cls: 'h-3 sm:h-4' },
-  { src: '/images/brands/ford-mono.svg', alt: 'Ford', cls: 'h-4 sm:h-5' },
-  { src: '/images/brands/hyundai.svg', alt: 'Hyundai', cls: 'h-3 sm:h-4' },
-  { src: '/images/brands/kia.svg', alt: 'Kia', cls: 'h-5 sm:h-6' },
-]
-
 export default function Footer() {
-  // Dubbele set voor een naadloze, oneindig lopende marquee.
-  const brands = [...BRAND_LOGOS, ...BRAND_LOGOS]
-
   return (
-    <footer className="-mt-px bg-footer pt-6 pb-16 text-white/80">
-      {/* Merken-marquee */}
-      <div className="overflow-hidden pt-10 pb-10 mb-10">
-        <div className="marquee-track flex min-w-max items-center">
-          {brands.map((logo, i) => (
-            <div key={i} className="flex items-center">
-              <div className="flex items-center justify-center px-5 sm:px-8">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  className={`${logo.cls} w-auto shrink-0`}
-                  style={{ filter: 'brightness(0) invert(0.72) opacity(0.6)' }}
-                />
-              </div>
-              <span className="text-xs text-white/10 select-none">|</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
+    <footer className="-mt-px bg-footer pt-16 pb-16 text-white/80">
       <div className="mx-auto grid max-w-container gap-10 px-6 sm:grid-cols-2 lg:grid-cols-4">
         <div className="sm:col-span-2 lg:col-span-1">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -72,7 +35,7 @@ export default function Footer() {
           </p>
           <ul className="mt-4 space-y-2 text-sm text-white/60">
             <li>info@telestomotors.nl</li>
-            <li>+31 (0)6 20 92 92 14</li>
+            <li>+31 (0)6 20 77 99 77</li>
             <li>Nederland</li>
           </ul>
         </div>

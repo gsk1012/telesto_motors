@@ -18,8 +18,8 @@ export const QUICK_NAV: NavLink[] = [
 ]
 
 /** Contact- en socialgegevens voor de navigatie. */
-export const PHONE_DISPLAY = '+31 6 20929214'
-export const PHONE_HREF = 'tel:+31620929214'
+export const PHONE_DISPLAY = '+31 6 20779977'
+export const PHONE_HREF = 'tel:+31620779977'
 export const INSTAGRAM_HREF = 'https://www.instagram.com/telesto.motors'
 // TODO: vervang '#' door de Facebook-pagina zodra die bekend is.
 export const FACEBOOK_HREF = '#'

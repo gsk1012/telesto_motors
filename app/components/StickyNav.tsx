@@ -84,7 +84,7 @@ export default function StickyNav({
             src="/images/telesto-logo-color.svg"
             alt="Telesto Motors"
             className={`w-auto transition-[height] duration-300 ease-out ${
-              scrolled ? 'h-16' : 'h-20'
+              scrolled ? 'h-20' : 'h-24'
             }`}
           />
         </a>
@@ -100,7 +100,7 @@ export default function StickyNav({
             src="/images/telesto-logo-color.svg"
             alt="Telesto Motors"
             className={`w-auto transition-[height] duration-300 ease-out ${
-              scrolled ? 'h-16' : 'h-20'
+              scrolled ? 'h-20' : 'h-24'
             }`}
           />
         </a>
@@ -116,7 +116,7 @@ export default function StickyNav({
           </a>
           <a
             href={ctaHref}
-            className="btn-label inline-flex items-center justify-center rounded-full bg-bronze px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors duration-300 ease-out hover:bg-bronze-dark"
+            className="btn-gold btn-label inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold shadow-sm"
           >
             Afspraak maken
           </a>

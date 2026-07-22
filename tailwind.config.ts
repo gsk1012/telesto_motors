@@ -20,7 +20,7 @@ const config: Config = {
         display: ["var(--font-open-sans)", "system-ui", "sans-serif"],
       },
       maxWidth: {
-        container: "1200px",
+        container: "1500px",
       },
     },
   },

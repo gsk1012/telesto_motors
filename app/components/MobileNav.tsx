@@ -138,7 +138,7 @@ export default function MobileNav({
                   <a
                     href={ctaHref}
                     onClick={closeMenu}
-                    className="btn-label block rounded-full bg-bronze px-6 py-3.5 text-center text-base font-semibold text-white transition-colors duration-300 ease-out hover:bg-bronze-dark"
+                    className="btn-gold btn-label block rounded-full px-6 py-3.5 text-center text-base font-semibold"
                   >
                     Afspraak maken
                   </a>

@@ -78,7 +78,7 @@ const jsonLd = {
   description:
     "Onafhankelijke auto-adviseur voor particulieren en bedrijven in Nederland. Persoonlijke autoselectie, technische keuring en prijsonderhandeling.",
   url: "https://telestomotors.nl",
-  telephone: "+31620929214",
+  telephone: "+31620779977",
   email: "info@telestomotors.nl",
   foundingDate: "2008",
   areaServed: {

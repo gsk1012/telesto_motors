@@ -7,6 +7,8 @@ import ScrollAnimator from "./components/ScrollAnimator";
 import SocialInstagram from "./components/SocialInstagram";
 import ReviewsSpotlight from "./components/ReviewsSpotlight";
 import PromiseShowcase from "./components/PromiseShowcase";
+import HeroSlider from "./components/HeroSlider";
+import BrandsMarquee from "./components/BrandsMarquee";
 
 export default function Home() {
   return (
@@ -15,57 +17,37 @@ export default function Home() {
       <StickyNav />
 
       {/* ===== Hero ===== */}
-      <section className="relative flex min-h-[85svh] w-full items-end overflow-hidden md:items-center">
-        <video
-          className="absolute inset-0 h-full w-full object-cover will-change-transform"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/images/hero-bmw.jpg"
-        >
-          <source src="/video/hero.mp4?v=5" type="video/mp4" />
-        </video>
+      <section className="relative flex min-h-[62svh] w-full items-center overflow-hidden md:min-h-[88svh] md:items-start">
+        <HeroSlider />
         {/* scrims */}
         <div className="absolute inset-0 bg-black/20" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/25 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/15" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-black/15" />
 
-        <div className="relative z-10 mx-auto w-full max-w-container px-6 pb-14 md:pb-0">
+        <div className="relative z-10 mx-auto w-full max-w-container px-6 pt-16 md:pt-32 lg:pt-40">
           <div className="max-w-3xl">
             <h1
-              className="animate-fade-up font-sans text-6xl font-light uppercase tracking-[0.04em] leading-[1.02] text-white sm:text-7xl lg:text-9xl"
+              className="animate-fade-up font-sans text-4xl/[1.3] font-light uppercase tracking-[0.04em] text-white sm:text-5xl/[1.3] lg:text-6xl/[1.3]"
               style={{ animationDelay: '0.05s' }}
             >
-              Telesto <span className="text-bronze">Motors</span>
+              Waar jouw droom<br />
+              waargemaakt wordt
             </h1>
-            <p
-              className="animate-fade-up mt-6 max-w-sm text-base text-white/80 sm:max-w-xl sm:text-lg"
-              style={{ animationDelay: '0.3s' }}
-            >
-              Onafhankelijk advies, technische keuring en prijsonderhandeling.
-              Wij luisteren naar jouw wensen en regelen de rest.
-            </p>
-            <div
-              className="animate-fade-up mt-8 flex flex-row items-center gap-3"
-              style={{ animationDelay: '0.5s' }}
-            >
-              <a
-                href="#contact"
-                className="btn-label inline-flex items-center justify-center whitespace-nowrap rounded-full bg-bronze px-7 py-3.5 text-base font-semibold text-white shadow-lg transition-colors hover:bg-bronze-dark"
-              >
-                Afspraak maken
-              </a>
-              <a
+
+            <div className="animate-fade-up mt-8" style={{ animationDelay: '0.2s' }}>
+              <Link
                 href="#diensten"
-                className="btn-label inline-flex items-center justify-center whitespace-nowrap rounded-full border border-white/40 bg-white/5 px-7 py-3.5 text-base font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/15"
+                className="btn-gold btn-label inline-flex items-center justify-center rounded-full px-7 py-3.5 text-sm font-medium tracking-wide"
               >
-                Bekijk diensten
-              </a>
+                Bekijk onze diensten
+              </Link>
             </div>
           </div>
         </div>
       </section>
+
+      {/* ===== Merken-marquee ===== */}
+      <BrandsMarquee />
 
       {/* ===== Diensten ===== */}
       <section
@@ -92,7 +74,7 @@ export default function Home() {
             <div className="animate-on-scroll flex-none" data-delay="0.25s">
               <Link
                 href="/diensten"
-                className="btn-label group inline-flex items-center gap-2 rounded-full bg-bronze px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-bronze-dark"
+                className="btn-gold btn-label group inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold"
               >
                 Bekijk alle diensten
                 <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
@@ -147,6 +129,7 @@ export default function Home() {
               "Vakkundig advies",
               "Persoonlijke aandacht",
               "5+ jaar ervaring in EV's en hybrides",
+              "Specialisme",
             ].map((item) => (
               <li
                 key={item}
@@ -175,7 +158,7 @@ export default function Home() {
           <div className="order-2 flex flex-col lg:order-1">
             {/* Label alleen op desktop hier (linksboven het beeld) */}
             <p
-              className="animate-on-scroll hidden text-sm font-semibold uppercase tracking-widest text-bronze lg:block lg:px-10 lg:pt-16 lg:pb-10"
+              className="animate-on-scroll hidden text-lg font-semibold uppercase tracking-widest text-bronze lg:block lg:pl-16 lg:pr-10 lg:pt-16 lg:pb-10 xl:pl-20"
               data-delay="0s"
             >
               Over ons
@@ -198,7 +181,7 @@ export default function Home() {
               <p className="animate-on-scroll mb-4 text-sm font-semibold uppercase tracking-widest text-bronze lg:hidden" data-delay="0s">
                 Over ons
               </p>
-              <h2 className="animate-on-scroll font-serif text-4xl font-light uppercase leading-tight tracking-[0.06em] text-ink sm:text-5xl lg:-ml-28 lg:max-w-[48rem] lg:text-[4rem] lg:leading-[1.05] lg:[text-shadow:0_0_22px_rgb(247_240_236_/_0%),0_0_9px_rgb(247_240_236_/_0%),0_1px_2px_rgb(247_240_236_/_84%)]" data-delay="0.05s">
+              <h2 className="animate-on-scroll font-serif text-4xl font-light uppercase leading-[1.4] tracking-[0.12em] text-ink sm:text-5xl lg:-ml-28 lg:max-w-[48rem] lg:text-[4rem] lg:leading-[1.35] lg:[text-shadow:0_0_22px_rgb(247_240_236_/_0%),0_0_9px_rgb(247_240_236_/_0%),0_1px_2px_rgb(247_240_236_/_84%)]" data-delay="0.05s">
                 Onafhankelijk advies{" "}
                 <br className="hidden lg:block" />
                 altijd zonder{" "}
@@ -231,7 +214,7 @@ export default function Home() {
               </ul>
               <a
                 href="#contact"
-                className="btn-label animate-on-scroll mt-10 inline-flex w-fit items-center justify-center rounded-full bg-bronze px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-bronze-dark"
+                className="btn-gold btn-label animate-on-scroll mt-10 inline-flex w-fit items-center justify-center rounded-full px-7 py-3.5 text-base font-semibold"
                 data-delay="0.4s"
               >
                 Plan een kennismaking

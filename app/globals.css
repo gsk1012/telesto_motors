@@ -37,6 +37,40 @@ h6 {
   text-box-edge: cap alphabetic;
 }
 
+/*
+ * Premium gold CTA skin (inspired by the rijkstaete.nl button, tuned to the
+ * Telesto bronze palette). Composable: it only sets colours — a dark pill fill,
+ * a thin gold border, a soft inset gold glow that intensifies on hover, and
+ * white→gold gradient text. Keep the element's own layout utilities
+ * (inline-flex / rounded-full / px-* / py-* / text-* / margins). No wrapper
+ * <span> needed: two background layers are clipped separately — the gradient to
+ * the text, the dark fill to the padding box.
+ */
+.btn-gold {
+  background-image:
+    linear-gradient(90deg, #ffffff 0%, #e2c99f 55%, #c6a87a 110%),
+    linear-gradient(#14181e, #14181e);
+  -webkit-background-clip: text, padding-box;
+  background-clip: text, padding-box;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  border: 1px solid rgba(200, 170, 124, 0.85);
+  box-shadow: inset 0 0 14px 0 rgba(166, 132, 99, 0.7);
+  transition: box-shadow 0.35s ease, border-color 0.35s ease, transform 0.3s ease;
+}
+
+/* Icons use currentColor, so give them an explicit gold instead of the
+   transparent text colour above. */
+.btn-gold svg {
+  color: #e2c99f;
+  -webkit-text-fill-color: #e2c99f;
+}
+
+.btn-gold:hover {
+  border-color: rgba(226, 201, 159, 1);
+  box-shadow: inset 0 0 22px 0 rgba(166, 132, 99, 0.95), 0 4px 12px rgba(0, 0, 0, 0.28);
+}
+
 body {
   background-color: #f7f0ec;
   color: #111111;
@@ -138,7 +172,17 @@ body {
 }
 
 .marquee-track {
-  animation: marquee 36s linear infinite;
+  animation: marquee 80s linear infinite;
+}
+
+/* Scroll-down indicator: the arrow gently bounces */
+@keyframes scrollArrow {
+  0%, 100% { transform: translateY(-2px); opacity: 0.7; }
+  50%      { transform: translateY(4px); opacity: 1; }
+}
+
+.animate-scroll-arrow {
+  animation: scrollArrow 1.8s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -153,6 +197,11 @@ body {
 
   .marquee-track {
     animation: none;
+  }
+
+  .animate-scroll-arrow {
+    animation: none !important;
+    transform: none !important;
   }
 }
 

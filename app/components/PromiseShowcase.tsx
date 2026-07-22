@@ -79,7 +79,7 @@ export default function PromiseShowcase() {
                 key={p.title}
                 onMouseEnter={canHover ? () => setActive(i) : undefined}
                 onFocus={canHover ? () => setActive(i) : undefined}
-                className={i < PROMISES.length - 1 ? 'border-b border-white/15' : ''}
+                className={`relative ${i > 0 ? 'border-t-2 border-white/60' : ''}`}
               >
                 <button
                   type="button"
@@ -115,36 +115,52 @@ export default function PromiseShowcase() {
                   </span>
                 </button>
 
-                {/* Uitklapbare inhoud (grid-rows truc voor vloeiend openklappen) */}
+                {/* Uitklapbare inhoud (grid-rows truc voor vloeiend openklappen).
+                    `relative` zodat de desktop-foto als losse laag kan hangen. */}
                 <div
-                  className={`grid transition-all duration-700 ease-in-out ${
-                    isActive ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                  className={`relative grid transition-[grid-template-rows] duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[grid-template-rows] ${
+                    isActive ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
                   }`}
                 >
-                  <div className="overflow-hidden">
-                    <div className="grid gap-6 pb-6 sm:pb-8 lg:grid-cols-[1.3fr_1fr] lg:items-start lg:gap-10">
-                      <div>
-                        <p className="max-w-md leading-relaxed text-white/70">
-                          <span className="font-semibold text-white">{p.lead} </span>
-                          {p.body}
-                        </p>
-                        <a
-                          href="#contact"
-                          className="btn-label mt-4 inline-flex w-fit items-center justify-center rounded-full bg-bronze px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-bronze-dark"
-                        >
-                          Plan een gesprek
-                        </a>
-                      </div>
-                      <div className="relative mx-auto aspect-[4/3] w-full max-w-xs overflow-hidden shadow-lg [transform:rotate(-1.5deg)] lg:max-w-full">
+                  <div
+                    className={`overflow-hidden transition-opacity duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                      isActive ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  >
+                    <div className="pb-14 sm:pb-20">
+                      {/* Mobiel: rechte foto boven de tekst, volle breedte. */}
+                      <div className="relative mb-6 aspect-[4/3] w-full overflow-hidden shadow-2xl shadow-black/50 lg:hidden">
                         <Image
                           src={p.image}
                           alt={p.alt}
                           fill
-                          sizes="(min-width: 1024px) 32vw, 90vw"
+                          sizes="100vw"
                           className="object-cover"
                         />
                       </div>
+                      <p className="max-w-xl text-[1.0625rem] leading-relaxed text-white/70">
+                        <span className="font-semibold text-white">{p.lead} </span>
+                        {p.body}
+                      </p>
+                      <a
+                        href="#contact"
+                        className="btn-gold btn-label mt-4 inline-flex w-fit items-center justify-center rounded-full px-6 py-3 text-sm font-semibold"
+                      >
+                        Plan een gesprek
+                      </a>
                     </div>
+                  </div>
+
+                  {/* Desktop: gekantelde foto als losse laag. Doet niet mee aan de
+                      hoogte-animatie en wordt nooit afgekapt — hij fadet puur mee
+                      met het paneel, dus geen harde clip of nasleep bij wisselen. */}
+                  <div
+                    aria-hidden="true"
+                    className={`pointer-events-none absolute left-[55%] hidden aspect-[4/5] w-[21rem] overflow-hidden shadow-2xl shadow-black/50 transition-opacity duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transform:rotate(4deg)] lg:block ${
+                      i === 0 ? 'top-[-6rem]' : 'top-[-9rem]'
+                    } ${isActive ? 'opacity-100 delay-150' : 'opacity-0 delay-0'}`}
+                  >
+                    <Image src={p.image} alt="" fill sizes="21rem" className="object-cover" />
                   </div>
                 </div>
               </div>
