@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
-
-export type InstagramPost = { src: string; alt: string; href: string };
+import type { InstagramPost } from "../lib/instagram";
 
 const IG_URL = "https://www.instagram.com/telesto.motors";
 
