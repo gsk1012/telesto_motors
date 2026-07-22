@@ -9,6 +9,7 @@ import ReviewsSpotlight from "./components/ReviewsSpotlight";
 import PromiseShowcase from "./components/PromiseShowcase";
 import HeroSlider from "./components/HeroSlider";
 import BrandsMarquee from "./components/BrandsMarquee";
+import ParallaxImage from "./components/ParallaxImage";
 
 export default function Home() {
   return (
@@ -254,14 +255,19 @@ export default function Home() {
       </section>
 
       {/* ===== Sfeerbeeld (parallax) ===== */}
-      {/* Achtergrond zit vast aan het venster (bg-fixed): de sectie is het kijkgat dat
-          erover scrolt, de foto zelf beweegt niet mee met de pagina-inhoud. */}
+      {/* JS-gedreven parallax (ParallaxImage) i.p.v. CSS bg-fixed, omdat iOS Safari
+          background-attachment: fixed negeert. Zo drift de foto óók op mobiel mee. */}
       <section
-        className="relative h-[35svh] w-full bg-fixed bg-cover bg-center sm:h-[45svh]"
-        style={{ backgroundImage: "url('/images/home/parallax-werkplaats.jpg')" }}
+        className="relative h-[35svh] w-full overflow-hidden sm:h-[45svh]"
         aria-label="Telesto Motors werkplaats"
         role="img"
-      />
+      >
+        <ParallaxImage
+          src="/images/home/parallax-werkplaats.jpg"
+          alt="Telesto Motors werkplaats"
+          className="object-cover object-center"
+        />
+      </section>
 
       <ScrollAnimator />
     </main>
