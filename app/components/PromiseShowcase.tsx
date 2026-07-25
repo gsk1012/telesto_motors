@@ -1,7 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import SplitHeading from './SplitHeading'
 
 /*
  * "Onze belofte" — hover-accordion showcase.
@@ -60,18 +61,38 @@ export default function PromiseShowcase() {
     setCanHover(window.matchMedia('(hover: hover)').matches)
   }, [])
 
+  // Eén trigger voor de hele lijst, zodat alle titels tegelijk revealen
+  // zodra de sectie in beeld komt — niet pas na doorscrollen per rij.
+  const listRef = useRef<HTMLDivElement>(null)
+  const [listVisible, setListVisible] = useState(false)
+  useEffect(() => {
+    const el = listRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setListVisible(true)
+          observer.unobserve(el)
+        }
+      },
+      { threshold: 0, rootMargin: '0px 0px -20% 0px' },
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <section id="belofte" className="bg-[#14181E] text-white">
       <div className="mx-auto max-w-container px-6 pt-20 pb-14 sm:pb-16 lg:pb-20">
         <p
-          className="animate-on-scroll text-sm font-semibold uppercase tracking-widest text-bronze"
+          className="animate-on-scroll text-lg font-semibold uppercase tracking-widest text-bronze"
           data-delay="0s"
         >
           Onze beloftes
         </p>
 
         {/* Hover-accordion */}
-        <div className="animate-on-scroll mt-2" data-delay="0.1s">
+        <div ref={listRef} className="animate-on-scroll mt-2" data-delay="0.1s">
           {PROMISES.map((p, i) => {
             const isActive = active === i
             return (
@@ -87,19 +108,16 @@ export default function PromiseShowcase() {
                   aria-expanded={isActive}
                   className="flex w-full items-center justify-between gap-6 py-5 text-left sm:py-6"
                 >
-                  <h3
+                  <SplitHeading
+                    as="h3"
+                    lines={[p.title]}
+                    revealed={listVisible}
                     className={`font-serif text-xl font-light transition-colors duration-300 sm:text-2xl lg:text-3xl ${
                       isActive ? 'text-white' : 'text-white/40'
                     }`}
-                  >
-                    {p.title}
-                  </h3>
+                  />
                   <span
-                    className={`flex h-10 w-10 flex-none items-center justify-center rounded-full border transition-colors duration-500 sm:h-12 sm:w-12 ${
-                      isActive
-                        ? 'border-bronze bg-bronze text-white'
-                        : 'border-white/20 text-white/40'
-                    }`}
+                    className="btn-gold flex h-10 w-10 flex-none items-center justify-center rounded-full sm:h-12 sm:w-12"
                   >
                     <svg
                       className={`h-4 w-4 transition-transform duration-500 ease-in-out ${
@@ -138,7 +156,10 @@ export default function PromiseShowcase() {
                           className="object-cover"
                         />
                       </div>
-                      <p className="max-w-xl text-[1.0625rem] leading-relaxed text-white/70">
+                      <p
+                        key={isActive ? 'open' : 'closed'}
+                        className={`max-w-xl text-[1.0625rem] leading-relaxed text-white/70 ${isActive ? 'animate-fade-up-slow' : ''}`}
+                      >
                         <span className="font-semibold text-white">{p.lead} </span>
                         {p.body}
                       </p>

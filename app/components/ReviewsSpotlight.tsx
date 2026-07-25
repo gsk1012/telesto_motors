@@ -1,6 +1,7 @@
 "use client";
 
 import { type CSSProperties, useCallback, useEffect, useRef, useState } from "react";
+import SplitHeading from "./SplitHeading";
 
 /*
  * Klantreviews als peek-slider: het uitgelichte citaat staat groot in beeld,
@@ -157,17 +158,15 @@ export default function ReviewsSpotlight() {
         {/* Header */}
         <div className="max-w-2xl">
           <p
-            className="animate-on-scroll text-sm font-semibold uppercase tracking-widest text-bronze"
+            className="animate-on-scroll text-lg font-semibold uppercase tracking-widest text-bronze"
             data-delay="0s"
           >
             Klantervaringen
           </p>
-          <h2
-            className="animate-on-scroll mt-3 font-serif text-4xl font-light uppercase leading-tight text-white sm:text-5xl"
-            data-delay="0.05s"
-          >
-            Wat onze klanten zeggen
-          </h2>
+          <SplitHeading
+            lines={['Wat onze klanten zeggen']}
+            className="mt-3 font-serif text-4xl font-light uppercase leading-tight text-white sm:text-5xl"
+          />
           <p
             className="animate-on-scroll mt-5 text-lg leading-relaxed text-white/65"
             data-delay="0.15s"

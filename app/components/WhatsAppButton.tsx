@@ -60,7 +60,7 @@ export default function WhatsAppButton() {
   const chatHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(PREFILLED_MESSAGE)}`
 
   return (
-    <div ref={rootRef} className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    <div ref={rootRef} className="fixed bottom-6 right-6 z-50 hidden flex-col items-end gap-3 lg:flex">
       <div
         role="dialog"
         aria-label="WhatsApp chat"

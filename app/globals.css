@@ -90,7 +90,14 @@ body {
 
 .animate-fade-up {
   opacity: 0;
-  animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: fadeUp 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Belofte-subtekst: eigen (tragere) variant van de fade-up, onafhankelijk
+   van de globale .animate-fade-up snelheid. */
+.animate-fade-up-slow {
+  opacity: 0;
+  animation: fadeUp 3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .animate-on-scroll {
@@ -188,6 +195,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .animate-on-scroll,
   .animate-fade-up,
+  .animate-fade-up-slow,
   .animate-reveal-image {
     opacity: 1 !important;
     animation: none !important;

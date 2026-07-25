@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { InstagramPost } from "../lib/instagram";
+import SplitHeading from "./SplitHeading";
 
 const IG_URL = "https://www.instagram.com/telesto.motors";
 
@@ -98,17 +99,15 @@ export default function InstagramSlider({ posts }: { posts: InstagramPost[] }) {
       {/* Titel boven de beelden */}
       <div className="mb-5 px-6 text-center sm:mb-6">
         <p
-          className="animate-on-scroll text-sm font-semibold uppercase tracking-widest text-bronze"
+          className="animate-on-scroll text-lg font-semibold uppercase tracking-widest text-bronze"
           data-delay="0s"
         >
           Instagram
         </p>
-        <h2
-          className="animate-on-scroll mt-2 font-serif text-3xl font-light uppercase leading-tight text-white sm:text-4xl lg:text-5xl"
-          data-delay="0.08s"
-        >
-          Bekijk onze socials
-        </h2>
+        <SplitHeading
+          lines={['Bekijk onze socials']}
+          className="mt-2 font-serif text-3xl font-light uppercase leading-tight text-white sm:text-4xl lg:text-5xl"
+        />
         <a
           href={IG_URL}
           target="_blank"

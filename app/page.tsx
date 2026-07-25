@@ -9,7 +9,7 @@ import ReviewsSpotlight from "./components/ReviewsSpotlight";
 import PromiseShowcase from "./components/PromiseShowcase";
 import HeroSlider from "./components/HeroSlider";
 import BrandsMarquee from "./components/BrandsMarquee";
-import ParallaxImage from "./components/ParallaxImage";
+import SplitHeading from "./components/SplitHeading";
 
 export default function Home() {
   return (
@@ -26,13 +26,11 @@ export default function Home() {
 
         <div className="relative z-10 mx-auto w-full max-w-container px-6 pt-16 md:pt-32 lg:pt-40">
           <div className="max-w-3xl">
-            <h1
-              className="animate-fade-up font-sans text-4xl/[1.3] font-light uppercase tracking-[0.04em] text-white sm:text-5xl/[1.3] lg:text-6xl/[1.3]"
-              style={{ animationDelay: '0.05s' }}
-            >
-              Waar jouw droom<br />
-              waargemaakt wordt
-            </h1>
+            <SplitHeading
+              as="h1"
+              lines={['De plek waar jouw', 'droomauto werkelijkheid wordt']}
+              className="font-sans text-4xl/[1.3] font-light uppercase tracking-[0.04em] text-white sm:text-5xl/[1.3] lg:text-6xl/[1.3]"
+            />
 
             <div className="animate-fade-up mt-8" style={{ animationDelay: '0.2s' }}>
               <Link
@@ -58,12 +56,13 @@ export default function Home() {
         <div className="mx-auto max-w-container px-6">
           <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-3xl">
-              <p className="animate-on-scroll text-sm font-semibold uppercase tracking-widest text-bronze" data-delay="0s">
+              <p className="animate-on-scroll text-lg font-semibold uppercase tracking-widest text-bronze" data-delay="0s">
                 Onze diensten
               </p>
-              <h2 className="animate-on-scroll mt-3 font-serif text-4xl font-light uppercase leading-tight text-white sm:text-5xl lg:whitespace-nowrap" data-delay="0.05s">
-                Van zoektocht tot sleutels
-              </h2>
+              <SplitHeading
+                lines={['Van zoektocht tot sleutels']}
+                className="mt-3 font-serif text-4xl font-light uppercase leading-tight text-white sm:text-5xl lg:whitespace-nowrap"
+              />
               <p className="animate-on-scroll mt-5 text-lg leading-relaxed text-white/65" data-delay="0.15s">
                 Een auto kopen is een van de grootste aankopen die je doet.
                 Wij begeleiden je van het eerste gesprek tot de overhandeling
@@ -89,7 +88,7 @@ export default function Home() {
               <Link
                 key={d.slug}
                 href={`/diensten/${d.slug}`}
-                className="animate-on-scroll group flex flex-col overflow-hidden bg-[#20242B] ring-1 ring-white/10 shadow-sm transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/20"
+                className="animate-on-scroll group flex flex-col overflow-hidden bg-[#20242B] ring-1 ring-white/10 shadow-sm transition-all duration-500 ease-out hover:-translate-y-1.5 hover:bg-cream hover:shadow-xl hover:shadow-black/20"
                 data-delay={`${0.1 + i * 0.12}s`}
               >
                 <div className="relative h-52 overflow-hidden">
@@ -102,9 +101,13 @@ export default function Home() {
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-7">
-                  <h3 className="text-xl font-medium text-white">{d.title}</h3>
-                  <p className="mt-3 leading-relaxed text-white/65">{d.shortBody}</p>
-                  <span className="btn-label mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold text-bronze transition-colors duration-300 ease-out group-hover:text-white">
+                  <SplitHeading
+                    as="h3"
+                    lines={[d.title]}
+                    className="text-xl font-medium text-white transition-colors duration-500 ease-out group-hover:text-ink"
+                  />
+                  <p className="mt-3 leading-relaxed text-white/65 transition-colors duration-500 ease-out group-hover:text-ink/65">{d.shortBody}</p>
+                  <span className="btn-label mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold text-bronze transition-colors duration-300 ease-out group-hover:text-bronze-dark">
                     Lees meer
                     <svg className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -158,7 +161,7 @@ export default function Home() {
           <div className="order-2 flex flex-col lg:order-1">
             {/* Label alleen op desktop hier (linksboven het beeld) */}
             <p
-              className="animate-on-scroll hidden text-lg font-semibold uppercase tracking-widest text-bronze lg:block lg:pl-16 lg:pr-10 lg:pt-16 lg:pb-10 xl:pl-20"
+              className="animate-on-scroll hidden text-center text-lg font-semibold uppercase tracking-widest text-bronze lg:block lg:pl-16 lg:pr-10 lg:pt-16 lg:pb-10 xl:pl-20"
               data-delay="0s"
             >
               Over ons
@@ -178,16 +181,13 @@ export default function Home() {
           <div className="relative z-10 order-1 flex flex-col justify-between gap-10 px-8 py-14 lg:order-2 lg:py-16 lg:pl-14 xl:pl-20 lg:pr-14 xl:pr-20">
             <div>
               {/* Label alleen op mobiel hier (boven de koptekst) */}
-              <p className="animate-on-scroll mb-4 text-sm font-semibold uppercase tracking-widest text-bronze lg:hidden" data-delay="0s">
+              <p className="animate-on-scroll mb-4 text-lg font-semibold uppercase tracking-widest text-bronze lg:hidden" data-delay="0s">
                 Over ons
               </p>
-              <h2 className="animate-on-scroll font-serif text-4xl font-light uppercase leading-[1.4] tracking-[0.12em] text-ink sm:text-5xl lg:-ml-28 lg:max-w-[48rem] lg:text-[4rem] lg:leading-[1.35]" data-delay="0.05s">
-                Onafhankelijk advies{" "}
-                <br className="hidden lg:block" />
-                altijd zonder{" "}
-                <br className="hidden lg:block" />
-                eigenbelang.
-              </h2>
+              <SplitHeading
+                lines={['Onafhankelijk advies', 'altijd zonder', 'eigenbelang.']}
+                className="font-serif text-4xl font-light uppercase leading-[1.4] tracking-[0.12em] text-ink sm:text-5xl lg:max-w-[48rem] lg:text-[4rem] lg:leading-[1.35]"
+              />
             </div>
             <div>
               <p className="animate-on-scroll text-lg leading-relaxed text-ink/65" data-delay="0.15s">
@@ -236,12 +236,13 @@ export default function Home() {
         <div className="relative z-10 mx-auto max-w-container px-6">
           {/* Centered header */}
           <div className="mx-auto max-w-xl text-center">
-            <p className="animate-on-scroll text-sm font-semibold uppercase tracking-widest text-bronze" data-delay="0s">
+            <p className="animate-on-scroll text-lg font-semibold uppercase tracking-widest text-bronze" data-delay="0s">
               Contact
             </p>
-            <h2 className="animate-on-scroll mt-3 font-serif text-4xl font-light uppercase leading-tight sm:text-5xl" data-delay="0.05s">
-              Laten we kennismaken
-            </h2>
+            <SplitHeading
+              lines={['Laten we kennismaken']}
+              className="mt-3 font-serif text-4xl font-light uppercase leading-tight sm:text-5xl"
+            />
             <p className="animate-on-scroll mt-5 text-lg leading-relaxed text-ink/65" data-delay="0.15s">
               Vertel ons jouw wensen in een paar stappen. Wij nemen binnen een werkdag contact op.
             </p>
@@ -251,30 +252,6 @@ export default function Home() {
           <div className="animate-on-scroll mt-12 w-full" data-delay="0.28s">
             <ContactTabs />
           </div>
-        </div>
-      </section>
-
-      {/* ===== Sfeerbeeld (parallax) ===== */}
-      {/* Desktop (lg+): echt bg-fixed-effect. Mobiel: JS-parallax (ParallaxImage),
-          omdat iOS Safari background-attachment: fixed negeert. */}
-      <section
-        className="relative h-[35svh] w-full overflow-hidden sm:h-[45svh]"
-        aria-label="Telesto Motors werkplaats"
-        role="img"
-      >
-        {/* Desktop: achtergrond zit vast aan het venster */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 hidden bg-cover bg-center bg-fixed lg:block"
-          style={{ backgroundImage: "url('/images/home/parallax-werkplaats.jpg')" }}
-        />
-        {/* Mobiel/tablet: soepele drift-parallax die iOS wél ondersteunt */}
-        <div className="absolute inset-0 lg:hidden">
-          <ParallaxImage
-            src="/images/home/parallax-werkplaats.jpg"
-            alt=""
-            className="object-cover object-center"
-          />
         </div>
       </section>
 

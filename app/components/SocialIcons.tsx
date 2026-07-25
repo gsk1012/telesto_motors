@@ -43,7 +43,7 @@ export function SocialIconLink({ href, label, children }: SocialIconLinkProps) {
       href={href}
       aria-label={label}
       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-      className="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 text-white/85 transition-colors duration-300 ease-out hover:border-bronze hover:bg-bronze hover:text-white"
+      className="btn-gold flex h-9 w-9 items-center justify-center rounded-full"
     >
       {children}
     </a>

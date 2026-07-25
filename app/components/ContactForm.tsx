@@ -50,7 +50,7 @@ function Pill({
       onClick={onClick}
       className={`btn-label rounded-full border px-4 py-2 text-sm font-medium transition-all duration-150 ${
         selected
-          ? 'border-bronze bg-bronze text-white shadow-sm'
+          ? 'btn-gold'
           : 'border-ink/15 bg-cream text-ink hover:border-bronze/50 hover:text-ink'
       }`}
     >
@@ -206,7 +206,7 @@ export default function ContactForm() {
                     onClick={() => setForm((f) => ({ ...f, budget: b }))}
                     className={`btn-label rounded-full border px-5 py-3 text-left text-sm font-medium transition-all duration-150 ${
                       form.budget === b
-                        ? 'border-bronze bg-bronze text-white shadow-sm'
+                        ? 'btn-gold'
                         : 'border-ink/15 bg-cream text-ink hover:border-bronze/50'
                     }`}
                   >

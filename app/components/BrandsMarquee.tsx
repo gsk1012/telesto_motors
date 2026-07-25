@@ -34,7 +34,7 @@ export default function BrandsMarquee() {
   const brands = [...BRAND_LOGOS, ...BRAND_LOGOS]
 
   return (
-    <section className="overflow-hidden bg-[#191D23] pt-16 pb-6">
+    <section className="overflow-hidden bg-[#191D23] pt-9 pb-6">
       <div className="marquee-track flex min-w-max items-center">
         {brands.map((logo, i) => (
           <div key={i} className="flex items-center justify-center px-10 sm:px-16">
@@ -43,7 +43,7 @@ export default function BrandsMarquee() {
               src={logo.src}
               alt={logo.alt}
               className={`${logo.cls} w-auto shrink-0`}
-              style={{ filter: 'brightness(0) invert(0.72) opacity(0.6)' }}
+              style={{ filter: 'brightness(0) invert(1)' }}
             />
           </div>
         ))}
