@@ -260,7 +260,7 @@ export default function PlansPage() {
               </a>
               <a
                 href="#pakketten"
-                className="btn-label group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-base font-semibold text-white ring-1 ring-white/35 transition-all duration-200 hover:bg-white/10 hover:ring-white/70 active:scale-[0.98]"
+                className="btn-label group hidden items-center justify-center gap-2 rounded-full px-6 py-3.5 text-base font-semibold text-white ring-1 ring-white/35 transition-all duration-200 hover:bg-white/10 hover:ring-white/70 active:scale-[0.98] sm:inline-flex"
               >
                 Bekijk de pakketten
                 <svg
@@ -304,6 +304,7 @@ export default function PlansPage() {
               Pakketten
             </p>
             <SplitHeading
+              eager
               lines={['Drie pakketten,', 'één aanpak']}
               className="mt-3 font-serif text-4xl/[1.3] font-light text-white sm:text-5xl/[1.3]"
             />

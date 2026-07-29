@@ -16,9 +16,13 @@ interface SplitHeadingProps {
   /** Extern gestuurde zichtbaarheid (bv. één trigger voor een hele sectie met
    * meerdere koppen). Laat weg voor het standaardgedrag: eigen IntersectionObserver. */
   revealed?: boolean
+  /** Reveal zodra de kop echt in beeld komt (rootMargin 0) i.p.v. pas 10% erin.
+   * Handig voor koppen die op mobiel al bij het laden zichtbaar zijn, zodat de
+   * animatie meteen speelt in plaats van op scroll te wachten. */
+  eager?: boolean
 }
 
-export default function SplitHeading({ lines, as: Tag = 'h2', className = '', lineClassName = '', revealed }: SplitHeadingProps) {
+export default function SplitHeading({ lines, as: Tag = 'h2', className = '', lineClassName = '', revealed, eager = false }: SplitHeadingProps) {
   const ref = useRef<HTMLHeadingElement>(null)
   const [ownVisible, setOwnVisible] = useState(false)
   const visible = revealed ?? ownVisible
@@ -34,11 +38,11 @@ export default function SplitHeading({ lines, as: Tag = 'h2', className = '', li
           observer.unobserve(el)
         }
       },
-      { threshold: 0, rootMargin: '0px 0px -20% 0px' },
+      { threshold: 0, rootMargin: eager ? '0px' : '0px 0px -10% 0px' },
     )
     observer.observe(el)
     return () => observer.disconnect()
-  }, [revealed])
+  }, [revealed, eager])
 
   let wordIndex = 0
 

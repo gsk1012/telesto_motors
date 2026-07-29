@@ -27,12 +27,24 @@ function WhatsAppIcon({ className }: { className?: string }) {
 
 export default function WhatsAppButton() {
   const [open, setOpen] = useState(false)
+  // De popup + auto-open zijn alleen op desktop; op mobiel is de zwevende knop
+  // een directe WhatsApp-link (geen popup).
+  const [isDesktop, setIsDesktop] = useState(false)
   const rootRef = useRef<HTMLDivElement>(null)
   const userInteracted = useRef(false)
 
-  // Open het venster automatisch één keer per sessie, ~10s nadat de
-  // bezoeker binnenkomt — maar niet als hij de knop al zelf heeft gebruikt.
   useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)')
+    const update = () => setIsDesktop(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
+
+  // Open het venster automatisch één keer per sessie, ~8s nadat de bezoeker
+  // binnenkomt — maar niet op mobiel en niet als hij de knop al zelf gebruikte.
+  useEffect(() => {
+    if (!isDesktop) return
     if (typeof window === 'undefined') return
     if (sessionStorage.getItem(AUTO_OPEN_KEY)) return
 
@@ -44,7 +56,7 @@ export default function WhatsAppButton() {
     }, AUTO_OPEN_DELAY)
 
     return () => window.clearTimeout(timer)
-  }, [])
+  }, [isDesktop])
 
   useEffect(() => {
     if (!open) return
@@ -60,12 +72,13 @@ export default function WhatsAppButton() {
   const chatHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(PREFILLED_MESSAGE)}`
 
   return (
-    <div ref={rootRef} className="fixed bottom-6 right-6 z-50 hidden flex-col items-end gap-3 lg:flex">
+    <div ref={rootRef} className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+      {/* Chat-popup — alleen op desktop */}
       <div
         role="dialog"
         aria-label="WhatsApp chat"
         aria-hidden={!open}
-        className={`w-[320px] max-w-[calc(100vw-3rem)] origin-bottom-right overflow-hidden rounded-2xl bg-[#111b21] shadow-2xl ring-1 ring-white/10 transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`hidden w-[320px] max-w-[calc(100vw-3rem)] origin-bottom-right overflow-hidden rounded-2xl bg-[#111b21] shadow-2xl ring-1 ring-white/10 transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] lg:block ${
           open
             ? 'translate-y-0 scale-100 opacity-100'
             : 'pointer-events-none translate-y-6 scale-90 opacity-0'
@@ -112,39 +125,52 @@ export default function WhatsAppButton() {
           </div>
         </div>
 
-      <button
-        type="button"
-        onClick={() => {
-          userInteracted.current = true
-          sessionStorage.setItem(AUTO_OPEN_KEY, '1')
-          setOpen((v) => !v)
-        }}
-        aria-label={open ? 'WhatsApp venster sluiten' : 'Contacteer ons via WhatsApp'}
-        aria-expanded={open}
-        className="flex h-14 items-center gap-2.5 rounded-full bg-[#25D366] pl-4 pr-5 shadow-lg transition-transform duration-200 hover:scale-105 hover:shadow-xl"
-      >
-        <span className="relative flex h-7 w-7 flex-none items-center justify-center">
-          <WhatsAppIcon
-            className={`absolute h-7 w-7 transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-              open ? 'rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'
-            }`}
-          />
-          <svg
-            viewBox="0 0 24 24"
-            className={`absolute h-6 w-6 transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-              open ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-0 opacity-0'
-            }`}
-            fill="none"
-            stroke="white"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            aria-hidden="true"
-          >
-            <path d="M6 6l12 12M18 6L6 18" />
-          </svg>
-        </span>
-        <span className="text-sm font-semibold text-white">Contacteer ons</span>
-      </button>
+      {/* Zwevende knop. Desktop: opent/sluit de popup. Mobiel: directe WhatsApp-link. */}
+      {isDesktop ? (
+        <button
+          type="button"
+          onClick={() => {
+            userInteracted.current = true
+            sessionStorage.setItem(AUTO_OPEN_KEY, '1')
+            setOpen((v) => !v)
+          }}
+          aria-label={open ? 'WhatsApp venster sluiten' : 'Contacteer ons via WhatsApp'}
+          aria-expanded={open}
+          className="flex h-14 items-center gap-2.5 rounded-full bg-[#25D366] pl-4 pr-5 shadow-lg transition-transform duration-200 hover:scale-105 hover:shadow-xl"
+        >
+          <span className="relative flex h-7 w-7 flex-none items-center justify-center">
+            <WhatsAppIcon
+              className={`absolute h-7 w-7 transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                open ? 'rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'
+              }`}
+            />
+            <svg
+              viewBox="0 0 24 24"
+              className={`absolute h-6 w-6 transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                open ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-0 opacity-0'
+              }`}
+              fill="none"
+              stroke="white"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              aria-hidden="true"
+            >
+              <path d="M6 6l12 12M18 6L6 18" />
+            </svg>
+          </span>
+          <span className="text-sm font-semibold text-white">Contacteer ons</span>
+        </button>
+      ) : (
+        <a
+          href={chatHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Contacteer ons via WhatsApp"
+          className="flex h-14 w-14 flex-none items-center justify-center rounded-full bg-[#25D366] shadow-lg transition-transform duration-200 active:scale-95"
+        >
+          <WhatsAppIcon className="h-7 w-7" />
+        </a>
+      )}
     </div>
   )
 }
