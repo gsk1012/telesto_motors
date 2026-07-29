@@ -15,9 +15,44 @@ export interface FaqItem {
  * grid-template-rows 0fr -> 1fr technique, so the height animates without
  * measuring. Closed panels are `inert`, keeping hidden links out of tab order.
  * Collapses to an instant toggle under prefers-reduced-motion.
+ *
+ * `variant` switches the skin: `light` (default, cream cards on a light
+ * section) or `dark` (translucent cards for use on the charcoal/ink sections).
  */
-export default function FaqAccordion({ items }: { items: FaqItem[] }) {
+type Variant = 'light' | 'dark'
+
+const SKIN: Record<Variant, {
+  itemBase: string
+  borderOpen: string
+  borderClosed: string
+  question: string
+  icon: string
+  answer: string
+  link: string
+}> = {
+  light: {
+    itemBase: 'bg-cream',
+    borderOpen: 'border-bronze/40',
+    borderClosed: 'border-ink/10',
+    question: 'text-ink',
+    icon: 'bg-bronze/10 text-bronze-dark',
+    answer: 'text-ink/70',
+    link: 'text-bronze-dark hover:text-ink',
+  },
+  dark: {
+    itemBase: 'bg-white/[0.035]',
+    borderOpen: 'border-bronze/50',
+    borderClosed: 'border-white/10',
+    question: 'text-white',
+    icon: 'btn-gold',
+    answer: 'text-white/70',
+    link: 'text-bronze hover:text-white',
+  },
+}
+
+export default function FaqAccordion({ items, variant = 'light' }: { items: FaqItem[]; variant?: Variant }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const skin = SKIN[variant]
 
   function toggle(index: number) {
     setOpenIndex((prev) => (prev === index ? null : index))
@@ -32,23 +67,23 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
              state-driven classes live one level deeper so React never wipes it. */
           <div key={item.question} className="animate-on-scroll" data-delay={`${0.06 + i * 0.06}s`}>
           <div
-            className={`rounded-2xl border bg-cream transition-colors duration-200 ${
-              isOpen ? 'border-bronze/40' : 'border-ink/10'
+            className={`rounded-2xl border transition-colors duration-200 ${skin.itemBase} ${
+              isOpen ? skin.borderOpen : skin.borderClosed
             }`}
           >
-            <h3>
+            <h3 className="normal-case">
               <button
                 type="button"
                 id={`faq-button-${i}`}
                 aria-expanded={isOpen}
                 aria-controls={`faq-panel-${i}`}
                 onClick={() => toggle(i)}
-                className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left font-semibold text-ink sm:px-7"
+                className={`flex w-full items-center justify-between gap-4 px-6 py-5 text-left font-semibold sm:px-7 ${skin.question}`}
               >
                 {item.question}
                 <span
                   aria-hidden="true"
-                  className={`flex h-8 w-8 flex-none items-center justify-center rounded-full bg-bronze/10 text-bronze-dark transition-transform duration-200 motion-reduce:transition-none ${
+                  className={`flex h-8 w-8 flex-none items-center justify-center rounded-full transition-transform duration-200 motion-reduce:transition-none ${skin.icon} ${
                     isOpen ? 'rotate-45' : ''
                   }`}
                 >
@@ -72,11 +107,11 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
                     isOpen ? 'opacity-100 delay-75' : 'opacity-0'
                   }`}
                 >
-                  <p className="max-w-[62ch] leading-relaxed text-ink/70">{item.answer}</p>
+                  <p className={`max-w-[62ch] leading-relaxed ${skin.answer}`}>{item.answer}</p>
                   {item.link && (
                     <Link
                       href={item.link.href}
-                      className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-bronze-dark transition-colors hover:text-ink"
+                      className={`mt-3 inline-flex items-center gap-1.5 text-sm font-semibold transition-colors ${skin.link}`}
                     >
                       {item.link.label}
                       <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">

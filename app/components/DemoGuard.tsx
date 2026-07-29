@@ -8,11 +8,12 @@ import { useEffect } from 'react'
  * Alle functionaliteit van de homepage blijft werken (MENU-paneel, Calendly,
  * WhatsApp, in-page scrollen, formulieren, socials, telefoon). Het enige dat
  * geblokkeerd wordt: navigeren naar een ándere pagina. Toegestaan blijven de
- * homepage ('/') en het privacybeleid ('/privacybeleid'); alle overige interne
- * paginalinks doen niets. Externe links (http, tel, mail, WhatsApp, Instagram)
- * en anchors op dezelfde pagina blijven gewoon werken.
+ * homepage ('/'), het privacybeleid ('/privacybeleid') en de pakketten-pagina
+ * ('/plans'); alle overige interne paginalinks doen niets. Externe links
+ * (http, tel, mail, WhatsApp, Instagram) en anchors op dezelfde pagina
+ * blijven gewoon werken.
  */
-const ALLOWED_PATHS = new Set(['/', '/privacybeleid'])
+const ALLOWED_PATHS = new Set(['/', '/privacybeleid', '/plans'])
 
 export default function DemoGuard() {
   useEffect(() => {
