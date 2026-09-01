@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { InstagramPost } from "../lib/instagram";
 import SplitHeading from "./SplitHeading";
+import { useInView } from "./useInView";
 
 const IG_URL = "https://www.instagram.com/telesto.motors";
 
@@ -23,6 +24,8 @@ export default function InstagramSlider({ posts }: { posts: InstagramPost[] }) {
   const loop = [...posts, ...posts, ...posts];
 
   // ----- Oneindige slider -----
+  const sectionRef = useRef<HTMLElement>(null);
+  const inView = useInView(sectionRef);
   const trackRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(base); // start in de middelste set
   const [slideW, setSlideW] = useState(0);
@@ -69,12 +72,13 @@ export default function InstagramSlider({ posts }: { posts: InstagramPost[] }) {
     return () => cancelAnimationFrame(id);
   }, [animate]);
 
-  // Autoplay — geeft de "oneindige" beweging; pauzeert bij hover/verborgen tab.
+  // Autoplay — geeft de "oneindige" beweging; pauzeert bij hover, verborgen tab
+  // en wanneer de sectie buiten beeld staat (scheelt een re-render per 2s).
   useEffect(() => {
-    if (paused || reduced || slideW === 0) return;
+    if (paused || reduced || slideW === 0 || !inView) return;
     const id = setInterval(next, 2000);
     return () => clearInterval(id);
-  }, [paused, reduced, slideW, next]);
+  }, [paused, reduced, slideW, inView, next]);
 
   useEffect(() => {
     const onVis = () => setPaused(document.hidden);
@@ -95,7 +99,7 @@ export default function InstagramSlider({ posts }: { posts: InstagramPost[] }) {
   };
 
   return (
-    <section className="relative overflow-hidden bg-[#14181E] py-8 sm:py-10 lg:py-12">
+    <section ref={sectionRef} className="relative overflow-hidden bg-[#14181E] py-8 sm:py-10 lg:py-12">
       {/* Titel boven de beelden */}
       <div className="mb-5 px-6 text-center sm:mb-6">
         <p
@@ -160,6 +164,9 @@ export default function InstagramSlider({ posts }: { posts: InstagramPost[] }) {
                     className="relative block aspect-square overflow-hidden border border-white/10 shadow-lg"
                     draggable={false}
                   >
+                    {/* Ook de Behold-URL's gaan door de Next-optimizer (host
+                        staat in next.config) — dat scheelt ruim 100 KB per post
+                        tegenover de originele JPEG's. */}
                     <Image
                       src={post.src}
                       alt={post.alt}
@@ -167,7 +174,6 @@ export default function InstagramSlider({ posts }: { posts: InstagramPost[] }) {
                       className="object-cover transition-transform duration-500 hover:scale-105"
                       sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 68vw"
                       draggable={false}
-                      unoptimized={post.src.startsWith("http")}
                     />
                   </a>
                 </div>

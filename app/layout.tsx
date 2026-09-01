@@ -4,11 +4,13 @@ import "./globals.css";
 import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
 
+// Alleen de gewichten die de site daadwerkelijk gebruikt (light/regular/medium/
+// semibold). 700 en 800 kwamen nergens voor en kostten twee extra fontbestanden.
 const openSans = Open_Sans({
   subsets: ["latin"],
   variable: "--font-open-sans",
   display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -156,8 +158,10 @@ export default function RootLayout({
   return (
     <html lang="nl" className={openSans.variable}>
       <head>
-        <link rel="preconnect" href="https://calendly.com" />
-        <link rel="preconnect" href="https://assets.calendly.com" />
+        {/* Alleen DNS vooruit oplossen. De volledige preconnect (TCP + TLS naar
+            twee hosts) zou bij élke paginaweergave verbindingen opzetten die de
+            meeste bezoekers nooit gebruiken; ContactTabs doet dat nu pas zodra
+            iemand richting de agenda-tab beweegt. */}
         <link rel="dns-prefetch" href="https://calendly.com" />
         <link rel="dns-prefetch" href="https://assets.calendly.com" />
         <script

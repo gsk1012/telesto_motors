@@ -2,6 +2,7 @@
 
 import { type CSSProperties, useCallback, useEffect, useRef, useState } from "react";
 import SplitHeading from "./SplitHeading";
+import { useInView } from "./useInView";
 
 /*
  * Klantreviews als peek-slider: het uitgelichte citaat staat groot in beeld,
@@ -72,6 +73,8 @@ function Chevron({ dir }: { dir: "left" | "right" }) {
 }
 
 export default function ReviewsSpotlight() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const inView = useInView(sectionRef);
   const trackRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(BASE); // start in de middelste set
   const [slideW, setSlideW] = useState(0);
@@ -133,12 +136,13 @@ export default function ReviewsSpotlight() {
     return () => cancelAnimationFrame(id);
   }, [animate]);
 
-  // Auto-schuiven — verse timer na elke wissel, stopt bij pauze/reduced.
+  // Auto-schuiven — verse timer na elke wissel, stopt bij pauze/reduced en
+  // wanneer de sectie buiten beeld staat.
   useEffect(() => {
-    if (paused || reduced || slideW === 0) return;
+    if (paused || reduced || slideW === 0 || !inView) return;
     const id = setTimeout(next, INTERVAL_MS);
     return () => clearTimeout(id);
-  }, [index, paused, reduced, slideW, next]);
+  }, [index, paused, reduced, slideW, inView, next]);
 
   // Sleep/veeg.
   const swipeX = useRef<number | null>(null);
@@ -153,7 +157,7 @@ export default function ReviewsSpotlight() {
   };
 
   return (
-    <section className="overflow-hidden bg-charcoal py-24 sm:py-28">
+    <section ref={sectionRef} className="overflow-hidden bg-charcoal py-24 sm:py-28">
       <div className="mx-auto max-w-container px-6">
         {/* Header */}
         <div className="max-w-2xl">

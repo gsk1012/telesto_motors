@@ -80,9 +80,14 @@ export default function StickyNav({
           }`}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
+          {/* width/height geven de verhouding van de SVG (3240 × 2786) mee, zodat
+              de header niet verspringt op het moment dat het logo binnenkomt. */}
           <img
             src="/images/telesto-logo-color.svg"
             alt="Telesto Motors"
+            width={112}
+            height={96}
+            decoding="async"
             className={`w-auto transition-[height] duration-300 ease-out ${
               scrolled ? 'h-20' : 'h-24'
             }`}
@@ -96,9 +101,14 @@ export default function StickyNav({
           className="absolute left-1/2 hidden -translate-x-1/2 items-center lg:flex"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
+          {/* width/height geven de verhouding van de SVG (3240 × 2786) mee, zodat
+              de header niet verspringt op het moment dat het logo binnenkomt. */}
           <img
             src="/images/telesto-logo-color.svg"
             alt="Telesto Motors"
+            width={112}
+            height={96}
+            decoding="async"
             className={`w-auto transition-[height] duration-300 ease-out ${
               scrolled ? 'h-20' : 'h-24'
             }`}

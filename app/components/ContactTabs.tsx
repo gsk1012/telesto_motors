@@ -11,12 +11,34 @@ const TABS: { id: Tab; label: string }[] = [
   { id: 'afspraak', label: 'Plan een afspraak' },
 ]
 
+/*
+ * Zet vast een verbinding op naar Calendly zodra de bezoeker richting de
+ * agenda-tab beweegt. DNS + TLS staan dan al klaar wanneer hij daadwerkelijk
+ * klikt, zodat het uitstellen van de iframe niet als traag voelt.
+ */
+let warmed = false
+function warmCalendly() {
+  if (warmed || typeof document === 'undefined') return
+  warmed = true
+  for (const host of ['https://calendly.com', 'https://assets.calendly.com']) {
+    const link = document.createElement('link')
+    link.rel = 'preconnect'
+    link.href = host
+    link.crossOrigin = ''
+    document.head.appendChild(link)
+  }
+}
+
 export default function ContactTabs() {
   const [active, setActive] = useState<Tab>('bericht')
+  // Blijft true zodra de agenda één keer is geopend: de iframe blijft daarna
+  // gemount zodat heen-en-weer klikken niet opnieuw laadt.
+  const [calendarArmed, setCalendarArmed] = useState(false)
   const panelRef = useRef<HTMLDivElement>(null)
 
   const handleSelect = (tab: Tab) => {
     if (tab === active) return
+    if (tab === 'afspraak') setCalendarArmed(true)
     setActive(tab)
 
     // Laat de layout eerst updaten (max-width + zichtbaarheid),
@@ -52,6 +74,8 @@ export default function ContactTabs() {
             key={tab.id}
             type="button"
             onClick={() => handleSelect(tab.id)}
+            onPointerEnter={tab.id === 'afspraak' ? warmCalendly : undefined}
+            onFocus={tab.id === 'afspraak' ? warmCalendly : undefined}
             className={`btn-label flex-1 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200 ${
               active === tab.id
                 ? 'bg-paper text-ink shadow-sm'
@@ -63,10 +87,11 @@ export default function ContactTabs() {
         ))}
       </div>
 
-      {/* Beide blijven gemount zodat de Calendly-iframe maar één keer laadt */}
+      {/* Het formulier blijft gemount; Calendly komt er pas bij zodra die tab
+          voor het eerst wordt geopend en blijft daarna staan. */}
       <div ref={panelRef} className="scroll-mt-28">
         <div className={active === 'afspraak' ? 'block' : 'hidden'}>
-          <CalendlyWidget />
+          <CalendlyWidget active={calendarArmed} />
         </div>
         <div className={active === 'bericht' ? 'block' : 'hidden'}>
           <ContactForm />
