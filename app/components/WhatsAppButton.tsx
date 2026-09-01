@@ -71,8 +71,16 @@ export default function WhatsAppButton() {
 
   const chatHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(PREFILLED_MESSAGE)}`
 
+  /*
+   * De wrapper vangt zelf geen muis. De dichte popup houdt namelijk zijn
+   * layout-ruimte (opacity en scale zijn puur visueel, ze halen niets uit de
+   * flow), waardoor dit blok anders een dode zone van ~320 × 570 px rechtsonder
+   * over de pagina legt: hovers op wat eronder ligt — zoals de laatste
+   * dienstenkaart — kwamen nooit aan. Alleen de open popup en de knop zelf
+   * zetten pointer-events weer aan.
+   */
   return (
-    <div ref={rootRef} className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    <div ref={rootRef} className="pointer-events-none fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
       {/* Chat-popup — alleen op desktop */}
       <div
         role="dialog"
@@ -80,7 +88,7 @@ export default function WhatsAppButton() {
         aria-hidden={!open}
         className={`hidden w-[320px] max-w-[calc(100vw-3rem)] origin-bottom-right overflow-hidden rounded-2xl bg-[#111b21] shadow-2xl ring-1 ring-white/10 transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] lg:block ${
           open
-            ? 'translate-y-0 scale-100 opacity-100'
+            ? 'pointer-events-auto translate-y-0 scale-100 opacity-100'
             : 'pointer-events-none translate-y-6 scale-90 opacity-0'
         }`}
       >
@@ -136,7 +144,7 @@ export default function WhatsAppButton() {
           }}
           aria-label={open ? 'WhatsApp venster sluiten' : 'Contacteer ons via WhatsApp'}
           aria-expanded={open}
-          className="flex h-14 items-center gap-2.5 rounded-full bg-[#25D366] pl-4 pr-5 shadow-lg transition-transform duration-200 hover:scale-105 hover:shadow-xl"
+          className="pointer-events-auto flex h-14 items-center gap-2.5 rounded-full bg-[#25D366] pl-4 pr-5 shadow-lg transition-transform duration-200 hover:scale-105 hover:shadow-xl"
         >
           <span className="relative flex h-7 w-7 flex-none items-center justify-center">
             <WhatsAppIcon
@@ -166,7 +174,7 @@ export default function WhatsAppButton() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Contacteer ons via WhatsApp"
-          className="flex h-14 w-14 flex-none items-center justify-center rounded-full bg-[#25D366] shadow-lg transition-transform duration-200 active:scale-95"
+          className="pointer-events-auto flex h-14 w-14 flex-none items-center justify-center rounded-full bg-[#25D366] shadow-lg transition-transform duration-200 active:scale-95"
         >
           <WhatsAppIcon className="h-7 w-7" />
         </a>
