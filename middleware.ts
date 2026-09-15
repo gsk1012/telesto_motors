@@ -4,10 +4,11 @@ import type { NextRequest } from 'next/server'
 /*
  * CLIENT-DEMO modus (alleen op de branch 'client-demo').
  * Direct ingetypte of gedeelde URL's naar andere pagina's worden teruggestuurd
- * naar de homepage. Alleen '/', '/privacybeleid' en '/plans' zijn bereikbaar
- * (de homepage linkt door naar /plans, dus die blijft ook toegankelijk).
+ * naar de homepage. Alleen '/', '/privacybeleid', '/plans' en '/over-ons' zijn
+ * bereikbaar (de homepage linkt door naar /plans en /over-ons, dus die blijven
+ * ook toegankelijk).
  */
-const ALLOWED = new Set(['/', '/privacybeleid', '/plans'])
+const ALLOWED = new Set(['/', '/privacybeleid', '/plans', '/over-ons'])
 
 export function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname.replace(/\/+$/, '') || '/'

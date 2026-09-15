@@ -10,6 +10,7 @@ import PromiseShowcase from "./components/PromiseShowcase";
 import HeroSlider from "./components/HeroSlider";
 import BrandsMarquee from "./components/BrandsMarquee";
 import SplitHeading from "./components/SplitHeading";
+import CredentialsBar from "./components/CredentialsBar";
 
 export default function Home() {
   return (
@@ -124,34 +125,7 @@ export default function Home() {
       <PromiseShowcase />
 
       {/* ===== Kenmerken-balk (credentials) ===== */}
-      <section className="bg-cream">
-        <div className="mx-auto max-w-container px-6 py-11 sm:py-12">
-          <ul className="animate-on-scroll grid grid-cols-2 gap-x-6 gap-y-5 sm:flex sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-10 sm:gap-y-4 lg:flex-nowrap lg:justify-between lg:gap-x-6" data-delay="0s">
-            {[
-              "Expertise sinds 2008",
-              "Vakkundig advies",
-              "Persoonlijke aandacht",
-              "5+ jaar ervaring in EV's en hybrides",
-              "Specialisme",
-            ].map((item) => (
-              <li
-                key={item}
-                className="flex items-center gap-2.5 sm:whitespace-nowrap"
-              >
-                <svg
-                  className="h-5 w-5 flex-none text-bronze"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path d="M11.48 3.5a.6.6 0 011.04 0l2.09 5.03a.56.56 0 00.48.35l5.43.44c.5.04.7.66.32.99l-4.14 3.54a.56.56 0 00-.18.56l1.27 5.3a.56.56 0 01-.84.6l-4.65-2.84a.56.56 0 00-.58 0l-4.65 2.84a.56.56 0 01-.84-.6l1.27-5.3a.56.56 0 00-.18-.56L3.16 10.7a.56.56 0 01.32-.99l5.43-.44a.56.56 0 00.48-.35z" />
-                </svg>
-                <span className="text-sm font-medium text-ink sm:text-base">{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+      <CredentialsBar />
 
       {/* ===== Waarom Telesto ===== */}
       <section id="over" className="overflow-hidden bg-cream text-ink">
@@ -212,13 +186,26 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <a
-                href="#contact"
-                className="btn-gold btn-label animate-on-scroll mt-10 inline-flex w-fit items-center justify-center rounded-full px-7 py-3.5 text-base font-semibold"
+              <div
+                className="animate-on-scroll mt-10 flex flex-wrap items-center gap-x-8 gap-y-4"
                 data-delay="0.4s"
               >
-                Plan een kennismaking
-              </a>
+                <a
+                  href="#contact"
+                  className="btn-gold btn-label inline-flex w-fit items-center justify-center rounded-full px-7 py-3.5 text-base font-semibold"
+                >
+                  Plan een kennismaking
+                </a>
+                <Link
+                  href="/over-ons"
+                  className="btn-label group inline-flex items-center gap-1.5 text-sm font-semibold text-bronze transition-colors hover:text-bronze-dark"
+                >
+                  Meer over ons
+                  <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
             </div>
           </div>
 

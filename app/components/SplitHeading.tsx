@@ -13,6 +13,8 @@ interface SplitHeadingProps {
   as?: 'h1' | 'h2' | 'h3'
   className?: string
   lineClassName?: string
+  /** Extra classes per regel (zelfde index als `lines`), bv. één regel in brons. */
+  lineClassNames?: (string | undefined)[]
   /** Extern gestuurde zichtbaarheid (bv. één trigger voor een hele sectie met
    * meerdere koppen). Laat weg voor het standaardgedrag: eigen IntersectionObserver. */
   revealed?: boolean
@@ -22,7 +24,7 @@ interface SplitHeadingProps {
   eager?: boolean
 }
 
-export default function SplitHeading({ lines, as: Tag = 'h2', className = '', lineClassName = '', revealed, eager = false }: SplitHeadingProps) {
+export default function SplitHeading({ lines, as: Tag = 'h2', className = '', lineClassName = '', lineClassNames, revealed, eager = false }: SplitHeadingProps) {
   const ref = useRef<HTMLHeadingElement>(null)
   const [ownVisible, setOwnVisible] = useState(false)
   const visible = revealed ?? ownVisible
@@ -49,7 +51,7 @@ export default function SplitHeading({ lines, as: Tag = 'h2', className = '', li
   return (
     <Tag ref={ref} className={className}>
       {lines.map((line, li) => (
-        <span key={li} className={`block ${lineClassName}`}>
+        <span key={li} className={`block ${lineClassName} ${lineClassNames?.[li] ?? ''}`}>
           {line.split(' ').map((word, wi) => {
             const i = wordIndex++
             return (

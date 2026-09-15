@@ -1,20 +1,22 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import StickyNav from '../components/StickyNav'
-import { DEFAULT_NAV } from '../components/nav'
 import ScrollAnimator from '../components/ScrollAnimator'
 import ParallaxImage from '../components/ParallaxImage'
-import PrincipleBento, { PrincipleTile } from './PrincipleBento'
+import SplitHeading from '../components/SplitHeading'
+import CredentialsBar from '../components/CredentialsBar'
+import SocialInstagram from '../components/SocialInstagram'
+import ValuesStage from './ValuesStage'
 
 export const metadata: Metadata = {
   title: 'Over ons',
   description:
-    'Telesto Motors is sinds 2008 de onafhankelijke autoadviseur van Nederland. Lees ons verhaal, onze werkwijze en maak kennis met oprichter Pawan Singh.',
+    'Telesto Motors is sinds 2008 het onafhankelijke autoadviesbureau voor particulieren en ondernemers. Geen voorraad, geen dealer: alleen jouw belang.',
   keywords: [
     'over Telesto Motors',
     'onafhankelijke autoadviseur',
-    'Pawan Singh',
-    'auto-advies verhaal',
+    'autoadviesbureau',
     'autoadviseur Nederland',
     'EV advies specialist',
   ],
@@ -23,29 +25,34 @@ export const metadata: Metadata = {
     locale: 'nl_NL',
     url: 'https://telestomotors.nl/over-ons',
     siteName: 'Telesto Motors',
-    title: 'Over ons — Telesto Motors',
+    title: 'Over ons | Telesto Motors',
     description:
-      'Sinds 2008 de onafhankelijke autoadviseur die altijd aan jouw kant staat. Ons verhaal en oprichter Pawan Singh.',
+      'Sinds 2008 het onafhankelijke autoadviesbureau dat altijd aan jouw kant staat. Geen voorraad, geen dealer: alleen jouw belang.',
     images: [
       {
-        url: '/images/hero-bmw.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Telesto Motors — Over ons',
+        url: '/images/over-ons/hero-street.jpg',
+        width: 2000,
+        height: 1125,
+        alt: 'Telesto Motors, over ons',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Over ons — Telesto Motors',
-    description:
-      'Sinds 2008 de onafhankelijke autoadviseur die altijd aan jouw kant staat.',
-    images: ['/images/hero-bmw.jpg'],
+    title: 'Over ons | Telesto Motors',
+    description: 'Sinds 2008 het onafhankelijke autoadviesbureau dat altijd aan jouw kant staat.',
+    images: ['/images/over-ons/hero-street.jpg'],
   },
   alternates: {
     canonical: 'https://telestomotors.nl/over-ons',
   },
 }
+
+const POINTS = [
+  'Kennis van elk merk en segment, van stadsauto tot sportwagen',
+  'Voor particulieren, ondernemers en kleine wagenparken',
+  'Online of op locatie, helemaal in jouw tempo',
+]
 
 const TIMELINE = [
   {
@@ -54,51 +61,39 @@ const TIMELINE = [
     body: 'Wat startte als het helpen van vrienden en familie bij hun auto-aankoop, groeide uit tot Telesto Motors. De missie was toen al glashelder: mensen behoeden voor een miskoop en ze laten rijden in een auto die echt bij ze past.',
   },
   {
-    year: '2010 t/m 2018',
+    year: '2010 – 2018',
     title: 'Groei door vertrouwen',
-    body: 'Tevreden klanten brachten nieuwe klanten. Zonder dure reclame, puur op aanbeveling, breidde Telesto zich uit van particulieren naar ook ondernemers en kleine wagenparken.',
+    body: 'Tevreden klanten brachten nieuwe klanten. Zonder dure reclame, puur op aanbeveling, groeide Telesto van particulieren naar ook ondernemers en kleine wagenparken.',
   },
   {
     year: '2019',
     title: 'Elektrisch wordt volwassen',
-    body: 'Toen de eerste betaalbare elektrische en hybride modellen de markt veroverden, verdiepten wij ons er volledig in. Inmiddels is EV-advies een van onze sterkste specialismen: van actieradius en laadgedrag tot subsidies en restwaarde.',
+    body: 'Toen de eerste betaalbare elektrische en hybride modellen de markt veroverden, verdiepten wij ons er volledig in. Inmiddels is EV-advies een van onze sterkste specialismen.',
   },
   {
     year: 'Vandaag',
-    title: '15+ jaar verder',
+    title: 'Dezelfde aanpak, meer kennis',
     body: 'Honderden geslaagde auto-aankopen later is de aanpak nog altijd hetzelfde: onafhankelijk, grondig en persoonlijk. Of je nu je eerste auto zoekt of je tiende, je krijgt steevast dezelfde aandacht.',
   },
 ]
 
-const PRINCIPLES: PrincipleTile[] = [
-  {
-    title: 'Onafhankelijk',
-    body: 'Wij zijn aan geen enkel merk, dealer of importeur verbonden. Zonder verborgen commissies of voorkeursleveranciers weegt bij elk advies maar één belang mee: dat van jou.',
-    area: 'lg:col-span-2',
-    dark: true,
-  },
-  {
-    title: 'Persoonlijk',
-    body: 'Je krijgt één vast aanspreekpunt dat je situatie kent, je naam onthoudt en gewoon bereikbaar is.',
-    area: 'lg:col-start-1 lg:row-start-2',
-  },
-  {
-    title: 'Transparant',
-    body: 'We vertellen je ook wat je liever niet hoort. Past een auto niet bij je budget of rijgedrag, dan zeggen we dat eerlijk.',
-    area: 'lg:col-start-2 lg:row-start-2',
-  },
-  {
-    title: 'Specialist in EV & hybride',
-    body: 'Twijfel je tussen benzine, hybride of volledig elektrisch? Wij rekenen het eerlijk voor: laadgemak, actieradius, subsidies en de werkelijke kosten per kilometer. Zo kies je met cijfers, niet met onderbuikgevoel.',
-    area: 'lg:col-start-3 lg:row-start-1 lg:row-span-2',
-  },
-]
+function CheckIcon() {
+  return (
+    <span className="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-bronze/15 text-bronze">
+      <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+      </svg>
+    </span>
+  )
+}
 
-const CREDENTIALS = [
-  { accent: '15+ jaar', text: 'ervaring in elk segment' },
-  { accent: '100%', text: 'onafhankelijk advies' },
-  { accent: 'A tot Z', text: 'volledig ontzorgd' },
-]
+function ArrowRightIcon({ className = 'h-4 w-4' }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+    </svg>
+  )
+}
 
 function PhoneIcon({ className = 'h-4 w-4' }: { className?: string }) {
   return (
@@ -123,299 +118,232 @@ export default function OverOnsPage() {
       name: 'Telesto Motors',
       foundingDate: '2008',
       url: 'https://telestomotors.nl',
-      founder: {
-        '@type': 'Person',
-        name: 'Pawan Singh',
-        jobTitle: 'Oprichter',
-      },
     },
+  }
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://telestomotors.nl' },
+      { '@type': 'ListItem', position: 2, name: 'Over ons', item: 'https://telestomotors.nl/over-ons' },
+    ],
   }
 
   return (
     <main className="bg-cream text-ink">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutJsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <StickyNav logoHref="/" ctaHref="/contact#formulier" />
 
-      {/* ===== Hero (full-bleed immersive opening, bookends the dark finale) ===== */}
-      <section className="relative isolate flex min-h-[100dvh] items-center overflow-hidden bg-ink">
-        <Image
+      {/* ===== Hero banner ===== */}
+      <section className="relative flex min-h-[72svh] w-full items-end overflow-hidden md:min-h-[88svh] md:items-center">
+        <ParallaxImage
           src="/images/over-ons/hero-street.jpg"
           alt="Een premium sedan op een rustige Europese straat in het warme avondlicht"
-          fill
           priority
-          className="object-cover object-center"
-          sizes="100vw"
+          className="object-cover object-[72%_center] md:object-center"
         />
-        {/* Scrims: left for the headline column, top for nav legibility, base for depth */}
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-ink/20" />
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-ink/70 via-transparent to-ink/55" />
+        <div aria-hidden="true" className="absolute inset-0 bg-black/20" />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/25 to-transparent" />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/15" />
 
-        <div className="relative z-10 mx-auto w-full max-w-container px-6 py-28">
-          <div className="max-w-3xl">
-            <h1
-              className="animate-fade-up font-serif text-5xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-[4.25rem]"
-              style={{ animationDelay: '0.05s' }}
+        <div className="relative z-10 mx-auto w-full max-w-container px-6 pb-14 pt-32 md:pb-0">
+          <SplitHeading
+            as="h1"
+            eager
+            lines={['Over', 'Telesto', 'Motors']}
+            lineClassNames={[undefined, undefined, 'text-bronze']}
+            className="font-sans text-6xl/[1.08] font-light uppercase tracking-[0.04em] text-white sm:text-7xl/[1.06] lg:text-[6.5rem]/[1.04]"
+          />
+          <div
+            className="animate-fade-up mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4"
+            style={{ animationDelay: '0.36s' }}
+          >
+            <a
+              href="/contact#formulier"
+              className="btn-gold btn-label inline-flex items-center justify-center rounded-full px-7 py-3.5 text-base font-semibold shadow-lg transition-all duration-200 active:scale-[0.98]"
             >
-              Het verhaal achter<br className="hidden sm:block" /> de sleutels
-            </h1>
-            <p
-              className="animate-fade-up mt-8 max-w-[54ch] text-lg leading-relaxed text-white/80"
-              style={{ animationDelay: '0.18s' }}
+              Plan een kennismaking
+            </a>
+            <a
+              href="#wie-wij-zijn"
+              className="btn-label group hidden items-center justify-center gap-2 rounded-full px-6 py-3.5 text-base font-semibold text-white ring-1 ring-white/35 transition-all duration-200 hover:bg-white/10 hover:ring-white/70 active:scale-[0.98] sm:inline-flex"
             >
-              De gemiddelde Nederlander koopt maar een handvol keer in z&apos;n leven een auto. Toch
-              sta je er vaak alleen voor: tegenover een verkoper die het spel dagelijks speelt,
-              tussen duizenden advertenties.
-            </p>
-            <p
-              className="animate-fade-up mt-5 max-w-[54ch] text-lg leading-relaxed text-white/80"
-              style={{ animationDelay: '0.28s' }}
-            >
-              Telesto Motors ontstond uit de overtuiging dat het ook anders kan. Wij draaien de
-              rollen om: geen merk dat we moeten verkopen, geen target dat we moeten halen. Alleen
-              jouw belang, van de eerste zoekopdracht tot de sleutel in je hand.
-            </p>
+              Wie wij zijn
+              <svg
+                className="h-4 w-4 text-bronze transition-transform duration-200 group-hover:translate-y-0.5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
 
-            <div
-              className="animate-fade-up mt-10 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-7"
-              style={{ animationDelay: '0.38s' }}
+      {/* ===== Kenmerken-balk (same stars as the homepage) ===== */}
+      <CredentialsBar />
+
+      {/* ===== Wie wij zijn (same split as the homepage "over" section) ===== */}
+      <section id="wie-wij-zijn" className="scroll-mt-24 overflow-hidden bg-cream text-ink">
+        <div className="grid items-stretch lg:grid-cols-[1fr_1fr]">
+          <div className="order-2 flex flex-col lg:order-1">
+            <p
+              className="animate-on-scroll hidden text-center text-lg font-semibold uppercase tracking-widest text-bronze lg:block lg:pl-16 lg:pr-10 lg:pt-16 lg:pb-10 xl:pl-20"
+              data-delay="0s"
             >
-              <a
-                href="/contact#formulier"
-                className="btn-label inline-flex items-center justify-center rounded-full bg-bronze px-7 py-3.5 text-base font-semibold text-white shadow-lg transition-all duration-200 hover:bg-bronze-dark active:scale-[0.98]"
+              Wie wij zijn
+            </p>
+            <div className="relative min-h-[300px] w-full flex-1 lg:min-h-[440px]">
+              <Image
+                src="/images/over-ons.jpg"
+                alt="Een witte elektrische auto op een klinkerplein tussen moderne gebouwen"
+                fill
+                className="object-cover object-[55%_center]"
+                sizes="(min-width: 1024px) 50vw, 100vw"
+              />
+            </div>
+          </div>
+
+          <div className="relative z-10 order-1 flex flex-col justify-between gap-10 px-8 py-14 lg:order-2 lg:py-16 lg:pl-14 lg:pr-14 xl:pl-20 xl:pr-20">
+            <div>
+              <p className="animate-on-scroll mb-4 text-lg font-semibold uppercase tracking-widest text-bronze lg:hidden" data-delay="0s">
+                Wie wij zijn
+              </p>
+              <SplitHeading
+                lines={['Slimmer', 'een auto', 'kopen.']}
+                className="font-serif text-4xl/[1.35] font-light uppercase tracking-[0.12em] text-ink sm:text-5xl/[1.35] lg:max-w-[48rem] lg:text-[3.5rem]/[1.3] xl:text-[4rem]/[1.3]"
+              />
+            </div>
+            <div>
+              <p className="animate-on-scroll text-lg leading-relaxed text-ink/65" data-delay="0.15s">
+                Telesto Motors is een onafhankelijk autoadviesbureau voor particulieren en ondernemers.
+                Waar een dealer verdient aan de auto die hij verkoopt, verdienen wij aan goed advies. Dat
+                geeft ons de vrijheid om te zeggen wat een verkoper nooit zegt: welke auto écht bij je
+                past, wat hij waard is, en wanneer je beter nog even kunt doorzoeken.
+              </p>
+              <ul className="animate-on-scroll mt-8 space-y-4" data-delay="0.28s">
+                {POINTS.map((point) => (
+                  <li key={point} className="flex items-start gap-3">
+                    <CheckIcon />
+                    <span className="text-ink/80">{point}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/diensten"
+                className="btn-gold btn-label group animate-on-scroll mt-10 inline-flex w-fit items-center justify-center gap-2 rounded-full px-7 py-3.5 text-base font-semibold"
+                data-delay="0.4s"
               >
-                Plan een kennismaking
-              </a>
-              <a
-                href="tel:+31620929214"
-                className="inline-flex items-center gap-2 text-sm font-medium text-white/85 transition-colors hover:text-white"
-              >
-                <PhoneIcon className="h-4 w-4" />
-                +31 (0)6 20 92 92 14
-              </a>
+                Bekijk onze diensten
+                <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ===== Ons verhaal (vertical timeline) ===== */}
-      <section className="bg-white py-24 sm:py-28">
-        <div className="mx-auto max-w-container px-6">
-          <div className="grid gap-12 lg:grid-cols-[0.9fr_1.4fr] lg:gap-16">
-            {/* Left: heading + intro */}
-            <div className="lg:sticky lg:top-28 lg:self-start">
-              <h2
-                className="animate-on-scroll font-serif text-4xl font-semibold leading-tight sm:text-5xl"
-                data-delay="0s"
-              >
-                Ons verhaal
-              </h2>
-              <p
-                className="animate-on-scroll mt-6 max-w-md text-lg leading-relaxed text-ink/70"
-                data-delay="0.1s"
-              >
-                Vijftien jaar onafhankelijk advies, en nog altijd dezelfde overtuiging als op dag een:
-                dat niemand er alleen voor zou moeten staan bij zo&apos;n grote aankoop.
-              </p>
-              <p
-                className="animate-on-scroll mt-4 max-w-md leading-relaxed text-ink/60"
-                data-delay="0.18s"
-              >
-                Wat ooit klein begon, groeide uit tot een vast adres voor particulieren en ondernemers
-                die zekerheid zoeken. Geen verkooppraat, maar iemand die meedenkt, doorvraagt en de
-                tijd neemt. De auto-markt is in die jaren onherkenbaar veranderd; onze belofte aan jou
-                geen seconde.
-              </p>
-              <p
-                className="animate-on-scroll mt-6 font-serif text-xl font-medium text-bronze-dark"
-                data-delay="0.26s"
-              >
-                Vier hoofdstukken, één rode draad.
-              </p>
-            </div>
+      {/* ===== Waar wij voor staan (scroll-podium: sticky full-screen stage per value) ===== */}
+      <ValuesStage />
 
-            {/* Right: timeline */}
-            <ol className="relative ml-1 border-l border-ink/15">
+      {/* ===== Ons verhaal (full-bleed split, flush image right) ===== */}
+      <section className="overflow-hidden bg-cream text-ink">
+        <div className="grid items-stretch lg:grid-cols-2">
+          <div className="order-2 px-6 py-16 sm:py-20 lg:order-1 lg:py-24 lg:pl-14 lg:pr-16 xl:pl-20">
+            <p className="animate-on-scroll text-lg font-semibold uppercase tracking-widest text-bronze" data-delay="0s">
+              Ons verhaal
+            </p>
+            <SplitHeading
+              lines={['Gegroeid op', 'aanbeveling']}
+              className="mt-3 font-serif text-4xl/[1.3] font-light uppercase text-ink sm:text-5xl/[1.3]"
+            />
+            <p className="animate-on-scroll mt-5 max-w-md text-lg leading-relaxed text-ink/65" data-delay="0.1s">
+              Telesto Motors begon niet met een reclamecampagne, maar met één tevreden klant die het
+              doorvertelde. Die aanpak is nooit veranderd.
+            </p>
+
+            <ol className="mt-10">
               {TIMELINE.map((item, i) => (
                 <li
                   key={item.year}
-                  className="animate-on-scroll relative pl-9 pb-12 last:pb-0 sm:pl-12"
-                  data-delay={`${i * 0.1}s`}
+                  className="animate-on-scroll relative flex gap-5 pb-9 last:pb-0"
+                  data-delay={`${0.15 + i * 0.1}s`}
                 >
-                  <span className="absolute -left-[7px] top-1.5 h-3.5 w-3.5 rounded-full bg-bronze ring-4 ring-white" />
-                  <p className="font-serif text-2xl font-semibold text-bronze">{item.year}</p>
-                  <h3 className="mt-1 text-xl font-semibold">{item.title}</h3>
-                  <p className="mt-3 max-w-xl leading-relaxed text-ink/65">{item.body}</p>
+                  {i < TIMELINE.length - 1 && (
+                    <span
+                      aria-hidden="true"
+                      className="absolute left-[1.375rem] top-11 h-[calc(100%-2.75rem)] w-px bg-bronze/25"
+                    />
+                  )}
+                  <span className="relative z-10 flex h-11 w-11 flex-none items-center justify-center rounded-full bg-[#EDE3DC] ring-1 ring-bronze/25">
+                    <span className="h-2.5 w-2.5 rounded-full bg-bronze" />
+                  </span>
+                  <div className="pt-0.5">
+                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-bronze">{item.year}</p>
+                    <h3 className="mt-1.5 text-xl font-light text-ink">{item.title}</h3>
+                    <p className="mt-2 max-w-md leading-relaxed text-ink/65">{item.body}</p>
+                  </div>
                 </li>
               ))}
             </ol>
           </div>
-        </div>
-      </section>
 
-      {/* ===== Waar wij voor staan (spotlight bento) ===== */}
-      <section className="bg-cream pt-24 pb-12 sm:py-28">
-        <div className="mx-auto max-w-container px-6">
-          <h2
-            className="animate-on-scroll max-w-2xl font-serif text-4xl font-semibold leading-tight sm:text-5xl"
-            data-delay="0s"
-          >
-            Waar wij voor staan
-          </h2>
-          <p
-            className="animate-on-scroll mt-5 max-w-xl text-lg leading-relaxed text-ink/65"
-            data-delay="0.1s"
-          >
-            Vier uitgangspunten die elke afspraak, elk advies en elke aankoop sturen.
-          </p>
-          <div className="mt-12">
-            <PrincipleBento tiles={PRINCIPLES} />
+          <div className="relative order-1 aspect-[4/3] w-full lg:order-2 lg:aspect-auto lg:min-h-[640px]">
+            <Image
+              src="/images/over-ons/moment.jpg"
+              alt="Een tevreden klant bij de open deur van haar nieuwe auto, met de sleutel in de hand"
+              fill
+              className="object-cover object-[50%_22%] lg:object-center"
+              sizes="(min-width: 1024px) 50vw, 100vw"
+            />
           </div>
         </div>
       </section>
 
-      {/* ===== Oprichter: Pawan Singh (founder spotlight) ===== */}
-      <section className="relative pt-12 pb-10 sm:py-28">
-        {/* Bottom-half dark seam so the card lifts off it (3D effect), bridging into the dark finale */}
-        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 top-1/2 bg-ink" />
-        <div className="relative z-10 mx-auto max-w-container px-6">
-          <div className="overflow-hidden rounded-[2.5rem] bg-white shadow-2xl shadow-black/30 ring-1 ring-ink/5">
-            <div className="grid items-center gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-0">
-              {/* Portrait */}
-              <div className="animate-on-scroll relative px-8 pt-10 lg:p-12" data-delay="0s">
-                <div className="relative mx-auto max-w-sm">
-                  {/* Bronze offset accent behind the portrait */}
-                  <div
-                    aria-hidden="true"
-                    className="absolute -bottom-4 -left-4 h-full w-full rounded-3xl bg-bronze/20"
-                  />
-                  <div className="relative aspect-[3/4] overflow-hidden rounded-3xl shadow-xl">
-                    <Image
-                      src="/images/team/pawan-singh.jpg"
-                      alt="Pawan Singh, oprichter van Telesto Motors"
-                      fill
-                      className="object-cover"
-                      sizes="(min-width: 1024px) 40vw, 90vw"
-                    />
-                  </div>
-                  {/* Floating badge (same language as homepage badge) */}
-                  <div className="absolute -bottom-5 right-5 rounded-2xl bg-bronze px-6 py-4 text-white shadow-xl">
-                    <p className="text-lg font-semibold leading-none">Oprichter</p>
-                    <p className="mt-1 text-sm text-white/85">sinds 2008</p>
-                  </div>
-                </div>
-              </div>
+      {/* ===== Social / Instagram ===== */}
+      <SocialInstagram />
 
-              {/* Letter from the founder */}
-              <div className="animate-on-scroll px-8 pb-12 lg:py-14 lg:pl-4 lg:pr-14" data-delay="0.15s">
-                <blockquote className="font-serif text-2xl font-medium leading-snug sm:text-3xl">
-                  &ldquo;Ik gun iedereen dezelfde rust bij het kopen van een auto als waarmee ik er
-                  zelf een zou uitkiezen.&rdquo;
-                </blockquote>
-                <p className="mt-7 leading-relaxed text-ink/70">
-                  Pawan Singh begon Telesto Motors omdat hij keer op keer zag hoe mensen met de beste
-                  bedoelingen de verkeerde auto kochten. Te duur, technisch niet in orde, of simpelweg
-                  niet passend bij hun leven.
-                </p>
-                <p className="mt-4 leading-relaxed text-ink/70">
-                  Met een scherp oog voor techniek, een uitgesproken liefde voor auto&apos;s en een
-                  hekel aan verkooppraatjes maakte hij van onafhankelijk advies zijn vak. Vandaag staat
-                  hij nog altijd persoonlijk aan het roer van elk advies.
-                </p>
-
-                {/* Signature block */}
-                <div className="mt-9">
-                  <p className="font-serif text-3xl font-medium leading-none text-ink">
-                    Pawan Singh
-                  </p>
-
-                  <p className="mt-4 text-sm font-medium tracking-wide text-ink/55">
-                    Oprichter van Telesto Motors
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== Onze staat van dienst (full-bleed EV credibility band) ===== */}
-      <section className="relative isolate -mt-px flex min-h-[560px] items-center overflow-hidden bg-ink py-16 sm:min-h-[640px] sm:py-20 lg:min-h-[700px]">
-        <ParallaxImage
-          src="/images/over-ons/band-ev.jpg"
-          alt="Een glanzende elektrische auto op een natte straat in het blauwe avonduur"
-          className="object-cover object-center"
-        />
-        {/* Scrims: even darken for centered text, stronger bottom, and a top fade to blend the seam */}
-        <div aria-hidden="true" className="absolute inset-0 bg-ink/50" />
-        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-ink to-transparent" />
-        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-ink to-transparent sm:h-56" />
-
-        <div className="relative z-10 mx-auto w-full max-w-container px-6">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2
-              className="animate-on-scroll font-serif text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl"
-              data-delay="0s"
-            >
-              Onafhankelijk sinds 2008.<br className="hidden sm:block" /> En nooit van koers veranderd.
-            </h2>
-            <p
-              className="animate-on-scroll mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/80"
-              data-delay="0.12s"
-            >
-              Honderden geslaagde auto-aankopen verder is er één constante gebleven: jouw belang staat
-              voorop, van de eerste zoekopdracht tot de sleutel in je hand.
-            </p>
-          </div>
-
-          <ul
-            className="animate-on-scroll mx-auto mt-10 flex flex-col items-center gap-4 border-t border-white/15 pt-7 sm:mt-12 lg:flex-row lg:justify-center lg:gap-0"
-            data-delay="0.24s"
-          >
-            {CREDENTIALS.map((c) => (
-              <li
-                key={c.text}
-                className="whitespace-nowrap text-lg leading-none text-white/85 lg:ml-8 lg:border-l lg:border-white/20 lg:pl-8 lg:first:ml-0 lg:first:border-l-0 lg:first:pl-0"
-              >
-                <span className="font-serif font-semibold text-bronze">{c.accent}</span> {c.text}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* ===== Closing CTA (bronze panel on the dark finale into the footer) ===== */}
-      <section className="relative -mt-px bg-ink px-6 py-16 sm:py-24">
+      {/* ===== Closing CTA (premium dark panel) ===== */}
+      <section className="relative -mt-px overflow-hidden bg-footer px-6 py-16 sm:py-24">
         <div className="relative z-10 mx-auto max-w-5xl">
           <div
-            className="animate-on-scroll relative overflow-hidden rounded-3xl bg-bronze-dark px-8 py-12 text-white shadow-2xl shadow-black/30 sm:px-12 sm:py-14"
+            className="animate-on-scroll relative overflow-hidden rounded-3xl bg-[#22262E] px-8 py-12 text-white ring-1 ring-bronze/50 sm:px-14 sm:py-16"
             data-delay="0s"
+            style={{ boxShadow: 'inset 0 0 44px 0 rgba(166,132,99,0.22), 0 30px 70px -24px rgba(0,0,0,0.6)' }}
           >
-            <div className="flex flex-col gap-9 sm:flex-row sm:items-center sm:justify-between sm:gap-12">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-16 -top-24 h-80 w-80 rounded-full blur-2xl"
+              style={{ background: 'radial-gradient(circle, rgba(166,132,99,0.32), transparent 70%)' }}
+            />
+            <div className="relative flex flex-col gap-9 sm:flex-row sm:items-center sm:justify-between sm:gap-12">
               <div className="max-w-md">
-                <h2 className="font-serif text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
-                  Benieuwd wat wij voor jou kunnen betekenen?
-                </h2>
-                <p className="mt-4 text-base leading-relaxed text-white/85 sm:text-lg">
-                  Plan een vrijblijvende kennismaking. We vertellen je graag persoonlijk hoe
-                  onafhankelijk advies in z&apos;n werk gaat.
+                <SplitHeading
+                  lines={['Benieuwd wat wij', 'voor jou kunnen doen?']}
+                  className="font-serif text-3xl/[1.3] font-light text-white sm:text-4xl/[1.3]"
+                />
+                <p className="mt-4 text-base leading-relaxed text-white/70 sm:text-lg">
+                  Plan een vrijblijvende kennismaking. We vertellen je graag hoe onafhankelijk advies in
+                  z&apos;n werk gaat.
                 </p>
               </div>
               <div className="flex w-full flex-none flex-col items-stretch gap-4 sm:w-auto sm:items-center">
                 <a
                   href="/contact#formulier"
-                  className="btn-label inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-base font-semibold text-ink transition-colors hover:bg-cream"
+                  className="btn-gold btn-label inline-flex items-center justify-center rounded-full px-8 py-4 text-base font-semibold"
                 >
                   Plan een kennismaking
                 </a>
                 <a
-                  href="tel:+31620929214"
-                  className="inline-flex items-center justify-center gap-2 text-sm font-medium text-white/85 transition-colors hover:text-white"
+                  href="tel:+31620779977"
+                  className="inline-flex items-center justify-center gap-2 text-sm font-medium text-white/70 transition-colors hover:text-white"
                 >
                   <PhoneIcon className="h-4 w-4" />
-                  +31 (0)6 20 92 92 14
+                  +31 (0)6 20 77 99 77
                 </a>
               </div>
             </div>
@@ -424,67 +352,6 @@ export default function OverOnsPage() {
       </section>
 
       <ScrollAnimator />
-
-      {/* ===== Footer ===== */}
-      <footer className="-mt-px bg-ink py-16 text-white/80">
-        <div className="mx-auto grid max-w-container gap-10 px-6 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="sm:col-span-2 lg:col-span-1">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/telesto-logo-color.svg" alt="Telesto Motors" className="h-20 w-auto" />
-            <p className="mt-4 max-w-xs text-sm text-white/60">
-              De onafhankelijke auto-adviseur die luistert naar jouw wensen.
-            </p>
-          </div>
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-widest text-white">Menu</p>
-            <ul className="mt-4 space-y-2 text-sm">
-              {DEFAULT_NAV.map((item) => (
-                <li key={item.label}>
-                  <a href={item.href} className="transition-colors hover:text-white">
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-widest text-white">Contact</p>
-            <ul className="mt-4 space-y-2 text-sm text-white/60">
-              <li>info@telestomotors.nl</li>
-              <li>+31 (0)6 20 92 92 14</li>
-              <li>Nederland</li>
-            </ul>
-          </div>
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-widest text-white">Openingstijden</p>
-            <ul className="mt-4 space-y-2 text-sm text-white/60">
-              <li>Ma t/m vr: 09.00 - 22.00 (op afspraak)</li>
-              <li>Za: 09.30 - 16.00</li>
-              <li>Zo: op afspraak</li>
-            </ul>
-          </div>
-        </div>
-        <div className="mx-auto mt-12 flex max-w-container flex-col items-center gap-2 border-t border-white/10 px-6 pt-6 text-xs text-white/40 sm:flex-row sm:justify-between">
-          <span>© {new Date().getFullYear()} Telesto Motors</span>
-          <div className="flex items-center gap-4">
-            <a href="/privacybeleid" className="transition-colors hover:text-white/70">
-              Privacybeleid
-            </a>
-            <span className="text-white/20">·</span>
-            <span>
-              Gemaakt door{' '}
-              <a
-                href="https://bluestardevelopment.nl/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="no-underline transition-colors hover:text-white/70"
-              >
-                BlueStar Development
-              </a>
-            </span>
-          </div>
-        </div>
-      </footer>
     </main>
   )
 }
