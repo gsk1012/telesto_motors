@@ -8,6 +8,26 @@ import { NextResponse } from 'next/server'
 
 const MAX = 2000
 
+// Alleen verzoeken vanaf onze eigen site (en lokale/preview-omgevingen) accepteren.
+const ALLOWED_ORIGIN = /^https?:\/\/((www\.)?telestomotors\.nl|localhost(:\d+)?|[a-z0-9-]+\.vercel\.app)$/
+
+// Eenvoudige limiet per IP. Geheugen is per serverinstantie, dus dit is een eerste
+// rem; een firewallregel (bv. Vercel WAF) is de stevigere laag.
+const WINDOW_MS = 10 * 60 * 1000
+const MAX_PER_WINDOW = 5
+const hits = new Map<string, number[]>()
+
+function rateLimited(ip: string): boolean {
+  const now = Date.now()
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS)
+  recent.push(now)
+  hits.set(ip, recent)
+  if (hits.size > 5000) {
+    for (const [key, times] of hits) if (now - times[times.length - 1] >= WINDOW_MS) hits.delete(key)
+  }
+  return recent.length > MAX_PER_WINDOW
+}
+
 const LABELS: Record<string, string> = {
   heeftVoorkeur: 'Heeft al een voorkeur',
   budget: 'Budget',
@@ -31,6 +51,14 @@ const clean = (v: unknown): string => {
 }
 
 export async function POST(req: Request) {
+  if (!ALLOWED_ORIGIN.test(req.headers.get('origin') ?? '')) {
+    return NextResponse.json({ error: 'Niet toegestaan' }, { status: 403 })
+  }
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0].trim() || 'onbekend'
+  if (rateLimited(ip)) {
+    return NextResponse.json({ error: 'Te veel aanvragen, probeer het later opnieuw' }, { status: 429 })
+  }
+
   let body: Record<string, unknown>
   try {
     body = await req.json()
@@ -141,7 +169,7 @@ export async function POST(req: Request) {
       from: process.env.CONTACT_FROM ?? 'Telesto Motors <noreply@telestomotors.nl>',
       to: [process.env.CONTACT_TO ?? 'info@telestomotors.nl'],
       reply_to: email,
-      subject: `Nieuwe aanvraag van ${naam}`,
+      subject: `Nieuwe aanvraag van ${naam.replace(/[\r\n]+/g, ' ')}`,
       html,
       text,
     }),

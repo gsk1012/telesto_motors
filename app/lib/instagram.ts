@@ -56,7 +56,7 @@ export async function getInstagramPosts(): Promise<InstagramPost[] | null> {
         if (!src) return null;
         return {
           src,
-          href: p.permalink ?? IG_URL,
+          href: p.permalink?.startsWith("https://www.instagram.com/") ? p.permalink : IG_URL,
           alt: captionToAlt(p.prunedCaption ?? p.caption),
         };
       })
