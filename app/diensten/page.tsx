@@ -15,7 +15,7 @@ import ServicePanels from './ServicePanels'
 export const metadata: Metadata = {
   title: 'Diensten',
   description:
-    'Van persoonlijk advies en technische keuring tot prijsonderhandeling, begeleiding en EV-advies. Bekijk alle diensten van Telesto Motors, jouw onafhankelijke autoadviseur.',
+    'Van persoonlijk advies en technische keuring tot prijsonderhandeling, begeleiding en EV-advies. Alle diensten van Telesto Motors, jouw onafhankelijke autoadviseur.',
   alternates: { canonical: 'https://telestomotors.nl/diensten' },
   openGraph: {
     type: 'website',
@@ -28,11 +28,18 @@ export const metadata: Metadata = {
     images: [
       {
         url: '/images/diensten/hero.jpg',
-        width: 2048,
-        height: 1152,
+        width: 2000,
+        height: 1125,
         alt: 'Telesto Motors — Diensten',
       },
     ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Diensten | Telesto Motors',
+    description:
+      'Van persoonlijk advies en technische keuring tot prijsonderhandeling, begeleiding en EV-advies.',
+    images: ['/images/diensten/hero.jpg'],
   },
 }
 

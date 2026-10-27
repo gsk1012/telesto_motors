@@ -41,7 +41,7 @@ const NAV = [
   { label: 'Home', href: '/#home' },
   { label: 'Over ons', href: '/#over' },
   { label: 'Diensten', href: '/diensten' },
-  { label: 'Pakketten', href: '/plans' },
+  { label: 'Pakketten', href: '/pakketten' },
   { label: 'Contact', href: '/#contact' },
 ]
 

@@ -15,7 +15,7 @@ import { type FaqItem } from '../components/FaqAccordion'
 export const metadata: Metadata = {
   title: 'Contact',
   description:
-    'Neem contact op met Telesto Motors: stel je vraag via het formulier, plan direct een vrijblijvende kennismaking, of bel, app of mail ons. Reactie binnen één werkdag.',
+    'Neem contact op met Telesto Motors: stel je vraag via het formulier, plan een vrijblijvende kennismaking, of bel, app of mail ons. Reactie binnen één werkdag.',
   keywords: [
     'contact Telesto Motors',
     'autoadviseur contact',
@@ -62,7 +62,7 @@ const FAQS: FaqItem[] = [
     question: 'Wat kost een kennismakingsgesprek?',
     answer:
       'Niets. De kennismaking is altijd vrijblijvend: we luisteren naar je situatie en vertellen eerlijk of en hoe we je kunnen helpen. Daarna beslis jij of we verdergaan.',
-    link: { href: '/plans', label: 'Bekijk de pakketten' },
+    link: { href: '/pakketten', label: 'Bekijk de pakketten' },
   },
   {
     question: 'Moet ik al weten welke auto ik zoek?',

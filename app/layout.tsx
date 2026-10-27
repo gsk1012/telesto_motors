@@ -44,8 +44,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/images/hero-bmw.jpg",
-        width: 1200,
-        height: 630,
+        width: 1376,
+        height: 768,
         alt: "Telesto Motors — Onafhankelijk auto-advies",
       },
     ],
@@ -103,18 +103,11 @@ const jsonLd = {
       dayOfWeek: ["Saturday"],
       opens: "09:30",
       closes: "16:00",
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Sunday"],
-      opens: "00:00",
-      closes: "00:00",
-      description: "Op afspraak",
-    },
+    }
   ],
   image: "https://telestomotors.nl/images/hero-bmw.jpg",
   logo: "https://telestomotors.nl/images/telesto-logo-color.svg",
-  sameAs: [],
+  sameAs: ["https://www.instagram.com/telesto.motors"],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "Auto-advies diensten",

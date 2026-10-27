@@ -270,7 +270,7 @@ export const SERVICES: Service[] = [
     ctaTitle: 'Zit je met een concrete autovraag?',
     metaTitle: 'Technische consultatie voor autokopers',
     metaDescription:
-      'Een losse, inhoudelijke vraag over een model, motor of uitvoering? Wij geven een onderbouwd antwoord op basis van ervaring en marktdata, ook zonder volledig traject.',
+      'Een inhoudelijke vraag over een model, motor of uitvoering? Wij geven een onderbouwd antwoord op basis van ervaring en marktdata.',
   },
   {
     slug: 'ev-hybride-advies',
@@ -318,7 +318,7 @@ export const SERVICES: Service[] = [
     ctaTitle: 'Klaar voor de overstap naar elektrisch?',
     metaTitle: 'EV & hybride advies',
     metaDescription:
-      'Onafhankelijk advies over elektrisch en hybride: accugezondheid, werkelijke actieradius, laadmogelijkheden en kosten per jaar. Rijd elektrisch zonder dure verrassingen.',
+      'Onafhankelijk advies over elektrisch en hybride: accugezondheid, werkelijke actieradius, laadmogelijkheden en kosten per jaar. Zonder dure verrassingen.',
   },
 ]
 

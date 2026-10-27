@@ -7,7 +7,7 @@ export const DEFAULT_NAV: NavLink[] = [
   { label: 'Home', href: '/#home' },
   { label: 'Diensten', href: '/diensten' },
   { label: 'Over ons', href: '/over-ons' },
-  { label: 'Pakketten', href: '/plans' },
+  { label: 'Pakketten', href: '/pakketten' },
   { label: 'Contact', href: '/contact' },
 ]
 

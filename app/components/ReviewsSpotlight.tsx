@@ -48,7 +48,7 @@ const INTERVAL_MS = 5500;
 
 function Stars() {
   return (
-    <div className="flex gap-1 text-bronze" aria-label="Beoordeling 5 van de 5 sterren">
+    <div role="img" className="flex gap-1 text-bronze" aria-label="Beoordeling 5 van de 5 sterren">
       {Array.from({ length: 5 }).map((_, i) => (
         <svg key={i} viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4" aria-hidden>
           <path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.1-1.01L12 2z" />

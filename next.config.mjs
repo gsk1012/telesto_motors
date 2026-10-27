@@ -14,6 +14,9 @@ const nextConfig = {
   },
   // Bespaart een paar honderd bytes per response en scheelt een render-stap.
   poweredByHeader: false,
+  async redirects() {
+    return [{ source: "/plans", destination: "/pakketten", permanent: true }];
+  },
 };
 
 export default nextConfig;

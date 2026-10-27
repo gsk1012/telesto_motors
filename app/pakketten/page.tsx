@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'nl_NL',
-    url: 'https://telestomotors.nl/plans',
+    url: 'https://telestomotors.nl/pakketten',
     siteName: 'Telesto Motors',
     title: 'Pakketten & Prijzen | Telesto Motors',
     description:
@@ -32,8 +32,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: '/images/plans/hero.jpg',
-        width: 2048,
-        height: 1152,
+        width: 2560,
+        height: 1429,
         alt: 'Telesto Motors, pakketten en prijzen',
       },
     ],
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     images: ['/images/plans/hero.jpg'],
   },
   alternates: {
-    canonical: 'https://telestomotors.nl/plans',
+    canonical: 'https://telestomotors.nl/pakketten',
   },
 }
 
@@ -150,7 +150,7 @@ export default function PlansPage() {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://telestomotors.nl' },
-      { '@type': 'ListItem', position: 2, name: 'Pakketten', item: 'https://telestomotors.nl/plans' },
+      { '@type': 'ListItem', position: 2, name: 'Pakketten', item: 'https://telestomotors.nl/pakketten' },
     ],
   }
 
