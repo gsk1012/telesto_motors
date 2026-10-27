@@ -73,7 +73,7 @@ const FAQS: FaqItem[] = [
   {
     question: "Kan ik ook 's avonds of in het weekend terecht?",
     answer:
-      'Ja. Doordeweeks zijn we op afspraak bereikbaar tot 22.00 uur, op zaterdag tot 16.00 uur en op zondag op afspraak. Zo plan je een gesprek gewoon om je werk heen.',
+      'Ja. Doordeweeks zijn we op afspraak bereikbaar tot 22.00 uur, op zaterdag tot 16.00 uur, ook op afspraak, en op zondag eveneens op afspraak. Zo plan je een gesprek gewoon om je werk heen.',
   },
   {
     question: 'Werken jullie door heel Nederland?',

@@ -65,7 +65,7 @@ export default function SplitHeading({ lines, as: Tag = 'h2', className = '', li
                 }}
               >
                 {word}
-                {wi < line.split(' ').length - 1 || li < lines.length - 1 ? ' ' : ''}
+                {wi < line.split(' ').length - 1 ? '\u00A0' : li < lines.length - 1 ? ' ' : ''}
               </span>
             )
           })}
