@@ -12,6 +12,7 @@ interface FormState {
   naam: string
   email: string
   telefoon: string
+  pakket: string
   dagVoorkeur: string[]
   tijdVoorkeur: string
   bericht: string
@@ -49,8 +50,8 @@ function Pill({
       onClick={onClick}
       className={`btn-label rounded-full border px-4 py-2 text-sm font-medium transition-all duration-150 ${
         selected
-          ? 'border-bronze bg-bronze text-white shadow-sm'
-          : 'border-ink/15 bg-white text-ink hover:border-bronze/50 hover:text-ink'
+          ? 'btn-gold'
+          : 'border-ink/15 bg-cream text-ink hover:border-bronze/50 hover:text-ink'
       }`}
     >
       {label}
@@ -61,6 +62,8 @@ function Pill({
 const toggleMulti = (arr: string[], val: string): string[] =>
   arr.includes(val) ? arr.filter((v) => v !== val) : [...arr, val]
 
+const PAKKETTEN = ['Telesto Elite', 'Telesto Deluxe', 'Telesto Excellent']
+
 const INITIAL: FormState = {
   heeftVoorkeur: '',
   budget: '',
@@ -69,6 +72,7 @@ const INITIAL: FormState = {
   naam: '',
   email: '',
   telefoon: '',
+  pakket: '',
   dagVoorkeur: [],
   tijdVoorkeur: '',
   bericht: '',
@@ -77,6 +81,9 @@ const INITIAL: FormState = {
 export default function ContactForm() {
   const [step, setStep] = useState<Step>(1)
   const [submitted, setSubmitted] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState('')
+  const [honeypot, setHoneypot] = useState('')
   const [form, setForm] = useState<FormState>(INITIAL)
 
   const fastTrack = form.heeftVoorkeur === 'ja'
@@ -105,20 +112,35 @@ export default function ContactForm() {
     else if (step > 1) setStep((s) => (s - 1) as Step)
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setSubmitted(true)
+    if (sending) return
+    setSending(true)
+    setError('')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, website: honeypot }),
+      })
+      if (!res.ok) throw new Error()
+      setSubmitted(true)
+    } catch {
+      setError('Versturen is niet gelukt. Probeer het opnieuw of bel ons op +31 (0)6 20 77 99 77.')
+    } finally {
+      setSending(false)
+    }
   }
 
   if (submitted) {
     return (
-      <div className="flex min-h-[440px] flex-col items-center justify-center rounded-2xl bg-white p-10 shadow-sm text-center">
+      <div className="flex min-h-[440px] flex-col items-center justify-center rounded-2xl bg-paper p-10 shadow-sm text-center">
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-bronze/10">
           <svg className="h-8 w-8 text-bronze" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="mt-6 font-serif text-2xl font-semibold text-ink">
+        <h3 className="mt-6 font-serif text-2xl font-light text-ink">
           Bedankt, {form.naam.split(' ')[0]}!
         </h3>
         <p className="mt-3 max-w-[22ch] text-base leading-relaxed text-ink/60">
@@ -136,7 +158,7 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="overflow-hidden rounded-2xl bg-white shadow-sm">
+    <div className="overflow-hidden rounded-2xl bg-paper shadow-sm">
       {/* Progress bar */}
       <div className="h-[3px] bg-ink/6">
         <div
@@ -154,7 +176,7 @@ export default function ContactForm() {
           {/* ── Step 1: weet je al wat je zoekt? ── */}
           {step === 1 && (
             <div>
-              <h3 className="mt-3 font-serif text-2xl font-semibold leading-snug text-ink">
+              <h3 className="mt-3 font-serif text-2xl font-light leading-snug text-ink">
                 Weet je al wat je zoekt?
               </h3>
               <div className="mt-6 grid gap-3 sm:grid-cols-2">
@@ -191,7 +213,7 @@ export default function ContactForm() {
           {/* ── Step 2: budget ── */}
           {step === 2 && (
             <div>
-              <h3 className="mt-3 font-serif text-2xl font-semibold leading-snug text-ink">
+              <h3 className="mt-3 font-serif text-2xl font-light leading-snug text-ink">
                 Wat is je budget?
               </h3>
               <div className="mt-6 flex flex-col gap-2">
@@ -202,8 +224,8 @@ export default function ContactForm() {
                     onClick={() => setForm((f) => ({ ...f, budget: b }))}
                     className={`btn-label rounded-full border px-5 py-3 text-left text-sm font-medium transition-all duration-150 ${
                       form.budget === b
-                        ? 'border-bronze bg-bronze text-white shadow-sm'
-                        : 'border-ink/15 bg-white text-ink hover:border-bronze/50'
+                        ? 'btn-gold'
+                        : 'border-ink/15 bg-cream text-ink hover:border-bronze/50'
                     }`}
                   >
                     {b}
@@ -216,7 +238,7 @@ export default function ContactForm() {
           {/* ── Step 3: type auto ── */}
           {step === 3 && (
             <div>
-              <h3 className="mt-3 font-serif text-2xl font-semibold leading-snug text-ink">
+              <h3 className="mt-3 font-serif text-2xl font-light leading-snug text-ink">
                 Welk type auto zoek je?
               </h3>
               <p className="mt-1 text-sm text-ink/45">Meerdere opties mogelijk</p>
@@ -236,7 +258,7 @@ export default function ContactForm() {
           {/* ── Step 4: brandstof ── */}
           {step === 4 && (
             <div>
-              <h3 className="mt-3 font-serif text-2xl font-semibold leading-snug text-ink">
+              <h3 className="mt-3 font-serif text-2xl font-light leading-snug text-ink">
                 Welke brandstof heeft je voorkeur?
               </h3>
               <div className="mt-6 flex flex-wrap gap-2.5">
@@ -255,7 +277,7 @@ export default function ContactForm() {
           {/* ── Step 5: contactgegevens ── */}
           {step === 5 && (
             <div>
-              <h3 className="mt-3 font-serif text-2xl font-semibold leading-snug text-ink">
+              <h3 className="mt-3 font-serif text-2xl font-light leading-snug text-ink">
                 Hoe kunnen we je bereiken?
               </h3>
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -304,6 +326,23 @@ export default function ContactForm() {
                   placeholder="+31 6 12 34 56 78"
                   className="rounded-lg border border-ink/15 bg-cream px-4 py-3 text-sm text-ink placeholder:text-ink/45 focus:border-bronze focus:outline-none focus:ring-1 focus:ring-bronze"
                 />
+              </div>
+              <div className="mt-4 flex flex-col gap-1.5">
+                <label htmlFor="pakket" className="text-sm font-medium text-ink">
+                  Pakket voorkeur{' '}
+                  <span className="font-normal text-ink/40">(optioneel)</span>
+                </label>
+                <select
+                  id="pakket"
+                  value={form.pakket}
+                  onChange={(e) => setForm((f) => ({ ...f, pakket: e.target.value }))}
+                  className="rounded-lg border border-ink/15 bg-cream px-4 py-3 text-sm text-ink focus:border-bronze focus:outline-none focus:ring-1 focus:ring-bronze"
+                >
+                  <option value="">Nog geen voorkeur</option>
+                  {PAKKETTEN.map((p) => (
+                    <option key={p} value={p}>{p}</option>
+                  ))}
+                </select>
               </div>
               <div className="mt-5">
                 <p className="text-sm font-medium text-ink">
@@ -354,6 +393,24 @@ export default function ContactForm() {
             </div>
           )}
 
+          {/* Honeypot: verborgen voor mensen, bots vullen het wel in */}
+          <input
+            type="text"
+            name="website"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="absolute left-[-9999px] h-0 w-0 opacity-0"
+          />
+
+          {error && (
+            <p role="alert" className="mt-6 text-sm text-red-700">
+              {error}
+            </p>
+          )}
+
           {/* Navigation */}
           <div className="mt-8 flex items-center justify-between">
             {step > 1 ? (
@@ -373,17 +430,17 @@ export default function ContactForm() {
                 type="button"
                 onClick={handleNext}
                 disabled={!isNextEnabled()}
-                className="btn-label rounded-full bg-bronze px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-bronze-dark disabled:cursor-not-allowed disabled:opacity-40"
+                className="btn-gold btn-label rounded-full px-7 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-40"
               >
                 Volgende
               </button>
             ) : (
               <button
                 type="submit"
-                disabled={!isNextEnabled()}
-                className="btn-label rounded-full bg-bronze px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-bronze-dark disabled:cursor-not-allowed disabled:opacity-40"
+                disabled={!isNextEnabled() || sending}
+                className="btn-gold btn-label rounded-full px-7 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-40"
               >
-                Verstuur aanvraag
+                {sending ? 'Versturen…' : 'Verstuur aanvraag'}
               </button>
             )}
           </div>

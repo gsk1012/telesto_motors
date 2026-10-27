@@ -1,26 +1,60 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import StickyNav from '../components/StickyNav'
+import { DEFAULT_NAV } from '../components/nav'
 import ScrollAnimator from '../components/ScrollAnimator'
+import ParallaxImage from '../components/ParallaxImage'
+import SplitHeading from '../components/SplitHeading'
+import BrandsMarquee from '../components/BrandsMarquee'
+import FaqSection from '../components/FaqSection'
+import SocialInstagram from '../components/SocialInstagram'
+import { FAQS } from '../lib/faqs'
 
 export const metadata: Metadata = {
-  title: 'Pakketen — Telesto Motors',
+  title: 'Pakketten & Prijzen',
   description:
-    'Ontdek onze drie diensten: Telesto Elite, Deluxe en Excellent. Van een gerichte start tot volledig ontzorgd van A tot Z.',
+    'Kies het pakket dat past bij jouw wensen: Telesto Elite, Deluxe of Excellent. Van onafhankelijk auto-advies tot volledig ontzorgd van A tot Z.',
+  keywords: [
+    'auto-advies pakket',
+    'autobegeleiding kosten',
+    'Telesto Elite',
+    'Telesto Deluxe',
+    'Telesto Excellent',
+    'auto kopen service',
+  ],
+  openGraph: {
+    type: 'website',
+    locale: 'nl_NL',
+    url: 'https://telestomotors.nl/plans',
+    siteName: 'Telesto Motors',
+    title: 'Pakketten & Prijzen | Telesto Motors',
+    description:
+      'Kies het pakket dat past bij jouw wensen: Telesto Elite, Deluxe of Excellent. Van onafhankelijk auto-advies tot volledig ontzorgd van A tot Z.',
+    images: [
+      {
+        url: '/images/plans/hero.jpg',
+        width: 2048,
+        height: 1152,
+        alt: 'Telesto Motors, pakketten en prijzen',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Pakketten & Prijzen | Telesto Motors',
+    description:
+      'Kies het pakket dat past bij jouw wensen: Telesto Elite, Deluxe of Excellent.',
+    images: ['/images/plans/hero.jpg'],
+  },
+  alternates: {
+    canonical: 'https://telestomotors.nl/plans',
+  },
 }
-
-const PLANS_NAV = [
-  { label: 'Home', href: '/#home' },
-  { label: 'Over ons', href: '/#over' },
-  { label: 'Diensten', href: '/#diensten' },
-  { label: 'Pakketen', href: '/plans' },
-  { label: 'Contact', href: '/#contact' },
-]
 
 const PLANS = [
   {
     tier: 'Elite',
     name: 'Telesto Elite',
+    scope: 'Gericht advies',
     description:
       'Een gerichte start in je auto-zoektocht. Wij geven je een helder beeld van de beste opties die aansluiten bij jouw wensen en budget.',
     featured: false,
@@ -36,6 +70,7 @@ const PLANS = [
   {
     tier: 'Deluxe',
     name: 'Telesto Deluxe',
+    scope: 'Advies & onderhandeling',
     description:
       'Wij staan voor je klaar om de beste deal te maken. Betaal nooit te veel voor jouw droomauto.',
     featured: true,
@@ -51,6 +86,7 @@ const PLANS = [
   {
     tier: 'Excellent',
     name: 'Telesto Excellent',
+    scope: 'Volledig ontzorgd',
     description:
       'Volledig ontzorgd van A tot Z. Vertel ons jouw wensen en wij regelen alles rondom jouw auto-aankoop.',
     featured: false,
@@ -67,7 +103,7 @@ const PLANS = [
 
 function CheckIcon() {
   return (
-    <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-bronze/15 text-bronze">
+    <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-bronze/20 text-bronze">
       <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
       </svg>
@@ -77,7 +113,7 @@ function CheckIcon() {
 
 function CrossIcon() {
   return (
-    <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-ink/6 text-ink/25">
+    <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-white/[0.06] text-white/30">
       <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
       </svg>
@@ -85,94 +121,165 @@ function CrossIcon() {
   )
 }
 
+
+function PhoneIcon({ className = 'h-4 w-4' }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+      />
+    </svg>
+  )
+}
+
 export default function PlansPage() {
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQS.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  }
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://telestomotors.nl' },
+      { '@type': 'ListItem', position: 2, name: 'Pakketten', item: 'https://telestomotors.nl/plans' },
+    ],
+  }
+
   return (
     <main className="bg-cream text-ink">
-      <StickyNav links={PLANS_NAV} logoHref="/" ctaHref="/#contact" />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <StickyNav links={DEFAULT_NAV} logoHref="/" ctaHref="/contact#formulier" />
 
-      {/* ===== Hero ===== */}
-      <section className="relative flex min-h-[78svh] w-full items-end overflow-hidden md:items-center">
-        <Image
-          src="/images/tesla-hero.webp"
-          alt="Telesto Motors — jouw droomauto"
-          fill
-          className="object-cover object-center"
+      {/* ===== Hero (full-height parallax photo, copy weighted to the left) ===== */}
+      <section className="relative flex min-h-[62svh] w-full items-end overflow-hidden md:min-h-[88svh] md:items-center">
+        <ParallaxImage
+          src="/images/plans/hero.jpg"
+          alt="Auto-adviseur in gesprek met een klant tussen premium auto's in het gouden avondlicht"
           priority
-          sizes="100vw"
+          className="object-cover object-[62%_center] md:object-center"
         />
         {/* scrims — identical to homepage */}
-        <div className="absolute inset-0 bg-black/20" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/25 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/15" />
+        <div aria-hidden="true" className="absolute inset-0 bg-black/20" />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/25 to-transparent" />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/15" />
 
         <div className="relative z-10 mx-auto w-full max-w-container px-6 pb-14 md:pb-0">
           <div className="max-w-2xl">
-            <h1
-              className="animate-fade-up font-serif text-5xl font-semibold leading-[1.05] text-white sm:text-6xl lg:text-7xl"
-              style={{ animationDelay: '0.05s' }}
-            >
-              Laten wij u op weg helpen
-            </h1>
+            <SplitHeading
+              as="h1"
+              lines={['Kies hoeveel we je', 'uit handen nemen']}
+              className="font-sans text-4xl/[1.3] font-light uppercase tracking-[0.04em] text-white sm:text-5xl/[1.3] lg:text-6xl/[1.3]"
+            />
             <p
-              className="animate-fade-up mt-6 max-w-xl text-base text-white/80 sm:text-lg"
-              style={{ animationDelay: '0.3s' }}
+              className="animate-fade-up mt-6 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg"
+              style={{ animationDelay: '0.2s' }}
             >
-              Kies het plan dat het beste aansluit bij jouw wensen. Van een gerichte start tot een volledig ontzorgde auto-aankoop.
+              Drie pakketten: van gericht advies tot een aankoop die we volledig voor je regelen.
+              Altijd onafhankelijk, altijd één vast aanspreekpunt.
             </p>
-            <a
-              href="/#contact"
-              className="btn-label animate-fade-up mt-8 inline-flex items-center justify-center rounded-full bg-bronze px-7 py-3.5 text-base font-semibold text-white shadow-lg transition-colors hover:bg-bronze-dark"
-              style={{ animationDelay: '0.5s' }}
+            <div
+              className="animate-fade-up mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4"
+              style={{ animationDelay: '0.32s' }}
             >
-              Plan een consult in
-            </a>
+              <a
+                href="/contact#formulier"
+                className="btn-gold btn-label inline-flex items-center justify-center rounded-full px-7 py-3.5 text-base font-semibold shadow-lg transition-all duration-200 active:scale-[0.98]"
+              >
+                Plan een consult in
+              </a>
+              <a
+                href="#pakketten"
+                className="btn-label group hidden items-center justify-center gap-2 rounded-full px-6 py-3.5 text-base font-semibold text-white ring-1 ring-white/35 transition-all duration-200 hover:bg-white/10 hover:ring-white/70 active:scale-[0.98] sm:inline-flex"
+              >
+                Bekijk de pakketten
+                <svg
+                  className="h-4 w-4 text-bronze transition-transform duration-200 group-hover:translate-y-0.5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ===== Plans ===== */}
-      <section className="py-24 plans-section-bg">
-        <div className="mx-auto max-w-container px-6">
-          <div className="grid gap-6 lg:grid-cols-3 lg:items-start">
+      {/* ===== Merken-marquee (dark strip, flows straight into the packages stage) ===== */}
+      <BrandsMarquee />
+
+      {/* ===== Packages ("dark showroom": tiers on charcoal, spotlight on the featured plan) ===== */}
+      <section
+        id="pakketten"
+        className="relative -mt-px scroll-mt-24 overflow-hidden bg-[#191D23] pt-16 pb-24 sm:pb-28"
+      >
+        {/* Deepen the stage toward the bottom so it settles into the light section that follows */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#191D23] via-[#191D23] to-[#14181E]"
+        />
+        {/* Warm bronze spotlight behind the recommended plan */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 top-[42%] h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-2xl"
+          style={{ background: 'radial-gradient(circle, rgba(166,132,99,0.20), transparent 68%)' }}
+        />
+
+        <div className="relative z-10 mx-auto max-w-container px-6">
+          <div className="grid gap-6 lg:grid-cols-3 lg:items-stretch">
             {PLANS.map((plan, i) => (
               <article
                 key={plan.tier}
-                className={`animate-on-scroll relative flex flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 ${
+                className={`animate-on-scroll relative flex flex-col overflow-hidden rounded-2xl transition-transform duration-300 hover:-translate-y-1.5 ${
                   plan.featured
-                    ? 'border-2 border-bronze bg-white shadow-xl hover:shadow-2xl'
-                    : 'border border-ink/10 bg-white shadow-sm hover:shadow-md'
+                    ? 'bg-[#22262E] ring-1 ring-bronze/60 lg:-my-4 z-10'
+                    : 'bg-[#20242B] ring-1 ring-white/10'
                 }`}
                 data-delay={`${0.08 + i * 0.12}s`}
+                style={
+                  plan.featured
+                    ? { boxShadow: 'inset 0 0 26px 0 rgba(166,132,99,0.30), 0 24px 60px -12px rgba(0,0,0,0.55)' }
+                    : undefined
+                }
               >
-                {/* Bronze top accent for featured */}
-                {plan.featured && (
-                  <div className="absolute top-0 inset-x-0 h-0.5 bg-bronze" />
-                )}
-
                 <div className="flex flex-1 flex-col p-8">
-                  {plan.featured && (
-                    <span className="mb-5 self-start rounded-full bg-bronze/10 px-3 py-1 text-xs font-semibold tracking-wide text-bronze">
+                  {plan.featured ? (
+                    <span className="mb-5 self-start rounded-full bg-bronze/15 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-bronze">
                       Meest gekozen
+                    </span>
+                  ) : (
+                    <span className="mb-5 self-start text-xs font-semibold uppercase tracking-[0.18em] text-white/40">
+                      {plan.scope}
                     </span>
                   )}
 
-                  <h2 className="font-serif text-2xl font-semibold leading-snug">
-                    {plan.name}
-                  </h2>
+                  <h3 className="font-serif text-2xl font-light leading-snug text-white">{plan.name}</h3>
 
-                  <p className="mt-3 text-sm leading-relaxed text-ink/60">
-                    {plan.description}
-                  </p>
+                  <p className="mt-3 text-sm leading-relaxed text-white/60">{plan.description}</p>
 
                   <ul className="mt-8 flex flex-col gap-3.5">
                     {plan.features.map((feature) => (
                       <li key={feature.label} className="flex items-center gap-3">
                         {feature.included ? <CheckIcon /> : <CrossIcon />}
-                        <span
-                          className={`text-sm ${
-                            feature.included ? 'text-ink/85' : 'text-ink/30'
-                          }`}
-                        >
+                        <span className={`text-sm ${feature.included ? 'text-white/85' : 'text-white/40'}`}>
                           {feature.label}
                         </span>
                       </li>
@@ -181,11 +288,11 @@ export default function PlansPage() {
 
                   <div className="mt-auto pt-8">
                     <a
-                      href="/#contact"
-                      className={`btn-label flex w-full items-center justify-center rounded-full py-3 text-sm font-semibold transition-colors ${
+                      href="/contact#formulier"
+                      className={`btn-label flex w-full items-center justify-center rounded-full py-3.5 text-sm font-semibold transition-all duration-200 active:scale-[0.98] ${
                         plan.featured
-                          ? 'bg-bronze text-white hover:bg-bronze-dark'
-                          : 'border border-ink/15 text-ink/70 hover:border-bronze hover:text-bronze'
+                          ? 'btn-gold'
+                          : 'text-white/80 ring-1 ring-white/25 hover:text-white hover:ring-bronze/70'
                       }`}
                     >
                       Plan een consult in
@@ -198,97 +305,58 @@ export default function PlansPage() {
         </div>
       </section>
 
-      {/* ===== CTA ===== */}
-      <section className="bg-ink py-24">
-        <div className="mx-auto max-w-container px-6 text-center">
-          <h2
-            className="animate-on-scroll font-serif text-4xl font-semibold text-white sm:text-5xl"
+      {/* ===== FAQ ===== */}
+      <FaqSection blurb="het pakket dat past." light />
+
+      {/* ===== Social / Instagram ===== */}
+      <SocialInstagram />
+
+      {/* ===== Closing CTA (premium dark panel, same showroom language as the featured plan) ===== */}
+      <section className="relative -mt-px overflow-hidden bg-footer px-6 py-16 sm:py-24">
+        <div className="relative z-10 mx-auto max-w-5xl">
+          <div
+            className="animate-on-scroll relative overflow-hidden rounded-3xl bg-[#22262E] px-8 py-12 text-white ring-1 ring-bronze/50 sm:px-14 sm:py-16"
             data-delay="0s"
+            style={{ boxShadow: 'inset 0 0 44px 0 rgba(166,132,99,0.22), 0 30px 70px -24px rgba(0,0,0,0.6)' }}
           >
-            Klaar om te starten?
-          </h2>
-          <p
-            className="animate-on-scroll mx-auto mt-5 max-w-md text-lg text-white/55"
-            data-delay="0.15s"
-          >
-            Plan nu je persoonlijk consult in. Wij nemen contact op en helpen je verder.
-          </p>
-          <a
-            href="/#contact"
-            className="btn-label animate-on-scroll mt-8 inline-flex items-center justify-center rounded-full bg-bronze px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-bronze-dark"
-            data-delay="0.28s"
-          >
-            Persoonlijk consult inplannen
-          </a>
+            {/* Warm bronze spotlight, echoing the packages stage */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-16 -top-24 h-80 w-80 rounded-full blur-2xl"
+              style={{ background: 'radial-gradient(circle, rgba(166,132,99,0.32), transparent 70%)' }}
+            />
+            <div className="relative flex flex-col gap-9 sm:flex-row sm:items-center sm:justify-between sm:gap-12">
+              <div className="max-w-md">
+                <SplitHeading
+                  lines={['Nog niet zeker', 'welk pakket past?']}
+                  className="font-serif text-3xl/[1.3] font-light text-white sm:text-4xl/[1.3]"
+                />
+                <p className="mt-4 text-base leading-relaxed text-white/70 sm:text-lg">
+                  Plan een vrijblijvend consult. We bespreken je wensen en kiezen samen het pakket
+                  dat bij jou past.
+                </p>
+              </div>
+              <div className="flex w-full flex-none flex-col items-stretch gap-4 sm:w-auto sm:items-center">
+                <a
+                  href="/contact#formulier"
+                  className="btn-gold btn-label inline-flex items-center justify-center rounded-full px-8 py-4 text-base font-semibold"
+                >
+                  Plan een consult in
+                </a>
+                <a
+                  href="tel:+31620779977"
+                  className="inline-flex items-center justify-center gap-2 text-sm font-medium text-white/70 transition-colors hover:text-white"
+                >
+                  <PhoneIcon className="h-4 w-4" />
+                  +31 (0)6 20 77 99 77
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       <ScrollAnimator />
-
-      {/* ===== Footer ===== */}
-      <footer className="bg-ink py-16 text-white/80">
-        <div className="mx-auto grid max-w-container gap-10 px-6 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="sm:col-span-2 lg:col-span-1">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/telesto-logo-color.svg"
-              alt="Telesto Motors"
-              className="h-20 w-auto"
-            />
-            <p className="mt-4 max-w-xs text-sm text-white/60">
-              De onafhankelijke auto-adviseur die luistert naar jouw wensen.
-            </p>
-          </div>
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-widest text-white">
-              Menu
-            </p>
-            <ul className="mt-4 space-y-2 text-sm">
-              {PLANS_NAV.map((item) => (
-                <li key={item.label}>
-                  <a href={item.href} className="transition-colors hover:text-white">
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-widest text-white">
-              Contact
-            </p>
-            <ul className="mt-4 space-y-2 text-sm text-white/60">
-              <li>info@telestomotors.nl</li>
-              <li>+31 (0)6 12 34 56 78</li>
-              <li>Nederland</li>
-            </ul>
-          </div>
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-widest text-white">
-              Openingstijden
-            </p>
-            <ul className="mt-4 space-y-2 text-sm text-white/60">
-              <li>Ma t/m vr: 09:00 - 18:00</li>
-              <li>Za: op afspraak</li>
-              <li>Zo: gesloten</li>
-            </ul>
-          </div>
-        </div>
-        <div className="mx-auto mt-12 max-w-container flex flex-col items-center gap-2 border-t border-white/10 px-6 pt-6 text-xs text-white/40 sm:flex-row sm:justify-between">
-          <span>© {new Date().getFullYear()} Telesto Motors</span>
-          <span>
-            Gemaakt door{' '}
-            <a
-              href="https://bluestardevelopment.nl/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="no-underline transition-colors hover:text-white/70"
-            >
-              BlueStar Development
-            </a>
-          </span>
-        </div>
-      </footer>
     </main>
   )
 }

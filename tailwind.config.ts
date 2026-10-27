@@ -6,16 +6,21 @@ const config: Config = {
     extend: {
       colors: {
         cream: "#F7F0EC",
+        paper: "#FDFAF6",
         bronze: "#A68463",
         "bronze-dark": "#8C6E50",
         ink: "#111111",
+        charcoal: "#191D23",
+        footer: "#14181E",
       },
       fontFamily: {
-        sans: ["var(--font-montserrat)", "system-ui", "sans-serif"],
-        serif: ["var(--font-montserrat)", "system-ui", "sans-serif"],
+        sans: ["var(--font-open-sans)", "system-ui", "sans-serif"],
+        serif: ["var(--font-open-sans)", "system-ui", "sans-serif"],
+        heading: ["var(--font-open-sans)", "system-ui", "sans-serif"],
+        display: ["var(--font-open-sans)", "system-ui", "sans-serif"],
       },
       maxWidth: {
-        container: "1200px",
+        container: "1500px",
       },
     },
   },
