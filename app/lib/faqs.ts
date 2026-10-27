@@ -14,7 +14,7 @@ export const FAQS: FaqItem[] = [
   {
     question: 'Ik heb al een auto op het oog. Heeft een pakket dan nog zin?',
     answer:
-      'Vaak is een losse dienst dan logischer, bijvoorbeeld alleen de technische keuring of de prijsonderhandeling. Leg je situatie voor in een consult, dan hoor je direct wat het beste past.',
+      'Zeker. We beoordelen eerst of de auto echt bij je past, en afhankelijk van het pakket onderhandelen we de prijs (Deluxe) of keuren we hem vooraf grondig (Excellent). Leg je situatie voor in een consult, dan hoor je direct welk pakket het beste past.',
   },
   {
     question: 'Hoe lang duurt een traject?',

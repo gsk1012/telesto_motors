@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import type { Service } from './services'
 
 /*
@@ -12,6 +14,7 @@ import type { Service } from './services'
  */
 export default function ServicePanels({ services }: { services: Service[] }) {
   const [active, setActive] = useState(0)
+  const router = useRouter()
 
   return (
     <div className="flex flex-col gap-3 lg:h-[34rem] lg:flex-row">
@@ -21,7 +24,9 @@ export default function ServicePanels({ services }: { services: Service[] }) {
           <div
             key={s.slug}
             onMouseEnter={() => setActive(i)}
-            onClick={() => setActive(i)}
+            // Een tik op een dichte kaart klapt hem eerst open (touch); een klik op de open
+            // kaart gaat naar de dienst. Met een muis opent hover hem al, dus klikken navigeert.
+            onClick={() => (isActive ? router.push(`/diensten/${s.slug}`) : setActive(i))}
             className={`group relative cursor-pointer overflow-hidden rounded-2xl ring-1 ring-white/10 transition-all duration-500 ease-out motion-reduce:transition-none lg:h-full ${
               isActive ? 'h-72 lg:flex-[3.5]' : 'h-20 lg:flex-[1]'
             }`}
@@ -64,6 +69,16 @@ export default function ServicePanels({ services }: { services: Service[] }) {
               </h3>
               <span className="mt-3 block h-0.5 w-12 bg-bronze" />
               <p className="mt-3 max-w-md text-sm leading-relaxed text-white/85">{s.shortBody}</p>
+              <Link
+                href={`/diensten/${s.slug}`}
+                tabIndex={isActive ? undefined : -1}
+                className="btn-label group/link mt-4 inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-bronze transition-colors hover:text-white"
+              >
+                Lees meer
+                <svg className="h-4 w-4 transition-transform group-hover/link:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
             </div>
           </div>
         )
