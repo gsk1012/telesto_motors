@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react'
 import CalendlyWidget from './CalendlyWidget'
 import ContactForm from './ContactForm'
+import { readConsent } from './consent'
 
 type Tab = 'afspraak' | 'bericht'
 
@@ -18,7 +19,7 @@ const TABS: { id: Tab; label: string }[] = [
  */
 let warmed = false
 function warmCalendly() {
-  if (warmed || typeof document === 'undefined') return
+  if (warmed || typeof document === 'undefined' || !readConsent()?.external) return
   warmed = true
   for (const host of ['https://calendly.com', 'https://assets.calendly.com']) {
     const link = document.createElement('link')

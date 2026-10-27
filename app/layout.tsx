@@ -3,6 +3,7 @@ import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
+import CookieConsent from "./components/CookieConsent";
 
 // Alleen de gewichten die de site daadwerkelijk gebruikt (light/regular/medium/
 // semibold). 700 en 800 kwamen nergens voor en kostten twee extra fontbestanden.
@@ -171,6 +172,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <WhatsAppButton />
+        <CookieConsent />
       </body>
     </html>
   );

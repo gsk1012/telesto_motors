@@ -83,8 +83,8 @@ const FAQS: FaqItem[] = [
 ]
 
 const HOURS = [
-  { day: 'Ma t/m vr', time: '09.00 - 22.00' },
-  { day: 'Zaterdag', time: '09.30 - 16.00' },
+  { day: 'Ma t/m vr', time: '09.00 - 22.00 (op afspraak)' },
+  { day: 'Zaterdag', time: '09.30 - 16.00 (op afspraak)' },
   { day: 'Zondag', time: 'Op afspraak' },
 ]
 

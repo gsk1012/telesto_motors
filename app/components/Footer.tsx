@@ -45,7 +45,7 @@ export default function Footer() {
           </p>
           <ul className="mt-4 space-y-2 text-sm text-white/60">
             <li>Ma t/m vr: 09.00 - 22.00 (op afspraak)</li>
-            <li>Za: 09.30 - 16.00</li>
+            <li>Za: 09.30 - 16.00 (op afspraak)</li>
             <li>Zo: op afspraak</li>
           </ul>
         </div>
@@ -56,6 +56,10 @@ export default function Footer() {
         <div className="flex items-center gap-4">
           <a href="/privacybeleid" className="transition-colors hover:text-white/70">
             Privacybeleid
+          </a>
+          <span className="text-white/20">·</span>
+          <a href="/cookiebeleid" className="transition-colors hover:text-white/70">
+            Cookiebeleid
           </a>
           <span className="text-white/20">·</span>
           <span>
