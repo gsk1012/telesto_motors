@@ -64,52 +64,32 @@ export default function PrivacybeleidPage() {
       <section className="py-12">
         <div className="mx-auto max-w-container px-6">
           <div className="max-w-3xl space-y-6">
-
             <p className="text-sm leading-relaxed text-ink/65">
-              Telesto Motors verwerkt persoonsgegevens zorgvuldig en in overeenstemming met de
-              Algemene verordening gegevensbescherming (AVG). In dit beleid leest u welke gegevens
-              wij verwerken, waarvoor, met wie wij ze delen en welke rechten u heeft.
+              Telesto Motors verwerkt persoonsgegevens conform de AVG. Hieronder leest u welke
+              gegevens wij verwerken en welke rechten u heeft.
             </p>
 
-            <Block title="Wie is verantwoordelijk?">
+            <Block title="Wie zijn wij?">
               <p>
-                Telesto Motors is verantwoordelijk voor de verwerking van uw persoonsgegevens. Voor
-                vragen over dit beleid of uw gegevens kunt u contact opnemen via{' '}
-                <a href="mailto:info@telestomotors.nl" className="text-bronze hover:underline">info@telestomotors.nl</a> of telefonisch via{' '}
+                Telesto Motors is verantwoordelijk voor de verwerking van uw gegevens. Contact:{' '}
+                <a href="mailto:info@telestomotors.nl" className="text-bronze hover:underline">info@telestomotors.nl</a> of{' '}
                 <a href="tel:+31620779977" className="text-bronze hover:underline">+31 (0)6 20 77 99 77</a>.
               </p>
             </Block>
 
-            <Block title="Welke gegevens verwerken wij?">
-              <p className="font-medium text-ink">Gegevens die u zelf verstrekt</p>
-              <List items={[
-                'Contactformulier: naam, e-mailadres, telefoonnummer (optioneel) en uw antwoorden over uw zoekvraag, zoals budget, type auto, brandstof, gewenst pakket, voorkeursdagen en uw bericht.',
-                'Afspraak via de agenda: naam, e-mailadres en het gekozen tijdstip.',
-                'Contact via e-mail, telefoon of chat: de gegevens die u in uw bericht of gesprek deelt, en uw telefoonnummer.',
-              ]} />
-              <p className="font-medium text-ink pt-2">Gegevens die automatisch worden verzameld</p>
-              <List items={[
-                'Technische gegevens zoals uw IP-adres, browsertype en de bezochte pagina\u2019s. Deze komen in de logbestanden van onze hostingpartij terecht en dienen voor beveiliging en storingen.',
-                'Alleen met uw toestemming: geanonimiseerde bezoekstatistieken via een analysedienst (zie ons cookiebeleid).',
-              ]} />
-              <p className="pt-1">
-                Wij vragen niet om gevoelige persoonsgegevens en verwerken die niet. Wij verwerken
-                geen gegevens van kinderen onder de 16 jaar.
+            <Block title="Welke gegevens en waarvoor?">
+              <p>
+                Wij verwerken de gegevens die u zelf invult in het contactformulier of de agenda (naam,
+                e-mailadres, telefoonnummer, uw wensen en bericht), en technische gegevens zoals uw
+                IP-adres. Wij gebruiken ze om uw vraag te beantwoorden, een afspraak te plannen, onze
+                dienst uit te voeren en de website te beveiligen. Grondslagen: uitvoering van een
+                overeenkomst of uw verzoek, ons gerechtvaardigd belang en een wettelijke verplichting.
+                Voor analytische cookies en externe diensten vragen wij uw toestemming, zie ons{' '}
+                <a href="/cookiebeleid" className="text-bronze hover:underline">cookiebeleid</a>.
               </p>
-            </Block>
-
-            <Block title="Waarvoor gebruiken wij uw gegevens?">
-              <List items={[
-                'Uw vraag of aanvraag beantwoorden en een kennismaking of afspraak plannen. Grondslag: het nemen van maatregelen op uw verzoek voordat een overeenkomst wordt gesloten.',
-                'Onze dienstverlening uitvoeren en met u communiceren over uw opdracht. Grondslag: uitvoering van de overeenkomst.',
-                'De website beveiligen en storingen oplossen. Grondslag: gerechtvaardigd belang.',
-                'Het gebruik van de website meten om die te verbeteren. Grondslag: uw toestemming.',
-                'Voldoen aan wettelijke verplichtingen, zoals de administratie. Grondslag: wettelijke verplichting.',
-              ]} />
-              <p className="pt-1">
-                Wij gebruiken uw gegevens niet voor nieuwsbrieven of reclame, tenzij u daar apart
-                toestemming voor geeft. Er is geen sprake van geautomatiseerde besluitvorming of
-                profilering.
+              <p>
+                Wij gebruiken uw gegevens niet voor reclame en nemen geen besluiten die uitsluitend op
+                geautomatiseerde verwerking berusten.
               </p>
             </Block>
 
@@ -117,79 +97,27 @@ export default function PrivacybeleidPage() {
               <p>
                 Wij verkopen uw gegevens nooit. Wij delen gegevens met partijen die ons helpen bij onze
                 dienstverlening, zoals onze e-mailprovider, hostingpartij, afsprakentool en
-                betrouwbare aanbieders voor het verzenden van formulieren. Met deze partijen maken wij
-                afspraken over de bescherming van uw gegevens. Sommigen verwerken gegevens ook buiten de
-                Europese Economische Ruimte; dan zorgen zij voor passende waarborgen, zoals
-                standaardcontractbepalingen. Verder verstrekken wij gegevens alleen aan derden als de
-                wet dat verplicht.
+                betrouwbare aanbieders voor het verzenden van formulieren, met afspraken over de
+                bescherming van uw gegevens. Verwerking buiten de EER gebeurt met passende waarborgen.
+                Verder verstrekken wij gegevens alleen als de wet dat verplicht.
               </p>
             </Block>
 
-            <Block title="Cookies">
+            <Block title="Bewaartermijn">
               <p>
-                Wij gebruiken alleen noodzakelijke cookies, tenzij u toestemming geeft voor analytische
-                cookies of externe diensten (de afspraakagenda). Welke cookies dat zijn en hoe u uw
-                keuze wijzigt, leest u in ons{' '}
-                <a href="/cookiebeleid" className="text-bronze hover:underline">cookiebeleid</a>.
-              </p>
-            </Block>
-
-            <Block title="Hoe lang bewaren wij uw gegevens?">
-              <p>
-                Wij bewaren gegevens niet langer dan nodig is voor het doel waarvoor ze zijn verzameld.
-                Een aanvraag of bericht bewaren wij in de regel tot maximaal twaalf maanden na het
-                laatste contact. Gegevens die wij op grond van de wet moeten bewaren, zoals onze
-                administratie, bewaren wij zo lang als de wet voorschrijft. Daarna verwijderen wij ze.
-              </p>
-            </Block>
-
-            <Block title="Beveiliging">
-              <p>
-                Wij nemen passende technische en organisatorische maatregelen om uw gegevens te
-                beschermen tegen verlies en misbruik. De website is beveiligd met een versleutelde
-                verbinding (HTTPS) en alleen medewerkers die dat nodig hebben, hebben toegang tot uw
-                gegevens. Vermoedt u misbruik? Neem dan direct contact met ons op.
-              </p>
-            </Block>
-
-            <Block title="Externe links">
-              <p>
-                Onze website bevat links naar andere websites, zoals sociale media en berichtendiensten.
-                Telesto Motors is niet verantwoordelijk voor hun privacypraktijken. Lees hun
-                privacybeleid.
+                Wij bewaren gegevens niet langer dan nodig, in de regel maximaal twaalf maanden na het
+                laatste contact, tenzij de wet een langere bewaartermijn voorschrijft.
               </p>
             </Block>
 
             <Block title="Uw rechten">
-              <List items={[
-                'Inzage in de gegevens die wij van u verwerken.',
-                'Correctie van onjuiste gegevens.',
-                'Verwijdering van uw gegevens.',
-                'Beperking van de verwerking en bezwaar tegen de verwerking.',
-                'Overdracht van uw gegevens (dataportabiliteit).',
-                'Intrekking van uw toestemming, op elk moment. Dat heeft geen gevolgen voor de verwerking daarvoor.',
-              ]} />
-              <p className="pt-1">
-                U kunt een verzoek indienen via <a href="mailto:info@telestomotors.nl" className="text-bronze hover:underline">info@telestomotors.nl</a>. Wij reageren binnen één maand. Om misbruik te
-                voorkomen kunnen wij u vragen zich te legitimeren.
-              </p>
-            </Block>
-
-            <Block title="Klachten">
               <p>
-                Bent u niet tevreden over hoe wij met uw gegevens omgaan? Neem dan contact met ons op
-                via <a href="mailto:info@telestomotors.nl" className="text-bronze hover:underline">info@telestomotors.nl</a>. U heeft daarnaast het recht een klacht in te dienen bij de{' '}
+                U heeft recht op inzage, correctie, verwijdering, beperking, bezwaar en overdracht van
+                uw gegevens, en u kunt gegeven toestemming altijd intrekken. Dien een verzoek in via
+                <a href="mailto:info@telestomotors.nl" className="text-bronze hover:underline">info@telestomotors.nl</a>; wij reageren binnen één maand. Een klacht kunt u indienen bij de{' '}
                 <a href="https://www.autoriteitpersoonsgegevens.nl" target="_blank" rel="noopener noreferrer" className="text-bronze hover:underline">
                   Autoriteit Persoonsgegevens
                 </a>.
-              </p>
-            </Block>
-
-            <Block title="Wijzigingen">
-              <p>
-                Wij kunnen dit beleid aanpassen, bijvoorbeeld als onze dienstverlening of de wet
-                verandert. De meest recente versie staat altijd op deze pagina, met de datum van de
-                laatste wijziging bovenaan.
               </p>
             </Block>
 
