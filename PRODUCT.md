@@ -1,9 +1,5 @@
 # Product
 
-## Register
-
-brand
-
 ## Users
 Dutch car buyers (particulieren and bedrijven) searching for a vehicle. They have a wish list and a budget but lack the time, knowledge, or market access to buy confidently on their own. They want a trusted expert who acts on their behalf from search to delivery.
 
