@@ -89,7 +89,7 @@ export default function Home() {
               <Link
                 key={d.slug}
                 href={`/diensten/${d.slug}`}
-                className="animate-on-scroll group relative block h-[21rem] overflow-hidden rounded-2xl ring-1 ring-white/10 sm:h-[24rem]"
+                className="animate-on-scroll group relative block h-[26rem] overflow-hidden rounded-2xl ring-1 ring-white/10 sm:h-[30rem]"
                 data-delay={`${0.1 + i * 0.12}s`}
               >
                 <Image
@@ -101,8 +101,8 @@ export default function Home() {
                 />
                 <div className="absolute inset-0 bg-black/40" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
-                <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6">
-                  <h3 className="font-serif text-xl font-medium leading-tight text-white sm:text-2xl">
+                <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-7">
+                  <h3 className="font-serif text-2xl font-medium leading-tight text-white sm:text-3xl">
                     {d.title}
                   </h3>
                   <span className="mt-3 block h-0.5 w-12 bg-bronze" />
