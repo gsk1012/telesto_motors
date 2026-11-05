@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Telesto Motors — Binnenkort online</title>
+  <meta name="description" content="Telesto Motors: onafhankelijke aankoopbegeleiding voor jouw volgende auto. Onze nieuwe website komt binnenkort online.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#191D23; --gold:#c6a87a; --gold-light:#e2c99f; --text:#fff; }
+    * { box-sizing:border-box; margin:0; }
+    html, body { height:100%; }
+    body {
+      font-family:"Open Sans", system-ui, sans-serif;
+      background:var(--bg); color:var(--text);
+      -webkit-font-smoothing:antialiased;
+    }
+    .page {
+      position:relative; min-height:100svh; overflow:hidden;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      padding:48px 24px; text-align:center; isolation:isolate;
+    }
+    .bg { position:absolute; inset:0; z-index:-2; background:url("hero.jpg") center/cover no-repeat; transform:scale(1.04); }
+    .shade {
+      position:absolute; inset:0; z-index:-1;
+      background:
+        radial-gradient(ellipse at center, rgba(25,29,35,.35) 0%, rgba(25,29,35,.8) 80%),
+        linear-gradient(to bottom, rgba(25,29,35,.35), rgba(25,29,35,.85));
+    }
+    .logo { width:clamp(120px, 18vw, 170px); height:auto; margin-bottom:44px; }
+    .eyebrow {
+      font-size:.8rem; font-weight:600; letter-spacing:.32em; text-transform:uppercase;
+      color:var(--gold);
+    }
+    h1 {
+      margin-top:18px; font-weight:300; text-transform:uppercase;
+      font-size:clamp(2.2rem, 6.5vw, 4.6rem); line-height:1.3; letter-spacing:.02em;
+    }
+    .line { display:block; width:56px; height:2px; background:var(--gold); margin:28px auto; }
+    p.lead { max-width:34rem; font-size:1.05rem; line-height:1.7; color:rgba(255,255,255,.72); }
+    .actions { margin-top:40px; display:flex; flex-wrap:wrap; gap:14px; justify-content:center; }
+    .btn {
+      display:inline-flex; align-items:center; gap:10px; padding:14px 28px; border-radius:999px;
+      font-size:.9rem; font-weight:600; text-decoration:none; color:var(--gold-light);
+      background:#14181e; border:1px solid rgba(200,170,124,.85);
+      box-shadow:inset 0 0 14px rgba(166,132,99,.7);
+      transition:box-shadow .35s ease, border-color .35s ease, transform .3s ease;
+    }
+    .btn:hover { border-color:var(--gold-light); box-shadow:inset 0 0 22px rgba(166,132,99,.95), 0 4px 12px rgba(0,0,0,.28); transform:translateY(-1px); }
+    .btn:focus-visible { outline:2px solid var(--gold-light); outline-offset:3px; }
+    footer { position:absolute; bottom:24px; left:0; right:0; font-size:.78rem; color:rgba(255,255,255,.4); }
+    .in { opacity:0; animation:up 1.2s cubic-bezier(.22,1,.36,1) forwards; }
+    @keyframes up { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:none; } }
+    @media (prefers-reduced-motion:reduce) { .in { animation:none; opacity:1; } }
+    @media (max-width:520px) { footer { position:static; margin-top:56px; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="bg"></div>
+    <div class="shade"></div>
+
+    <img class="logo in" src="logo.svg" alt="Telesto Motors" style="animation-delay:.05s">
+    <p class="eyebrow in" style="animation-delay:.2s">Binnenkort online</p>
+    <h1 class="in" style="animation-delay:.35s">Onze nieuwe website<br>komt eraan</h1>
+    <span class="line in" style="animation-delay:.5s"></span>
+    <p class="lead in" style="animation-delay:.6s">
+      Telesto Motors begeleidt je onafhankelijk, grondig en met jouw belang voorop
+      van zoektocht tot sleutels. Binnenkort vind je hier alles over onze diensten en pakketten.
+    </p>
+    <div class="actions in" style="animation-delay:.8s">
+      <a class="btn" href="mailto:info@telestomotors.nl">info@telestomotors.nl</a>
+      <a class="btn" href="tel:+31620779977">+31 6 20 77 99 77</a>
+    </div>
+
+    <footer>© 2026 Telesto Motors</footer>
+  </main>
+</body>
+</html>

@@ -292,7 +292,7 @@ export default async function ServicePage({
           </div>
 
           <ol
-            className="animate-on-scroll relative -mx-6 mt-14 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 [scrollbar-width:none] lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0 [&::-webkit-scrollbar]:hidden"
+            className="animate-on-scroll relative -mx-6 mt-14 flex snap-x snap-mandatory scroll-pl-6 gap-4 overflow-x-auto px-6 pb-2 [scrollbar-width:none] lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0 [&::-webkit-scrollbar]:hidden"
             data-delay="0.15s"
           >
             {/* Route line connecting the stops (desktop) */}
@@ -331,6 +331,7 @@ export default async function ServicePage({
       </section>
 
       {/* ===== In welk pakket ("dark showroom", same stage as /pakketten) ===== */}
+      {service.packages.length > 0 && (
       <section className="relative overflow-hidden bg-[#191D23] py-20 sm:py-28">
         <div
           aria-hidden="true"
@@ -400,6 +401,7 @@ export default async function ServicePage({
           </div>
         </div>
       </section>
+      )}
 
       {/* ===== Andere diensten (image tiles, same photo language as the diensten panels) ===== */}
       <section className="bg-cream py-20 text-ink sm:py-24">
@@ -424,7 +426,7 @@ export default async function ServicePage({
             </Link>
           </div>
 
-          <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5 [&>*:last-child]:col-span-2 sm:[&>*:last-child]:col-span-1">
+          <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
             {otherServices.map((other, i) => (
               <Link
                 key={other.slug}
@@ -437,12 +439,12 @@ export default async function ServicePage({
                   alt=""
                   fill
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05] motion-reduce:transition-none"
-                  sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
+                  sizes="(min-width: 1024px) 17vw, (min-width: 640px) 33vw, 50vw"
                 />
                 <div aria-hidden="true" className="absolute inset-0 bg-black/30" />
                 <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-5">
-                  <h3 className="font-serif text-lg font-medium leading-snug text-white">{other.title}</h3>
+                <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 lg:p-4">
+                  <h3 className="hyphens-auto break-words font-serif text-sm font-medium leading-snug text-white sm:text-lg lg:text-[0.95rem]">{other.title}</h3>
                   <span className="mt-3 block h-0.5 w-10 bg-bronze transition-all duration-300 group-hover:w-16" />
                 </div>
               </Link>

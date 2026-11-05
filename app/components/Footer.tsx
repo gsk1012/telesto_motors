@@ -2,7 +2,7 @@ import { DEFAULT_NAV } from './nav'
 
 export default function Footer() {
   return (
-    <footer className="-mt-px bg-footer pt-16 pb-16 text-white/80">
+    <footer className="-mt-px bg-footer pt-16 pb-28 text-white/80">
       <div className="mx-auto grid max-w-container gap-10 px-6 sm:grid-cols-2 lg:grid-cols-4">
         <div className="sm:col-span-2 lg:col-span-1">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -61,18 +61,6 @@ export default function Footer() {
           <a href="/cookiebeleid" className="transition-colors hover:text-white/70">
             Cookiebeleid
           </a>
-          <span className="text-white/20">·</span>
-          <span>
-            Gemaakt door{' '}
-            <a
-              href="https://bluestardevelopment.nl/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="no-underline transition-colors hover:text-white/70"
-            >
-              BlueStar Development
-            </a>
-          </span>
         </div>
       </div>
     </footer>

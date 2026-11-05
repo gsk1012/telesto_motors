@@ -1,11 +1,13 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 const WHATSAPP_NUMBER = '31620779977'
 const PREFILLED_MESSAGE = 'Hallo Telesto Motors, ik heb een vraag over...'
-// Het venster opent automatisch na deze vertraging wanneer een bezoeker binnenkomt.
-const AUTO_OPEN_DELAY = 8_000
+// Het venster opent automatisch zodra de bezoeker scrolt tot de intro van
+// "Onze diensten" (#diensten), met een korte vertraging.
+const AUTO_OPEN_DELAY = 1200
 // Onthoudt binnen de sessie dat we het al automatisch hebben getoond,
 // zodat het niet bij elke pagina-navigatie of refresh opnieuw opengaat.
 const AUTO_OPEN_KEY = 'wa-auto-opened'
@@ -27,11 +29,30 @@ function WhatsAppIcon({ className }: { className?: string }) {
 
 export default function WhatsAppButton() {
   const [open, setOpen] = useState(false)
-  // De popup + auto-open zijn alleen op desktop; op mobiel is de zwevende knop
-  // een directe WhatsApp-link (geen popup).
+  // Bepaalt wanneer de popup automatisch opent (desktop: diensten-intro, mobiel: eerste scroll).
   const [isDesktop, setIsDesktop] = useState(false)
   const rootRef = useRef<HTMLDivElement>(null)
   const userInteracted = useRef(false)
+  const pathname = usePathname()
+  // Wordt true zodra de bezoeker bij de intro van "Onze diensten" is (of er al
+  // voorbij). Pagina's zonder dat blok krijgen geen automatische popup.
+  const [reachedDiensten, setReachedDiensten] = useState(false)
+
+  useEffect(() => {
+    if (reachedDiensten) return
+    const target = document.getElementById('diensten')
+    if (!target) return
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting || e.boundingClientRect.top < 0)) {
+          setReachedDiensten(true)
+        }
+      },
+      { rootMargin: '0px 0px -30% 0px' },
+    )
+    io.observe(target)
+    return () => io.disconnect()
+  }, [pathname, reachedDiensten])
 
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 1024px)')
@@ -41,22 +62,34 @@ export default function WhatsAppButton() {
     return () => mq.removeEventListener('change', update)
   }, [])
 
-  // Open het venster automatisch één keer per sessie, ~8s nadat de bezoeker
-  // binnenkomt — maar niet op mobiel en niet als hij de knop al zelf gebruikte.
+  // Open het venster automatisch één keer per sessie, tenzij de bezoeker de knop al
+  // zelf gebruikte. Desktop: wanneer hij bij de intro van de diensten komt (met een
+  // korte, zachte vertraging). Mobiel: direct bij de eerste scroll-beweging.
   useEffect(() => {
-    if (!isDesktop) return
     if (typeof window === 'undefined') return
     if (sessionStorage.getItem(AUTO_OPEN_KEY)) return
 
-    const timer = window.setTimeout(() => {
-      if (!userInteracted.current) {
-        setOpen(true)
-        sessionStorage.setItem(AUTO_OPEN_KEY, '1')
-      }
-    }, AUTO_OPEN_DELAY)
+    function openOnce() {
+      if (userInteracted.current || sessionStorage.getItem(AUTO_OPEN_KEY)) return
+      setOpen(true)
+      sessionStorage.setItem(AUTO_OPEN_KEY, '1')
+    }
 
-    return () => window.clearTimeout(timer)
-  }, [isDesktop])
+    if (isDesktop) {
+      if (!reachedDiensten) return
+      const timer = window.setTimeout(openOnce, AUTO_OPEN_DELAY)
+      return () => window.clearTimeout(timer)
+    }
+
+    function onScroll() {
+      if (window.scrollY > 4) {
+        openOnce()
+        window.removeEventListener('scroll', onScroll)
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [isDesktop, reachedDiensten])
 
   useEffect(() => {
     if (!open) return
@@ -81,15 +114,15 @@ export default function WhatsAppButton() {
    */
   return (
     <div ref={rootRef} className="pointer-events-none fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
-      {/* Chat-popup — alleen op desktop */}
+      {/* Chat-popup */}
       <div
         role="dialog"
         aria-label="WhatsApp chat"
         aria-hidden={!open}
-        className={`hidden w-[320px] max-w-[calc(100vw-3rem)] origin-bottom-right overflow-hidden rounded-2xl bg-[#111b21] shadow-2xl ring-1 ring-white/10 transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] lg:block ${
+        className={`w-[320px] max-w-[calc(100vw-3rem)] origin-bottom-right overflow-hidden rounded-2xl bg-[#111b21] shadow-2xl ring-1 ring-white/10 transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
           open
             ? 'pointer-events-auto translate-y-0 scale-100 opacity-100'
-            : 'pointer-events-none translate-y-6 scale-90 opacity-0'
+            : 'pointer-events-none translate-y-4 scale-95 opacity-0'
         }`}
       >
           <div className="flex items-center gap-3 bg-[#005c4b] px-4 py-3.5">
@@ -133,9 +166,8 @@ export default function WhatsAppButton() {
           </div>
         </div>
 
-      {/* Zwevende knop. Desktop: opent/sluit de popup. Mobiel: directe WhatsApp-link. */}
-      {isDesktop ? (
-        <button
+      {/* Zwevende knop: opent/sluit de popup. Mobiel alleen het icoon. */}
+      <button
           type="button"
           onClick={() => {
             userInteracted.current = true
@@ -144,7 +176,7 @@ export default function WhatsAppButton() {
           }}
           aria-label={open ? 'WhatsApp venster sluiten' : 'Contacteer ons via WhatsApp'}
           aria-expanded={open}
-          className="pointer-events-auto flex h-14 items-center gap-2.5 rounded-full bg-[#25D366] pl-4 pr-5 shadow-lg transition-transform duration-200 hover:scale-105 hover:shadow-xl"
+          className="pointer-events-auto flex h-14 w-14 items-center justify-center gap-2.5 rounded-full bg-[#25D366] shadow-lg lg:w-auto lg:justify-start lg:pl-4 lg:pr-5 transition-transform duration-200 hover:scale-105 hover:shadow-xl"
         >
           <span className="relative flex h-7 w-7 flex-none items-center justify-center">
             <WhatsAppIcon
@@ -166,19 +198,8 @@ export default function WhatsAppButton() {
               <path d="M6 6l12 12M18 6L6 18" />
             </svg>
           </span>
-          <span className="text-sm font-semibold text-white">Contacteer ons</span>
+          <span className="hidden text-sm font-semibold text-white lg:inline">Contacteer ons</span>
         </button>
-      ) : (
-        <a
-          href={chatHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Contacteer ons via WhatsApp"
-          className="pointer-events-auto flex h-14 w-14 flex-none items-center justify-center rounded-full bg-[#25D366] shadow-lg transition-transform duration-200 active:scale-95"
-        >
-          <WhatsAppIcon className="h-7 w-7" />
-        </a>
-      )}
     </div>
   )
 }

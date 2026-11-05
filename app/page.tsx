@@ -89,28 +89,27 @@ export default function Home() {
               <Link
                 key={d.slug}
                 href={`/diensten/${d.slug}`}
-                className="animate-on-scroll group flex flex-col overflow-hidden bg-[#20242B] ring-1 ring-white/10 shadow-sm transition-all duration-500 ease-out hover:-translate-y-1.5 hover:bg-cream hover:shadow-xl hover:shadow-black/20"
+                className="animate-on-scroll group relative block h-[21rem] overflow-hidden rounded-2xl ring-1 ring-white/10 sm:h-[24rem]"
                 data-delay={`${0.1 + i * 0.12}s`}
               >
-                <div className="relative h-52 overflow-hidden">
-                  <Image
-                    src={d.image}
-                    alt={d.title}
-                    fill
-                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                    sizes="(min-width: 768px) 33vw, 100vw"
-                  />
-                </div>
-                <div className="flex flex-1 flex-col p-7">
-                  <SplitHeading
-                    as="h3"
-                    lines={[d.title]}
-                    className="text-xl font-medium text-white transition-colors duration-500 ease-out group-hover:text-ink"
-                  />
-                  <p className="mt-3 leading-relaxed text-white/65 transition-colors duration-500 ease-out group-hover:text-ink/65">{d.shortBody}</p>
-                  <span className="btn-label mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold text-bronze transition-colors duration-300 ease-out group-hover:text-bronze-dark">
+                <Image
+                  src={d.image}
+                  alt=""
+                  fill
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none"
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                />
+                <div className="absolute inset-0 bg-black/40" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+                <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6">
+                  <h3 className="font-serif text-xl font-medium leading-tight text-white sm:text-2xl">
+                    {d.title}
+                  </h3>
+                  <span className="mt-3 block h-0.5 w-12 bg-bronze" />
+                  <p className="mt-3 max-w-md text-sm leading-relaxed text-white/85">{d.shortBody}</p>
+                  <span className="btn-label mt-4 inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-bronze transition-colors group-hover:text-white">
                     Lees meer
-                    <svg className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                    <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
                   </span>
@@ -140,7 +139,7 @@ export default function Home() {
             >
               Over ons
             </p>
-            <div className="relative min-h-[300px] w-full flex-1 lg:min-h-[440px]">
+            <div className="relative min-h-[300px] w-full flex-1 lg:min-h-[440px] lg:[-webkit-mask-image:linear-gradient(to_right,#000_50%,transparent_100%)] lg:[mask-image:linear-gradient(to_right,#000_50%,transparent_100%)]">
               <Image
                 src="/images/over-ons-home.jpg"
                 alt="Telesto Motors, persoonlijk auto-advies"

@@ -332,6 +332,55 @@ export const SERVICES: Service[] = [
     metaDescription:
       'Zo helpt Telesto Motors je kiezen tussen elektrisch, hybride en benzine: werkelijke actieradius, laden en kosten per jaar. Onderdeel van elk pakket.',
   },
+  {
+    slug: 'auto-leasen',
+    title: 'Auto leasen',
+    shortBody:
+      'Liever leasen dan kopen? We vergelijken aanbiedingen onafhankelijk, rekenen de werkelijke maandkosten door en onderhandelen over de voorwaarden.',
+    image: '/images/over-ons/hero-street.jpg',
+    heroLines: ['Auto', 'leasen'],
+    tagline:
+      'Leasen zonder kleine lettertjes. Zo vergelijken we aanbiedingen eerlijk en kies je het contract dat echt bij je past.',
+    detailImage: '/images/plans/hero.jpg',
+    detailImageAlt: 'Adviseur van Telesto Motors in gesprek met een klant naast een zwarte auto',
+    headline: ['Een lease die', 'bij je past'],
+    intro:
+      'Leasen is een stuk minder eenvoudig dan een maandbedrag doet vermoeden. Looptijd, kilometerpakket, eigen risico en eindafrekening bepalen samen wat een lease je uiteindelijk kost. Wij helpen je het overzicht te houden.',
+    paragraphs: [
+      'We beginnen met jouw situatie: hoeveel je rijdt, hoe lang je de auto wilt houden en of je privé of zakelijk leaset. Daarmee bepalen we welke vorm, zoals financial of operational lease, en welke looptijd het verstandigst zijn.',
+      'Vervolgens vragen we aanbiedingen op en leggen we die naast elkaar, inclusief alles wat in het contract staat. Zo zie je de werkelijke maandkosten en weet je vooraf waar je aan toe bent bij schade, overschrijding van kilometers of inlevering.',
+    ],
+    points: [
+      'Onafhankelijke vergelijking van lease-aanbiedingen',
+      'Werkelijke maandkosten, inclusief voorwaarden',
+      'Advies over looptijd, kilometers en eigen risico',
+      'Wij onderhandelen mee over het contract',
+    ],
+    steps: [
+      {
+        title: 'Jouw situatie',
+        body: 'We bespreken je rijgedrag, budget en of je privé of zakelijk leaset.',
+      },
+      {
+        title: 'Aanbiedingen vergelijken',
+        body: 'We vragen offertes op en zetten looptijd, kilometers en kosten helder naast elkaar.',
+      },
+      {
+        title: 'Voorwaarden doorlopen',
+        body: 'We lopen het contract door op eigen risico, schadeafhandeling en eindafrekening.',
+      },
+      {
+        title: 'Samen kiezen',
+        body: 'Je kiest met een gerust hart de lease die het beste bij je past.',
+      },
+    ],
+    packages: [],
+    packageNote:
+      'Lease-advies is een aanvullende dienst op onze aankoopbegeleiding. Neem contact op en we bespreken wat bij jouw situatie past.',
+    metaTitle: 'Auto leasen',
+    metaDescription:
+      'Telesto Motors vergelijkt lease-aanbiedingen onafhankelijk, rekent de werkelijke maandkosten door en onderhandelt mee over de voorwaarden.',
+  },
 ]
 
 export function getService(slug: string): Service | undefined {
